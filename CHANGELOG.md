@@ -4,15 +4,15 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
-### Changed
+### Added
 
-- Sign-up closed (0a.10): the app only signs in existing accounts, and Supabase's "Allow new users to sign up" is off.
+- `docs/PLAN.md`: phase 0b Sessions plan, six tasks tracked as GitHub issues #24–#29. The finished 0a plan moves to `docs/plans/0a.md`.
 
 ## 0a Foundation — 2026-09-27
 
 ### Added
 
-- Close-out (0a.10): `docs/setup.md` (services, environment, Supabase Auth settings, recreating from scratch), an "as built" note in `docs/PLAN.md`, and a 200% text-size e2e pass over sign-in, the install prompt and Settings.
+- Close-out (0a.10): `docs/setup.md` (services, environment, Supabase Auth settings, recreating from scratch), an "as built" note in the 0a plan (now `docs/plans/0a.md`), and a 200% text-size e2e pass over sign-in, the install prompt and Settings.
 
 - Settings (0a.9): boards Settings, SettingsDelete1 and SettingsDelete2. Signed-in email, Add to home screen (links to `/install`), Export my data (every row as JSON, via the share sheet where the phone has one, else a download), Delete everything in two real steps (step 2 needs DELETE typed; the ink button is the app's one destructive action), About with the build's version, Sign out.
 - Local `BottomSheet` (DESIGN.md §5).
@@ -38,6 +38,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Changed
 
+- Sign-up closed (0a.10): the app only signs in existing accounts, and Supabase's "Allow new users to sign up" is off.
 - `CLAUDE.md` (approved in the 0a plan):
   - repo `waq-b/daybook`; GitHub issues replace monday.com
   - Node 22 LTS; the Render URL until the custom domain
