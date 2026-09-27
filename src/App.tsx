@@ -7,6 +7,7 @@ import { InstallRoute } from "./install/InstallRoute";
 import { AppShell } from "./shell/AppShell";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { SignInScreen } from "./screens/SignInScreen";
+import { SessionEditScreen } from "./sessions/SessionEditScreen";
 import { HistoryScreen, PracticesScreen, SessionsScreen, TodayScreen } from "./screens/tabs";
 
 export function App() {
@@ -39,6 +40,23 @@ export function App() {
               <Route path="history" element={<HistoryScreen />} />
               <Route path="settings" element={<SettingsScreen />} />
             </Route>
+            {/* Full-screen forms: no bottom nav (board SessionEdit). */}
+            <Route
+              path="sessions/new"
+              element={
+                <RequireSession>
+                  <SessionEditScreen />
+                </RequireSession>
+              }
+            />
+            <Route
+              path="sessions/:id/edit"
+              element={
+                <RequireSession>
+                  <SessionEditScreen />
+                </RequireSession>
+              }
+            />
             <Route
               path="install"
               element={

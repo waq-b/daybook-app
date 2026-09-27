@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- New and edit session (0b.3): boards SessionEdit and SessionEditPast at `/sessions/new` and `/sessions/:id/edit`.
+  - Fields: When (date and time), Session notes, and "Anything else, not a practice yet".
+  - A new session is set from the last one: same weekday, same time.
+  - The sticky Save session explains what it needs. Offline it says saving needs a connection and keeps what you typed.
 - Local `DateTimeField` and `TextArea` (0b.2, DESIGN.md §5):
   - DateTimeField: DATE and TIME side by side, values in words, and the whole field opens the phone's own picker
   - TextArea: grows with its text, and 17px so iOS doesn't zoom

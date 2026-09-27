@@ -57,6 +57,30 @@ export const copy = {
     androidInstall: "Install Daybook",
     notNow: "Not now",
   },
+  // New / edit session: boards SessionEdit and SessionEditPast (10b), plus
+  // the states the canvas doesn't draw (loading offline, saving, not found).
+  sessionEdit: {
+    newTitle: "New session",
+    editTitle: "Edit session",
+    close: "Close without saving",
+    when: "When",
+    hintDefault: (weekday: string) =>
+      `Set to the next ${weekday} at your last session's time. Change it if yours is different.`,
+    hintFirst: "Pick the date and time of your next appointment.",
+    notesLabel: "Session notes",
+    notesPlaceholder: "Anything worth keeping from the session",
+    assignedHeading: "Assigned in session",
+    assignedNoteLabel: "Anything else, not a practice yet",
+    assignedNotePlaceholder: "e.g. notice when I check my phone to avoid talking",
+    save: "Save session",
+    saveNeedsWhen: "Pick a date and time to save",
+    saving: "Saving",
+    offline: "Saving needs a connection. Your changes are still here.",
+    failed: "That didn't save. Your changes are still here, so try again in a minute.",
+    loadOffline: "Opening this session needs a connection.",
+    notFound: "That session isn't here any more.",
+    backToSessions: "Back to sessions",
+  },
   // Shared field words (DateTimeField, TextArea).
   fields: {
     date: "Date",

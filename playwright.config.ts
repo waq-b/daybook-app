@@ -9,7 +9,9 @@ export default defineConfig({
   testDir: "e2e",
   reporter: process.env.CI ? "github" : "list",
   use: { baseURL: `http://localhost:${PORT}` },
-  projects: [{ name: "phone", use: { ...devices["Pixel 7"] } }],
+  projects: [
+    { name: "phone", use: { ...devices["Pixel 7"], timezoneId: "Europe/London", locale: "en-GB" } },
+  ],
   webServer: {
     command: "npm start",
     env: { PORT: String(PORT) },
