@@ -10,7 +10,7 @@
     "dev": "vite",
     "dev:server": "tsx watch server/index.ts",
     "build": "vite build && tsc -p tsconfig.server.json",
-    "start": "node dist-server/index.js",
+    "start": "NODE_ENV=production node dist-server/index.js",
     "typecheck": "tsc -b",
     "lint": "eslint . && stylelint \"src/**/*.css\" --allow-empty-input",
     "format": "prettier --write .",

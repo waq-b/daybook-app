@@ -1,0 +1,19 @@
+# The Render service as it exists. It was created with the Render connector,
+# not from this file (the free plan has no Blueprint sync); this is the record
+# of its settings so it can be recreated anywhere.
+services:
+  - type: web
+    name: daybook
+    runtime: node
+    plan: free
+    region: frankfurt
+    branch: main
+    autoDeploy: true
+    # NODE_ENV stays unset at build time so `npm ci` installs the dev tools
+    # the build needs; `npm start` sets it for the running server.
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
