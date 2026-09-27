@@ -1,5 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Daybook, type Difficulty, type IconName } from "../design/daybook";
+import { DateTimeField } from "../components/DateTimeField";
+import { TextArea } from "../components/TextArea";
 import { samples as s } from "./samples";
 
 const {
@@ -63,6 +65,8 @@ export function DevStates() {
   const [rating, setRating] = useState<Difficulty | null>(null);
   const [flagged, setFlagged] = useState(false);
   const [chip, setChip] = useState<string>(s.chips[0]);
+  const [when, setWhen] = useState({ date: "", time: "" });
+  const [notes, setNotes] = useState("");
   const [nav, setNav] = useState<"today" | "practices" | "sessions" | "history" | "settings">(
     "today",
   );
@@ -205,6 +209,29 @@ export function DevStates() {
       <Section title={s.sections.sync}>
         <SyncStatus state="saved-local" count={2} />
         <SyncStatus state="synced" />
+      </Section>
+
+      <Section title={s.sections.dateTime}>
+        <DateTimeField date={when.date} time={when.time} onChange={setWhen} />
+        <DateTimeField date="2026-09-29" time="16:00" onChange={() => undefined} />
+      </Section>
+
+      <Section title={s.sections.textArea}>
+        <TextArea
+          heading
+          label={s.textArea.label}
+          placeholder={s.textArea.placeholder}
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          rows={5}
+        />
+        <TextArea
+          quietLabel
+          optional
+          label={s.textArea.quietLabel}
+          placeholder={s.textArea.quietPlaceholder}
+          rows={1}
+        />
       </Section>
 
       <Section title={s.sections.nav}>

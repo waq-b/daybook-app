@@ -57,6 +57,16 @@ export const copy = {
     androidInstall: "Install Daybook",
     notNow: "Not now",
   },
+  // Shared field words (DateTimeField, TextArea).
+  fields: {
+    date: "Date",
+    time: "Time",
+    pickDate: "Pick a date",
+    pickTime: "Pick a time",
+    dateChange: (value: string) => `Date, ${value}. Change`,
+    timeChange: (value: string) => `Time, ${value}. Change`,
+    optional: "(optional)",
+  },
   // Placeholder screens for the tabs whose content arrives in later phases.
   // Each is replaced when its phase builds the real screen.
   today: {

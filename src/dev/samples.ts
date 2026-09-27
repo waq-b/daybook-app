@@ -22,6 +22,14 @@ export const samples = {
     crisis: "CrisisFooter",
     sync: "SyncStatus",
     nav: "BottomNav",
+    dateTime: "DateTimeField (local)",
+    textArea: "TextArea (local)",
+  },
+  textArea: {
+    label: "Session notes",
+    placeholder: "Anything worth keeping from the session",
+    quietLabel: "Anything else, not a practice yet",
+    quietPlaceholder: "e.g. notice when I check my phone to avoid talking",
   },
   typeSample: {
     numHero: "7",

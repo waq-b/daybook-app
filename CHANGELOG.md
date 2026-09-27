@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Local `DateTimeField` and `TextArea` (0b.2, DESIGN.md §5):
+  - DateTimeField: DATE and TIME side by side, values in words, and the whole field opens the phone's own picker
+  - TextArea: grows with its text, and 17px so iOS doesn't zoom
+  - both on `/dev/states`
 - Session data (0b.1):
   - `sessions.assigned_note` for the edit screen's "Anything else, not a practice yet"
   - `src/data/sessions.ts` (list, get, create, update, mark done; each returns an outcome, never throws)
