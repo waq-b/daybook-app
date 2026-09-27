@@ -33,6 +33,8 @@ test("email, then code, then Today", async ({ page }) => {
   await page.getByLabel("Email").fill(" Test@Example.com ");
   await page.getByRole("button", { name: "Email me a code" }).click();
   expect(otpBody.email).toBe("test@example.com");
+  // Sign-up is closed: the app never asks Supabase to create an account.
+  expect(otpBody.create_user).toBe(false);
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Check your email");
   await expect(

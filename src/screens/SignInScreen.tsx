@@ -27,10 +27,11 @@ export function SignInScreen() {
   async function sendCode() {
     if (!navigator.onLine) return setStatus("offline");
     setStatus("busy");
-    // Sign-up stays open until Waqar's account exists (plan D16, task 10).
+    // Existing accounts only (plan D16). Supabase's "Allow new users to sign
+    // up" is off too; re-enabling both is how a second person would join.
     const { error } = await supabase.auth.signInWithOtp({
       email: cleanEmail,
-      options: { shouldCreateUser: true },
+      options: { shouldCreateUser: false },
     });
     if (error) return setStatus(navigator.onLine ? "sendFailed" : "offline");
     return true;

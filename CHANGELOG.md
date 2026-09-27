@@ -4,6 +4,12 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
+### Changed
+
+- Sign-up closed (0a.10): the app only signs in existing accounts, and Supabase's "Allow new users to sign up" is off.
+
+## 0a Foundation — 2026-09-27
+
 ### Added
 
 - Close-out (0a.10): `docs/setup.md` (services, environment, Supabase Auth settings, recreating from scratch), an "as built" note in `docs/PLAN.md`, and a 200% text-size e2e pass over sign-in, the install prompt and Settings.
