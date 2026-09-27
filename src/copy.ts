@@ -6,6 +6,7 @@
 export const copy = {
   app: {
     name: "Daybook",
+    description: "A logbook for the practical side of therapy.",
   },
   scaffold: {
     placeholder: "Daybook is being set up.",

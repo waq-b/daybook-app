@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { copy } from "./copy";
 import { samples } from "./dev/samples";
+import { manifest } from "../scripts/manifest";
 import { allStrings, voiceProblems } from "./voice";
 
 describe("voice rules", () => {
@@ -12,6 +13,13 @@ describe("voice rules", () => {
   it.each(allStrings(samples))("dev sample %s passes", (_path, text) => {
     expect(voiceProblems(text)).toEqual([]);
   });
+
+  it.each([manifest.name, manifest.short_name, manifest.description])(
+    "manifest %s passes",
+    (text) => {
+      expect(voiceProblems(text ?? "")).toEqual([]);
+    },
+  );
 
   it("index.html passes", () => {
     const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");

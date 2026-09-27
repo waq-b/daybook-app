@@ -24,6 +24,10 @@ Render web service `daybook` (settings recorded in `render.yaml`) builds with `n
 
 `src/copy.test.ts` is the voice test. Every string in `src/copy.ts` must have no exclamation marks, no emoji and none of the banned words. ESLint stops user-facing strings appearing anywhere else.
 
+## PWA
+
+`vite-plugin-pwa` builds the manifest (`scripts/manifest.ts`) and service worker. The icons in `public/icons/` are rendered from the design system's Logo mark. Re-run `npm run icons` after a design-system bump. `npm run e2e` (after `npm run build`) checks installability and offline; `npm run lighthouse` checks accessibility.
+
 ## Working rules
 
 `main` only changes through merged PRs. A pre-push hook (`scripts/refuse-push-to-main.mjs`, installed by `simple-git-hooks` on `npm ci`) refuses a direct push. GitHub can't enforce this on a free private repo.

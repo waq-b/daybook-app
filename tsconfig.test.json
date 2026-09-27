@@ -7,8 +7,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "types": ["node", "vite/client"],
+    "types": ["node", "vite/client", "vite-plugin-pwa/client"],
     "noEmit": true
   },
-  "include": ["src", "server", "scripts/**/*.ts"]
+  "include": ["src", "server", "scripts/**/*.ts", "e2e"]
 }

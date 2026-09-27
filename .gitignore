@@ -30,3 +30,5 @@ pnpm-debug.log*
 # Supabase local
 supabase/.branches
 supabase/.temp
+test-results/
+playwright-report/

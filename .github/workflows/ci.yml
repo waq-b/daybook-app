@@ -23,3 +23,20 @@ jobs:
       - run: npm run format:check
       - run: npm test
       - run: npm run build
+      - name: Playwright browser cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+      # Installable, service worker in control, opens offline (plan D8).
+      - run: npm run e2e
+      # Accessibility score at least 0.95 on every listed page.
+      - run: npm run lighthouse
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            test-results/
+            .lighthouseci/

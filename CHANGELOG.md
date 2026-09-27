@@ -6,6 +6,8 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Installable PWA (0a.4): manifest built from `copy.ts` and `tokens.json`, icons rendered from the design system's Logo mark (`npm run icons`), iOS home-screen tags, and a service worker that caches the app shell and fonts so the installed app opens offline. The API is never served from the cache. New versions take over the next time the app opens fresh.
+- CI checks installability and offline with Playwright, and runs Lighthouse CI with accessibility at 0.95 or above.
 - Design system v9 mounted (0a.3): tokens, self-hosted Atkinson Hyperlegible Next and the 16 components (`src/design/daybook.ts`, with React put on `window` in its own module first). `/dev/states` shows every component on a phone.
 - Token check (every `var()` in `bundle.css` is defined) and a hex ban outside `design/` (ESLint for TS/TSX, stylelint for CSS), both in CI.
 - Deployed to Render (0a.2): free web service `daybook` in Frankfurt at https://daybook-gjf6.onrender.com, auto-deploying `main`. Settings recorded in `render.yaml`.

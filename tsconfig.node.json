@@ -7,8 +7,15 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "types": ["node"],
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "scripts"],
+  "include": [
+    "vite.config.ts",
+    "vitest.config.ts",
+    "scripts",
+    "src/copy.ts",
+    "playwright.config.ts"
+  ],
   "exclude": ["scripts/**/*.test.ts", "scripts/tokens.ts"]
 }
