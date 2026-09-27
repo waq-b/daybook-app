@@ -14,6 +14,9 @@ function themeColour(): Plugin {
   };
 }
 
+// Render sets RENDER_GIT_COMMIT at build time; Settings shows it as the version.
+process.env.VITE_APP_VERSION ??= process.env.RENDER_GIT_COMMIT?.slice(0, 7) ?? "dev";
+
 export default defineConfig({
   plugins: [
     react(),

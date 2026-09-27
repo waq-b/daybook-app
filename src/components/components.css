@@ -36,3 +36,83 @@
   letter-spacing: 0.2em;
   text-align: center;
 }
+
+.db-field-confirm {
+  border-color: var(--ink);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.db-sheet-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+}
+
+.db-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
+}
+
+.db-sheet {
+  position: absolute;
+  inset: auto 0 0;
+  max-width: 640px;
+  margin: 0 auto;
+  max-height: 90dvh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: var(--paper-raised);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: var(--shadow-sheet);
+  padding: var(--space-3) var(--space-4) max(34px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.db-sheet-handle {
+  align-self: center;
+  width: 40px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+}
+
+.db-sheet-label {
+  color: var(--ink-muted);
+  margin-top: var(--space-1);
+}
+
+.db-sheet-title {
+  margin: 0;
+}
+
+.db-sheet-title:focus {
+  outline: none;
+}
+
+/* The one destructive action in the app (DESIGN.md §6, Settings). */
+.db-ink-button {
+  min-height: 56px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--ink);
+  color: var(--ink-inverse);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.db-ink-button:disabled {
+  background: var(--paper-sunk);
+  color: var(--ink-muted);
+  cursor: default;
+}
+
+.db-ink-button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}

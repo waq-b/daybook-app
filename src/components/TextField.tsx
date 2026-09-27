@@ -2,8 +2,11 @@ import { useId, type InputHTMLAttributes } from "react";
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "id" | "className"> {
   label: string;
-  /** "code": the large centred one-time-code style from the SignInCode board. */
-  variant?: "default" | "code";
+  /**
+   * "code": the large centred one-time-code field (board SignInCode).
+   * "confirm": the heavy typed-word field (board SettingsDelete2).
+   */
+  variant?: "default" | "code" | "confirm";
 }
 
 /**
