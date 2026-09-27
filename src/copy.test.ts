@@ -1,10 +1,15 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { copy } from "./copy";
+import { samples } from "./dev/samples";
 import { allStrings, voiceProblems } from "./voice";
 
 describe("voice rules", () => {
   it.each(allStrings(copy))("copy.%s passes", (_path, text) => {
+    expect(voiceProblems(text)).toEqual([]);
+  });
+
+  it.each(allStrings(samples))("dev sample %s passes", (_path, text) => {
     expect(voiceProblems(text)).toEqual([]);
   });
 

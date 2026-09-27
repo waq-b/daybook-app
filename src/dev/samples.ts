@@ -1,0 +1,82 @@
+// Sample content for /dev/states. It reaches the screen, so it follows the
+// same voice rules as src/copy.ts and is checked by src/copy.test.ts.
+
+export const samples = {
+  pageTitle: "Component states",
+  pageIntro: "Every design-system component, as the bundle renders it. Not linked from the app.",
+  sections: {
+    type: "Type",
+    logo: "Logo",
+    icons: "Icon",
+    buttons: "Button",
+    rating: "RatingScale",
+    score: "Score",
+    flag: "FlagToggle",
+    chips: "Chip",
+    target: "TargetProgress",
+    practice: "PracticeCard",
+    entry: "EntryCard",
+    rung: "LadderRung",
+    empty: "EmptyState",
+    notification: "NotificationCard",
+    crisis: "CrisisFooter",
+    sync: "SyncStatus",
+    nav: "BottomNav",
+  },
+  typeSample: {
+    numHero: "7",
+    numLg: "7 → 2",
+    numMd: "5",
+    titleLg: "Today",
+    title: "Add a practice",
+    heading: "Up next",
+    body: "Repeat each task until remaining difficulty is under 4, then move up to the next one.",
+    bodyStrong: "Gym, 20 minutes",
+    small: "Last one Wednesday",
+    label: "Remaining difficulty",
+  },
+  buttons: {
+    primary: "Save rep",
+    secondary: "Pause everything for a week",
+    quiet: "Cancel",
+    disabled: "Pick both scores to save",
+  },
+  rating: {
+    label: "Remaining difficulty",
+    hint: "If you did it again now",
+    low: "0 easy",
+    high: "8 intense",
+  },
+  chips: ["Tired", "Anxious", "No time", "Forgot", "Chose not to", "Other"],
+  practice: {
+    hierarchy: { name: "Activity hierarchy", meta: "5 tasks on the go, 2 done", due: "Gym today" },
+    feelings: { name: "Feelings check-in", meta: "Most days" },
+    gratitude: { name: "Gratitude", meta: "Once a week", lastLogged: "Wednesday" },
+  },
+  entry: {
+    rep: { title: "Gym, 20 minutes", time: "Today, 18:20", note: "Went with headphones in." },
+    attempt: {
+      title: "Supermarket at 5pm",
+      time: "Yesterday, 17:05",
+      note: "Started, left early.",
+    },
+    feelings: { title: "Feelings check-in", time: "Monday, 21:10", note: "Tense, tired" },
+  },
+  rungs: {
+    upNext: { name: "Gym, 20 minutes", right: "2 of 4 this week" },
+    oneOff: { name: "Supermarket at 5pm", right: "One-off · by Wed" },
+    done: { name: "Walk to the corner shop", completedOn: "12 Sep" },
+    fresh: { name: "Train into town" },
+  },
+  empty: {
+    title: "No tasks yet. Add the first rung.",
+    body: "Put in everything from your worksheet, in any order. They'll sort themselves, easiest first.",
+    action: "Add the first task",
+  },
+  notification: {
+    title: "Daybook",
+    body: "Gym is on the plan for today. Log it when you're back.",
+    time: "now",
+    actions: ["Log it", "Not today"],
+  },
+} as const;

@@ -1,0 +1,22 @@
+.dev-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 160px;
+}
+
+.dev-section {
+  margin-top: var(--space-6);
+}
+
+.dev-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dev-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
