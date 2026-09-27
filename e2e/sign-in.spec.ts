@@ -46,6 +46,11 @@ test("email, then code, then Today", async ({ page }) => {
   await code.fill("482913");
   await page.getByRole("button", { name: "Sign in" }).click();
   await expect(page).toHaveURL("/");
+  // In a phone browser, the install prompt comes first (task 8).
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Put Daybook on your home screen",
+  );
+  await page.getByRole("button", { name: "Not now" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Today");
 
   // Reopening stays signed in.

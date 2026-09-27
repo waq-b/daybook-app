@@ -6,6 +6,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Install prompt (0a.8): boards Install and InstallAndroid. After sign-in, a phone not running Daybook from the home screen sees how to add it (Safari's three steps on iPhone; Chrome's own install dialog on Android). "Not now" is remembered on that phone. It never shows in the installed app or on a computer. `/install` reopens it (Settings links there in task 9).
 - Email-code sign-in (0a.7): boards SignIn and SignInCode. Email → six-digit code (the phone offers it from Mail) → Today, and the session is kept on the phone. Every screen except sign-in needs a session. Disabled buttons say what they need; a wrong code, no signal or a failed send each get one calm line. There are no error colours.
 - Local `TextField` (DESIGN.md §5) and a Supabase client typed from the schema.
 - E2E tests sign in against a mocked Supabase; CI never calls the real one.

@@ -1,0 +1,110 @@
+/* Boards Install / InstallAndroid. */
+.install {
+  box-sizing: border-box;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: max(72px, env(safe-area-inset-top)) var(--space-4) max(34px, env(safe-area-inset-bottom));
+}
+
+.install-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.install-title,
+.install-intro {
+  margin: 0;
+}
+
+.install-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.install-steps li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.install-n {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--paper-sunk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.install-share {
+  display: inline-flex;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--paper-raised);
+  align-items: center;
+  justify-content: center;
+}
+
+.install-spacer {
+  flex-grow: 1;
+}
+
+.install-quiet {
+  display: flex;
+  justify-content: center;
+}
+
+.install-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--apricot-ink);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 650;
+}
+
+.install-card {
+  background: var(--paper-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.install-card-title {
+  font-weight: 650;
+}
+
+.install-card-body,
+.install-fallback {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+.install-fallback {
+  margin: 0;
+}
+
+.install-fallback strong {
+  color: var(--ink);
+}

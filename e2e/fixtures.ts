@@ -36,17 +36,23 @@ export async function mockSupabase(page: Page) {
 
 export const test = base;
 
-/** Tests that start signed in (a stored session, every Supabase call answered). */
+/** Signs the page in: a stored session, every Supabase call answered. */
+export async function signIn(page: Page, { installPromptSeen = true } = {}) {
+  await mockSupabase(page);
+  if (installPromptSeen) {
+    await page.addInitScript(() => localStorage.setItem("daybook.install-prompt.dismissed", "1"));
+  }
+  await page.addInitScript(
+    ([key, session]) => localStorage.setItem(key as string, JSON.stringify(session)),
+    [STORAGE_KEY, testSession()] as const,
+  );
+}
+
+/** Tests that start signed in, past the install prompt. */
 export const signedInTest = base.extend<{ signedIn: void }>({
   signedIn: [
     async ({ page }, use) => {
-      await mockSupabase(page);
-      await page.addInitScript(
-        ([key, session]) => {
-          localStorage.setItem(key as string, JSON.stringify(session));
-        },
-        [STORAGE_KEY, testSession()] as const,
-      );
+      await signIn(page);
       await use();
     },
     { auto: true },

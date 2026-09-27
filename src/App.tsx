@@ -2,6 +2,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { AuthProvider } from "./auth/AuthProvider";
 import { RequireNoSession, RequireSession } from "./auth/guards";
 import { DevStates } from "./dev/DevStates";
+import { InstallGate } from "./install/InstallGate";
+import { InstallRoute } from "./install/InstallRoute";
 import { AppShell } from "./shell/AppShell";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { SignInScreen } from "./screens/SignInScreen";
@@ -25,7 +27,9 @@ export function App() {
             <Route
               element={
                 <RequireSession>
-                  <AppShell />
+                  <InstallGate>
+                    <AppShell />
+                  </InstallGate>
                 </RequireSession>
               }
             >
@@ -35,6 +39,14 @@ export function App() {
               <Route path="history" element={<HistoryScreen />} />
               <Route path="settings" element={<SettingsScreen />} />
             </Route>
+            <Route
+              path="install"
+              element={
+                <RequireSession>
+                  <InstallRoute />
+                </RequireSession>
+              }
+            />
             <Route path="dev/states" element={<DevStates />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -31,6 +31,32 @@ export const copy = {
     sendFailed: "The code couldn't be sent just now. Wait a minute, then try again.",
     privacy: "Your entries are yours. Nothing is shared unless you choose to.",
   },
+  // Install prompt: boards Install (iOS) and InstallAndroid, canvas words.
+  install: {
+    title: "Put Daybook on your home screen",
+    intro:
+      "Reminders only work once it's there. It takes about ten seconds, and it opens like any other app.",
+    iosStep1Before: "Tap the Share button",
+    iosStep1After: "at the bottom of Safari.",
+    shareLabel: "Share",
+    iosStep2Before: "Scroll down and tap",
+    iosStep2Strong: "Add to Home Screen",
+    iosStep2After: ".",
+    iosStep3Before: "Tap",
+    iosStep3Strong: "Add",
+    iosStep3After: ", then open Daybook from your home screen and sign in once more.",
+    shareHint: "Share is down here",
+    androidCardTitle: "What you get",
+    androidCardBody:
+      "Reminders at the times you choose. Logging works with no signal and syncs later. No browser bars.",
+    androidFallbackBefore: "If the button doesn't do anything, tap",
+    androidFallbackMenu: "⋮",
+    androidFallbackMiddle: "in Chrome, then",
+    androidFallbackStrong: "Add to Home screen",
+    androidFallbackAfter: ".",
+    androidInstall: "Install Daybook",
+    notNow: "Not now",
+  },
   // Placeholder screens for the tabs whose content arrives in later phases.
   // Each is replaced when its phase builds the real screen.
   today: {

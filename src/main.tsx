@@ -1,8 +1,10 @@
 import "./design/daybook";
+import "./install/platform";
 import "./styles/app.css";
 import "./components/components.css";
 import "./shell/shell.css";
 import "./screens/signin.css";
+import "./install/install.css";
 import "./dev/dev.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
