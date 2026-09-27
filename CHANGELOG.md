@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Session detail (0b.5): boards SessionDetail and SessionDetailPast at `/sessions/:id`.
+  - A Today / Upcoming / Done / Not marked done badge, the date and time, the notes, and the assigned line.
+  - Mark session as done on today's session or any earlier one; it only records that the session is done.
+  - Saving a new or edited session now opens its detail, and sessions in the list open there too.
 - Sessions list (0b.4): boards Sessions and SessionsEmpty.
   - The next session sits in the teal card with its countdown ("3 days", Today, Tomorrow).
   - Any other booked sessions sit under Later; Past is newest first, each row titled by its notes' first line with its time and whether it was marked done.

@@ -83,6 +83,7 @@ test("a saved session appears as next", async ({ page }) => {
   await page.getByLabel("Pick a date").fill("2026-09-29");
   await page.getByLabel("Pick a time").fill("16:00");
   await page.getByRole("button", { name: "Save session" }).click();
+  await page.getByRole("link", { name: "Sessions", exact: true }).click();
   await expect(page).toHaveURL("/sessions");
   await expect(
     page.getByRole("link", { name: /^Next session, Tuesday 29 September at 4pm/ }),

@@ -7,6 +7,7 @@ import { TextArea } from "../components/TextArea";
 import { fromInputs, toDateInput, toTimeInput, weekdayName } from "../data/dates";
 import { defaultNewSession } from "../data/sessionRules";
 import { createSession, getSession, listSessions, updateSession } from "../data/sessions";
+import { sessionHref } from "./links";
 
 const { Button, Icon } = Daybook;
 const t = copy.sessionEdit;
@@ -66,7 +67,7 @@ export function SessionEditScreen() {
 
   const at = fromInputs(when.date, when.time);
   const saving = status === "saving";
-  const closeTo = "/sessions";
+  const closeTo = id ? sessionHref(id) : "/sessions";
 
   async function onSave(e: FormEvent) {
     e.preventDefault();
@@ -79,8 +80,7 @@ export function SessionEditScreen() {
     };
     const result = id ? await updateSession(id, fields) : await createSession(fields);
     if (!result.ok) return setStatus(result.reason);
-    // Session detail arrives in task 5; until then, back to the list.
-    navigate("/sessions", { replace: true });
+    navigate(sessionHref(result.data.id), { replace: true });
   }
 
   if (load === "loading") return null;

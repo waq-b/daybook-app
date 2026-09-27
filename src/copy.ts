@@ -81,6 +81,23 @@ export const copy = {
     notFound: "That session isn't here any more.",
     backToSessions: "Back to sessions",
   },
+  // Session detail: boards SessionDetail and SessionDetailPast (0b parts).
+  sessionDetail: {
+    back: "Sessions",
+    edit: "Edit",
+    today: "Today",
+    upcoming: "Upcoming",
+    done: "Done",
+    notMarkedDone: "Not marked done",
+    notes: "Session notes",
+    noNotes: "No notes yet. Add them with Edit.",
+    assigned: "Assigned in session",
+    markDone: "Mark session as done",
+    marking: "Marking it done",
+    markNote: "The entries stay in your history.",
+    markOffline: "Marking it done needs a connection. Nothing has changed.",
+    markFailed: "That didn't go through, so nothing has changed. Try again in a minute.",
+  },
   // Shared field words (DateTimeField, TextArea).
   fields: {
     date: "Date",

@@ -1,7 +1,4 @@
-/**
- * Where a session opens. Session detail arrives in task 5 (0b.5); until then
- * a session opens on its edit screen.
- */
+/** Where a session opens: its detail screen (board SessionDetail). */
 export function sessionHref(id: string): string {
-  return `/sessions/${id}/edit`;
+  return `/sessions/${id}`;
 }

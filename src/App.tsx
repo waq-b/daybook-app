@@ -9,6 +9,7 @@ import { SettingsScreen } from "./screens/SettingsScreen";
 import { SignInScreen } from "./screens/SignInScreen";
 import { SessionEditScreen } from "./sessions/SessionEditScreen";
 import { HistoryScreen, PracticesScreen, TodayScreen } from "./screens/tabs";
+import { SessionDetailScreen } from "./sessions/SessionDetailScreen";
 import { SessionsScreen } from "./sessions/SessionsScreen";
 
 export function App() {
@@ -38,6 +39,7 @@ export function App() {
               <Route index element={<TodayScreen />} />
               <Route path="practices" element={<PracticesScreen />} />
               <Route path="sessions" element={<SessionsScreen />} />
+              <Route path="sessions/:id" element={<SessionDetailScreen />} />
               <Route path="history" element={<HistoryScreen />} />
               <Route path="settings" element={<SettingsScreen />} />
             </Route>

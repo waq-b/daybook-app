@@ -21,7 +21,8 @@ test("a first session starts blank and saves what you enter", async ({ page }) =
   await page.getByLabel(/Anything else, not a practice yet/).fill("Notice my phone");
   await page.getByRole("button", { name: "Save session" }).click();
 
-  await expect(page).toHaveURL("/sessions");
+  await expect(page).toHaveURL(/\/sessions\/[0-9a-f-]{36}$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Tuesday 29 September");
   expect(store).toHaveLength(1);
   expect(store[0]).toMatchObject({
     at: "2026-09-29T15:00:00.000Z", // 4pm BST
@@ -57,7 +58,8 @@ test("editing shows what was saved and saves the change", async ({ page }) => {
   await page.getByLabel("Time, 4:00pm. Change").fill("16:30");
   await page.getByLabel("Session notes").fill("");
   await page.getByRole("button", { name: "Save session" }).click();
-  await expect(page).toHaveURL("/sessions");
+  await expect(page).toHaveURL(`/sessions/${row.id}`);
+  await expect(page.getByText("4:30pm")).toBeVisible();
   expect(store[0]).toMatchObject({ at: "2026-09-15T15:30:00.000Z", notes: null });
 });
 
@@ -76,17 +78,27 @@ test("offline, Save says so and keeps everything", async ({ page, context }) => 
   expect(store).toHaveLength(0);
   await context.setOffline(false);
   await page.getByRole("button", { name: "Save session" }).click();
-  await expect(page).toHaveURL("/sessions");
+  await expect(page).toHaveURL(/\/sessions\/[0-9a-f-]{36}$/);
   expect(store).toHaveLength(1);
 });
 
-test("close leaves without saving", async ({ page }) => {
+test("close on a new session goes back to the list, on an edit back to the session", async ({
+  page,
+}) => {
   const store = await fakeSessions(page);
   await page.goto("/sessions/new");
   await page.getByLabel("Session notes").fill("Not saved");
   await page.getByRole("link", { name: "Close without saving" }).click();
   await expect(page).toHaveURL("/sessions");
   expect(store).toHaveLength(0);
+
+  const row = sessionRow(new Date("2026-09-15T15:00:00Z"), { notes: "Kept" });
+  store.push(row);
+  await page.goto(`/sessions/${row.id}/edit`);
+  await page.getByLabel("Session notes").fill("Changed, not saved");
+  await page.getByRole("link", { name: "Close without saving" }).click();
+  await expect(page).toHaveURL(`/sessions/${row.id}`);
+  await expect(page.getByText("Kept")).toBeVisible();
 });
 
 test("a session that isn't there says so", async ({ page }) => {
