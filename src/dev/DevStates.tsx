@@ -68,7 +68,7 @@ export function DevStates() {
   );
 
   return (
-    <main className="app-page dev-page">
+    <main className="screen dev-page">
       <h1 className="t-title-lg">{s.pageTitle}</h1>
       <p className="t-small">{s.pageIntro}</p>
 

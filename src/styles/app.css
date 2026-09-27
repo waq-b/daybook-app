@@ -13,8 +13,3 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
 }
-
-.app-page {
-  padding: var(--space-4);
-  padding-top: max(var(--space-4), env(safe-area-inset-top));
-}

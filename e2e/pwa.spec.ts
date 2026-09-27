@@ -51,7 +51,7 @@ test("a service worker takes control and the app opens offline", async ({ page, 
 
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Daybook");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Today");
 
   // Any app route falls back to the cached shell, fonts included.
   await page.goto("/dev/states");

@@ -6,6 +6,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Bottom nav shell (0a.5): five tabs (Today, Practices, Sessions, History, Settings) with React Router 7. The nav is fixed above the home indicator, with no badges yet. Tabs whose screens come in later phases show their title and an empty state.
 - Installable PWA (0a.4): manifest built from `copy.ts` and `tokens.json`, icons rendered from the design system's Logo mark (`npm run icons`), iOS home-screen tags, and a service worker that caches the app shell and fonts so the installed app opens offline. The API is never served from the cache. New versions take over the next time the app opens fresh.
 - CI checks installability and offline with Playwright, and runs Lighthouse CI with accessibility at 0.95 or above.
 - Design system v9 mounted (0a.3): tokens, self-hosted Atkinson Hyperlegible Next and the 16 components (`src/design/daybook.ts`, with React put on `window` in its own module first). `/dev/states` shows every component on a phone.

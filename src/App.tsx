@@ -1,18 +1,26 @@
-import { copy } from "./copy";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { DevStates } from "./dev/DevStates";
+import { AppShell } from "./shell/AppShell";
+import { SettingsScreen } from "./screens/SettingsScreen";
+import { HistoryScreen, PracticesScreen, SessionsScreen, TodayScreen } from "./screens/tabs";
 
 export function App() {
-  // React Router arrives with the nav shell (task 5); until then, one dev route by hand.
-  const page =
-    window.location.pathname === "/dev/states" ? (
-      <DevStates />
-    ) : (
-      <main className="app-page">
-        <h1 className="t-title-lg">{copy.app.name}</h1>
-        <p className="t-body">{copy.scaffold.placeholder}</p>
-      </main>
-    );
-
   // The bundle's styles are scoped to .db (DESIGN.md §2).
-  return <div className="db">{page}</div>;
+  return (
+    <div className="db">
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppShell />}>
+            <Route index element={<TodayScreen />} />
+            <Route path="practices" element={<PracticesScreen />} />
+            <Route path="sessions" element={<SessionsScreen />} />
+            <Route path="history" element={<HistoryScreen />} />
+            <Route path="settings" element={<SettingsScreen />} />
+          </Route>
+          <Route path="dev/states" element={<DevStates />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }

@@ -3,15 +3,29 @@
     "collect": {
       "startServerCommand": "PORT=4174 npm start",
       "startServerReadyPattern": "listening",
-      "url": ["http://localhost:4174/", "http://localhost:4174/dev/states"],
+      "url": [
+        "http://localhost:4174/",
+        "http://localhost:4174/sessions",
+        "http://localhost:4174/dev/states"
+      ],
       "numberOfRuns": 1,
-      "settings": { "chromeFlags": "--no-sandbox --headless=new" }
+      "settings": {
+        "chromeFlags": "--no-sandbox --headless=new"
+      }
     },
     "assert": {
       "assertions": {
-        "categories:accessibility": ["error", { "minScore": 0.95 }]
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ]
       }
     },
-    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci"
+    }
   }
 }
