@@ -396,6 +396,7 @@ export type Database = {
       sessions: {
         Row: {
           anything_else: string | null;
+          assigned_note: string | null;
           archived_at: string | null;
           at: string;
           created_at: string;
@@ -407,6 +408,7 @@ export type Database = {
         };
         Insert: {
           anything_else?: string | null;
+          assigned_note?: string | null;
           archived_at?: string | null;
           at: string;
           created_at?: string;
@@ -418,6 +420,7 @@ export type Database = {
         };
         Update: {
           anything_else?: string | null;
+          assigned_note?: string | null;
           archived_at?: string | null;
           at?: string;
           created_at?: string;

@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Session data (0b.1):
+  - `sessions.assigned_note` for the edit screen's "Anything else, not a practice yet"
+  - `src/data/sessions.ts` (list, get, create, update, mark done; each returns an outcome, never throws)
+  - pure rules in `src/data/sessionRules.ts` and `src/data/dates.ts` for next and past sessions, the countdown, the new-session default, when a session can be marked done, and past row titles; tested in UK time across both clock changes
 - `docs/PLAN.md`: phase 0b Sessions plan, six tasks tracked as GitHub issues #24–#29. The finished 0a plan moves to `docs/plans/0a.md`.
 
 ## 0a Foundation — 2026-09-27
