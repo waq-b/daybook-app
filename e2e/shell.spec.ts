@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, signedInTest as test } from "./fixtures";
 
 const TABS = [
   ["Practices", "/practices", "Practices"],

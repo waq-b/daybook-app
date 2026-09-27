@@ -1,0 +1,61 @@
+/* Boards SignIn / SignInCode: brand at the top, the form in the bottom third. */
+.signin {
+  box-sizing: border-box;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: max(96px, env(safe-area-inset-top)) var(--space-4) max(34px, env(safe-area-inset-bottom));
+}
+
+.signin-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.signin-tagline,
+.signin-muted,
+.signin-note {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.signin-spacer {
+  flex-grow: 1;
+  min-height: var(--space-6);
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.signin-title {
+  margin: 0;
+}
+
+.signin-note {
+  color: var(--ink);
+}
+
+.signin-primary {
+  margin-top: var(--space-3);
+}
+
+.signin-quiet {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 calc(-1 * var(--space-3));
+}
+
+.signin-privacy {
+  margin: var(--space-5) 0 0;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+  text-align: center;
+}

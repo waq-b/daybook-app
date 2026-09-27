@@ -3,11 +3,7 @@
     "collect": {
       "startServerCommand": "PORT=4174 npm start",
       "startServerReadyPattern": "listening",
-      "url": [
-        "http://localhost:4174/",
-        "http://localhost:4174/sessions",
-        "http://localhost:4174/dev/states"
-      ],
+      "url": ["http://localhost:4174/sign-in", "http://localhost:4174/dev/states"],
       "numberOfRuns": 1,
       "settings": {
         "chromeFlags": "--no-sandbox --headless=new"

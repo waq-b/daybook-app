@@ -8,6 +8,29 @@ export const copy = {
     name: "Daybook",
     description: "A logbook for the practical side of therapy.",
   },
+  // Sign in: boards SignIn and SignInCode. Headings, labels and buttons are
+  // the canvas's words; the status lines fill states the canvas doesn't draw.
+  signIn: {
+    title: "Sign in",
+    intro: "We'll email you a 6-digit code. No password to remember.",
+    emailLabel: "Email",
+    send: "Email me a code",
+    sendNeedsEmail: "Enter your email to get a code",
+    sending: "Sending a code",
+    codeTitle: "Check your email",
+    codeIntro: (email: string) => `We sent a code to ${email}. It works for 10 minutes.`,
+    codeLabel: "6-digit code",
+    verify: "Sign in",
+    verifyNeedsCode: "Enter the 6-digit code",
+    verifying: "Signing in",
+    resend: "Send a new code",
+    resent: "A new code is on its way.",
+    differentEmail: "Use a different email",
+    wrongCode: "That code didn't work. Check it against the latest email, or send a new one.",
+    offline: "Signing in needs a connection. Try again when you're back online.",
+    sendFailed: "The code couldn't be sent just now. Wait a minute, then try again.",
+    privacy: "Your entries are yours. Nothing is shared unless you choose to.",
+  },
   // Placeholder screens for the tabs whose content arrives in later phases.
   // Each is replaced when its phase builds the real screen.
   today: {

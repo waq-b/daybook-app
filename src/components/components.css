@@ -1,0 +1,38 @@
+/* Canvas-only components (DESIGN.md §5), built from tokens. */
+
+.db-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.db-field-label {
+  font-weight: 650;
+}
+
+.db-field-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--line-strong);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: 17px;
+}
+
+.db-field-input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.db-field-code {
+  min-height: 64px;
+  border-color: var(--ink);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-align: center;
+}

@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
-// Runs against the real production server (Fastify serving dist/), so run
-// `npm run build` first. CI does.
+// Runs against the real production server (Fastify serving dist/), built
+// with VITE_SUPABASE_URL=http://localhost:54321 so e2e/fixtures.ts can answer
+// every Supabase call. `npm run e2e:build` makes that build; CI does too.
 const PORT = 4173;
 
 export default defineConfig({

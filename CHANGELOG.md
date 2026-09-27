@@ -6,6 +6,9 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Email-code sign-in (0a.7): boards SignIn and SignInCode. Email → six-digit code (the phone offers it from Mail) → Today, and the session is kept on the phone. Every screen except sign-in needs a session. Disabled buttons say what they need; a wrong code, no signal or a failed send each get one calm line. There are no error colours.
+- Local `TextField` (DESIGN.md §5) and a Supabase client typed from the schema.
+- E2E tests sign in against a mocked Supabase; CI never calls the real one.
 - Supabase (0a.6): project `daybook` (eu-west-1) with all ten tables from the data model, RLS on every table (read, add and change your own rows; no delete, no signed-out access), parent links that can only point at your own rows, `export_everything()` and `delete_everything('delete')`. Five migrations in `supabase/migrations/`, generated types in `src/lib/database.types.ts`.
 - 69 database tests against real Postgres in CI (`npm run test:db`), with a small Supabase stub.
 - Keep-awake workflow: pings Supabase every three days so the free project doesn't pause.

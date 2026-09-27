@@ -19,6 +19,8 @@ export function voiceProblems(text: string): string[] {
 /** Every string inside a nested copy object, with its dotted path. */
 export function allStrings(value: unknown, path = ""): Array<[string, string]> {
   if (typeof value === "string") return [[path, value]];
+  // Copy that takes a value (e.g. an email) is checked with a sample filled in.
+  if (typeof value === "function") return allStrings(value("name@example.com"), path);
   if (value && typeof value === "object") {
     return Object.entries(value).flatMap(([key, v]) =>
       allStrings(v, path ? `${path}.${key}` : key),

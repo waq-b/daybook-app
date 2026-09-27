@@ -1,6 +1,6 @@
 // The installability and offline check that replaces Lighthouse's removed PWA
 // category (plan D8).
-import { expect, test } from "@playwright/test";
+import { expect, signedInTest, test } from "./fixtures";
 
 test("manifest has what install needs, and its icons load", async ({ page, request }) => {
   await page.goto("/");
@@ -43,24 +43,27 @@ test("iOS home-screen tags are present", async ({ page }) => {
   await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute("content", /^#/);
 });
 
-test("a service worker takes control and the app opens offline", async ({ page, context }) => {
-  await page.goto("/");
-  await page.evaluate(() => navigator.serviceWorker.ready);
-  await page.reload();
-  expect(await page.evaluate(() => navigator.serviceWorker.controller !== null)).toBe(true);
+signedInTest(
+  "a service worker takes control and the app opens offline",
+  async ({ page, context }) => {
+    await page.goto("/");
+    await page.evaluate(() => navigator.serviceWorker.ready);
+    await page.reload();
+    expect(await page.evaluate(() => navigator.serviceWorker.controller !== null)).toBe(true);
 
-  await context.setOffline(true);
-  await page.reload();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Today");
+    await context.setOffline(true);
+    await page.reload();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Today");
 
-  // Any app route falls back to the cached shell, fonts included.
-  await page.goto("/dev/states");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Component states");
-  expect(await page.evaluate(() => document.fonts.check('16px "Atkinson Hyperlegible Next"'))).toBe(
-    true,
-  );
-  await context.setOffline(false);
-});
+    // Any app route falls back to the cached shell, fonts included.
+    await page.goto("/dev/states");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Component states");
+    expect(
+      await page.evaluate(() => document.fonts.check('16px "Atkinson Hyperlegible Next"')),
+    ).toBe(true);
+    await context.setOffline(false);
+  },
+);
 
 test("the API is never answered from the cache", async ({ page, context }) => {
   await page.goto("/");
