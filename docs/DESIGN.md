@@ -29,25 +29,30 @@ design/
     index.d.ts                     ← prop types for the 16 components
 ```
 
-**tokens.css comes from the design system; don't hand-edit or regenerate it.** It defines `--paper` … `--difficulty-8`, `--space-*`, `--radius-*`, `--shadow-*`, `--font-sans`, the two `@font-face` rules (`font-display: swap`) and one class per type style: `.t-num-hero`, `.t-num-lg`, `.t-num-md`, `.t-title-lg`, `.t-title`, `.t-heading`, `.t-body`, `.t-body-strong`, `.t-small`, `.t-label`. Vite resolves the `url("fonts/…")` references relative to the CSS file and hashes the woff2 into the build. A CI check greps `bundle.css` for `var(--x)` and fails if `x` is not defined in `tokens.css`.
+**tokens.css comes from the design system; don't hand-edit or regenerate it.** It defines `--paper` … `--difficulty-8`, `--space-*`, `--radius-*`, `--shadow-*`, `--font-sans`, the two `@font-face` rules (`font-display: swap`) and one class per type style: `.t-num-hero`, `.t-num-lg`, `.t-num-md`, `.t-title-lg`, `.t-title`, `.t-heading`, `.t-body`, `.t-body-strong`, `.t-small`, `.t-label`. Vite resolves the `url("fonts/…")` references relative to the CSS file and hashes the woff2 into the build. A CI check (`scripts/tokens.ts`, run by `npm test`) fails if `bundle.css` reads a `var(--x)` that nothing defines. Defined means: declared in `tokens.css`, set inline by `bundle.js` (`--c`, `--on`), or always read with a fallback (`var(--c-edge, …)`).
 
-**No hex anywhere else.** ESLint rule (`no-restricted-syntax` on `#[0-9a-f]{3,8}` in `.tsx`/`.css` outside `design/` and the generated file) fails CI. The dark theme later is a second block in `tokens.json`, nothing else.
+**No hex anywhere else.** ESLint (`no-restricted-syntax` on `#[0-9a-f]{3,8}` in string and template literals in `src/` and `server/`) and stylelint (`color-no-hex`, `color-named: never` in `src/**/*.css`) fail CI. Build-time code that needs a colour (manifest, `theme-color`, icons) reads it from `tokens.json` via `scripts/design-tokens.ts`. The dark theme later is a second block in `tokens.json`, nothing else.
 
 ## 2. Mounting the bundle
 
 `bundle.js` sets `window.Daybook` and expects `React` and `ReactDOM` globals. In Vite:
 
+ES imports are hoisted and run before the importing module's body, so React has to go on `window` in its own module, imported first. TypeScript also refuses an import path ending in `.d.ts`.
+
 ```ts
-// src/design/daybook.ts
+// src/design/globals.ts
 import React from "react";
 import ReactDOM from "react-dom";
-(window as any).React = React;
-(window as any).ReactDOM = ReactDOM;
+window.React = React;
+window.ReactDOM = ReactDOM;
+
+// src/design/daybook.ts
+import "./globals"; // must stay first
 import "../../design/tokens.css";
 import "../../design/components/bundle.css";
 import "../../design/components/bundle.js";
-import type * as DB from "../../design/components/index.d.ts";
-export const Daybook = (window as any).Daybook as typeof DB;
+import type * as DaybookComponents from "../../design/components/index";
+export const Daybook = window.Daybook; // typed via a global Window declaration
 ```
 
 Wrap the app root in `<div className="db">` (the bundle's styles are scoped to `.db`). Use the components as-is. If a component's API is missing something, the fix goes in the design system (next version), not in a fork. Until then, the workaround is documented in §4.
@@ -86,6 +91,8 @@ These are decided. Don't re-decide them in a build session. (The v8 API gaps —
 | `RatingScale` cells ~39px wide at 390 | Accept; 56px tall, gapless. Revisit in the accessibility pass |
 | Canvas loads fonts from Google | App self-hosts from `design/fonts/` via `tokens.css` |
 | Extra icons drawn locally on the canvas | Now in `Icon` (v9); `src/components/icons/` is not needed |
+| Install board's hand-drawn down arrow | `Icon` `chevron-down` (no arrow icon in the set) |
+| Type sizes are px in `tokens.css`, so iOS Larger Text doesn't scale an installed PWA | Accepted for now (plan Q10). Screens are tested at 200% zoom and must not clip or scroll sideways. A rem-based type scale is a design-system request for a later version |
 
 ## 5. Canvas-only components (build locally in `src/components/`)
 
@@ -117,9 +124,9 @@ One row per canvas board group. Copy marked **verbatim** must match exactly and 
 
 | Screen | Boards | States | Components | Verbatim copy | Primary |
 | --- | --- | --- | --- | --- | --- |
-| Sign in | `SignIn`, `SignInCode` | email, code | Logo lockup, TextField, Button | — | "Send code" / "Sign in", bottom third |
-| Install prompt | `Install`, `InstallAndroid` | iOS, Android | Logo mark, Note, Button | Explains add-to-home-screen because reminders need it | "Got it" |
-| Settings | `Settings`, `SettingsDelete1`, `SettingsDelete2` | main, delete 1, delete 2 | rows, Button (secondary; ink for delete) | Delete is two real steps; step 2 types the word "delete" | Secondary only; the ink button is the one destructive action in the app |
+| Sign in | `SignIn`, `SignInCode` | email, code | Logo lockup, TextField, Button | Canvas wording (see `src/copy.ts`) | "Email me a code" / "Sign in", bottom third |
+| Install prompt | `Install`, `InstallAndroid` | iOS, Android | Logo mark, Button | Explains add-to-home-screen because reminders need it | iOS: quiet "Not now" only (Share is in Safari's bar). Android: "Install Daybook", then quiet "Not now" |
+| Settings | `Settings`, `SettingsDelete1`, `SettingsDelete2` | main, delete 1, delete 2 | rows, BottomSheet, TextField, Button (secondary; ink for delete) | Delete is two real steps; step 2 types DELETE (any case accepted) | Secondary only; the ink button is the one destructive action in the app |
 
 ### Phase 0b — Sessions
 

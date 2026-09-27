@@ -6,6 +6,8 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Close-out (0a.10): `docs/setup.md` (services, environment, Supabase Auth settings, recreating from scratch), an "as built" note in `docs/PLAN.md`, and a 200% text-size e2e pass over sign-in, the install prompt and Settings.
+
 - Settings (0a.9): boards Settings, SettingsDelete1 and SettingsDelete2. Signed-in email, Add to home screen (links to `/install`), Export my data (every row as JSON, via the share sheet where the phone has one, else a download), Delete everything in two real steps (step 2 needs DELETE typed; the ink button is the app's one destructive action), About with the build's version, Sign out.
 - Local `BottomSheet` (DESIGN.md §5).
 - Install prompt (0a.8): boards Install and InstallAndroid. After sign-in, a phone not running Daybook from the home screen sees how to add it (Safari's three steps on iPhone; Chrome's own install dialog on Android). "Not now" is remembered on that phone. It never shows in the installed app or on a computer. `/install` reopens it (Settings links there in task 9).
@@ -27,3 +29,18 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 - Pre-push hook that refuses direct pushes to `main`.
 - `docs/PLAN.md`: phase 0a Foundation plan, ten tasks tracked as GitHub issues #1–#10.
 - Repo `waq-b/daybook` (private) with the constitution, design system v9 (`design/`) and design docs.
+
+### Changed
+
+- `CLAUDE.md` (approved in the 0a plan):
+  - repo `waq-b/daybook`; GitHub issues replace monday.com
+  - Node 22 LTS; the Render URL until the custom domain
+  - Supabase keep-awake instead of a Render keep-alive
+  - `main` guarded by a pre-push hook
+  - CI's PWA check is Playwright plus Lighthouse accessibility
+  - export and delete are Postgres functions
+- `docs/DESIGN.md`:
+  - §2 mounting snippet fixed (React on `window` in its own module, imported first)
+  - §1 token check and hex ban as built
+  - §6 wording aligned with the canvas
+  - §4 records the iOS text-size limit and the install arrow
