@@ -103,10 +103,30 @@ export const copy = {
     emptyTitle: "No practices yet",
     emptyBody: "Practices from your sessions will be listed here.",
   },
+  // Sessions list: boards Sessions and SessionsEmpty (canvas words), plus the
+  // states the canvas doesn't draw (later sessions, loading offline).
   sessions: {
     title: "Sessions",
     emptyTitle: "No sessions yet",
-    emptyBody: "Your appointments, and what to bring to them, will be listed here.",
+    emptyBody: "Add your next appointment. Anything you flag will collect for it.",
+    addFirst: "Add your next session",
+    add: "Add a session",
+    next: "Next session",
+    today: "Today",
+    tomorrow: "Tomorrow",
+    days: "days",
+    nextLabel: (date: string, time: string, when: string) =>
+      `Next session, ${date} at ${time}, ${when}`,
+    inDays: (n: number) => `in ${n} days`,
+    later: "Later",
+    past: "Past",
+    noNotes: "No notes",
+    markedDone: "Marked done",
+    notMarkedDone: "Not marked done",
+    rowMeta: (time: string, status: string) => `${time} · ${status}`,
+    offline:
+      "Sessions need a connection to load. Anything you add on the edit screen needs one too.",
+    failed: "Sessions didn't load just now. Try again in a minute.",
   },
   history: {
     title: "History",

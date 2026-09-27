@@ -19,7 +19,7 @@ export async function listSessions(): Promise<Result<Session[]>> {
     .select("*")
     .is("archived_at", null)
     .order("at", { ascending: false });
-  return error || !data ? failure() : { ok: true, data };
+  return error || !Array.isArray(data) ? failure() : { ok: true, data };
 }
 
 export async function getSession(id: string): Promise<Result<Session | null>> {

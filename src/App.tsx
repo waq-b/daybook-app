@@ -8,7 +8,8 @@ import { AppShell } from "./shell/AppShell";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { SignInScreen } from "./screens/SignInScreen";
 import { SessionEditScreen } from "./sessions/SessionEditScreen";
-import { HistoryScreen, PracticesScreen, SessionsScreen, TodayScreen } from "./screens/tabs";
+import { HistoryScreen, PracticesScreen, TodayScreen } from "./screens/tabs";
+import { SessionsScreen } from "./sessions/SessionsScreen";
 
 export function App() {
   // The bundle's styles are scoped to .db (DESIGN.md §2).

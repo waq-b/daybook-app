@@ -6,6 +6,11 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Sessions list (0b.4): boards Sessions and SessionsEmpty.
+  - The next session sits in the teal card with its countdown ("3 days", Today, Tomorrow).
+  - Any other booked sessions sit under Later; Past is newest first, each row titled by its notes' first line with its time and whether it was marked done.
+  - "Add a session", or "Add your next session" when empty.
+  - Offline, a calm line says loading needs a connection.
 - New and edit session (0b.3): boards SessionEdit and SessionEditPast at `/sessions/new` and `/sessions/:id/edit`.
   - Fields: When (date and time), Session notes, and "Anything else, not a practice yet".
   - A new session is set from the last one: same weekday, same time.

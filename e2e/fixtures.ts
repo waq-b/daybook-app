@@ -29,9 +29,15 @@ export function testSession() {
 
 /** Answers every Supabase request; tests override specific routes first. */
 export async function mockSupabase(page: Page) {
-  await page.route(`${SUPABASE_URL}/**`, (route) =>
-    route.fulfill({ status: 200, contentType: "application/json", body: "{}" }),
-  );
+  await page.route(`${SUPABASE_URL}/**`, (route) => {
+    // Table reads get an empty list, everything else an empty object.
+    const read = route.request().method() === "GET" && route.request().url().includes("/rest/v1/");
+    return route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: read ? "[]" : "{}",
+    });
+  });
 }
 
 export const test = base;
