@@ -15,7 +15,8 @@
     "vitest.config.ts",
     "scripts",
     "src/copy.ts",
-    "playwright.config.ts"
+    "playwright.config.ts",
+    "vitest.db.config.ts"
   ],
   "exclude": ["scripts/**/*.test.ts", "scripts/tokens.ts"]
 }

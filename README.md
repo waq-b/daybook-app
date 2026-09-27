@@ -24,6 +24,18 @@ Render web service `daybook` (settings recorded in `render.yaml`) builds with `n
 
 `src/copy.test.ts` is the voice test. Every string in `src/copy.ts` must have no exclamation marks, no emoji and none of the banned words. ESLint stops user-facing strings appearing anywhere else.
 
+## Database
+
+Supabase project `daybook` (eu-west-1). Migrations live in `supabase/migrations/` and are applied in order with the Supabase connector. Each file is the exact SQL applied. After a migration, regenerate `src/lib/database.types.ts`.
+
+`npm run test:db` runs the migrations and RLS tests against any Postgres you can create databases on:
+
+```bash
+TEST_DATABASE_URL=postgres://postgres@localhost:5432/postgres npm run test:db
+```
+
+`.github/workflows/keep-awake.yml` pings the database every three days (repo secrets `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, both public values).
+
 ## PWA
 
 `vite-plugin-pwa` builds the manifest (`scripts/manifest.ts`) and service worker. The icons in `public/icons/` are rendered from the design system's Logo mark. Re-run `npm run icons` after a design-system bump. `npm run e2e` (after `npm run build`) checks installability and offline; `npm run lighthouse` checks accessibility.

@@ -10,5 +10,5 @@
     "types": ["node", "vite/client", "vite-plugin-pwa/client"],
     "noEmit": true
   },
-  "include": ["src", "server", "scripts/**/*.ts", "e2e"]
+  "include": ["src", "server", "scripts/**/*.ts", "e2e", "supabase/tests"]
 }
