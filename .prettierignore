@@ -1,0 +1,7 @@
+design/
+docs/
+dist/
+dist-server/
+coverage/
+package-lock.json
+CLAUDE.md

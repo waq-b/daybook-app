@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "node_modules/.tmp/server.tsbuildinfo",
+    "lib": ["ES2023"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "rootDir": "server",
+    "outDir": "dist-server"
+  },
+  "include": ["server"],
+  "exclude": ["server/**/*.test.ts"]
+}
