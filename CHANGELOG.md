@@ -4,8 +4,11 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
+## 0b Sessions — 2026-09-27
+
 ### Added
 
+- Close-out (0b.6): axe accessibility checks, 390px and 200% text on every Sessions screen and state, an "as built" note in `docs/PLAN.md`.
 - Session detail (0b.5): boards SessionDetail and SessionDetailPast at `/sessions/:id`.
   - A Today / Upcoming / Done / Not marked done badge, the date and time, the notes, and the assigned line.
   - Mark session as done on today's session or any earlier one; it only records that the session is done.
@@ -28,6 +31,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
   - `src/data/sessions.ts` (list, get, create, update, mark done; each returns an outcome, never throws)
   - pure rules in `src/data/sessionRules.ts` and `src/data/dates.ts` for next and past sessions, the countdown, the new-session default, when a session can be marked done, and past row titles; tested in UK time across both clock changes
 - `docs/PLAN.md`: phase 0b Sessions plan, six tasks tracked as GitHub issues #24–#29. The finished 0a plan moves to `docs/plans/0a.md`.
+
+### Changed
+
+- `CLAUDE.md` data model: `sessions.assigned_note` (0b plan, Q1). `docs/DESIGN.md` §6 Sessions rows aligned with the canvas (Q8) and with how mark as done works. `docs/setup.md`: six migrations.
 
 ## 0a Foundation — 2026-09-27
 

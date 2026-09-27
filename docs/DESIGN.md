@@ -132,9 +132,9 @@ One row per canvas board group. Copy marked **verbatim** must match exactly and 
 
 | Screen | Boards | States | Components | Verbatim copy | Primary |
 | --- | --- | --- | --- | --- | --- |
-| Sessions | `Sessions`, `SessionsEmpty` | filled, empty | next-session card on `teal-tint`, list, EmptyState, CountPill | Empty: "No sessions yet" / "Add your next appointment so flags have somewhere to go." | "Add a session"; teal "Prepare" on the next-session card is the one teal button in the app |
-| Add / edit session (10b) | `AddSession`, `EditSession`, `TabletAddSession` | new, editing past, tablet | DateTimeField, TextArea, Chip, AddChip, RemovableChip, TextField, Button | Sections: **When** · **Session notes** (placeholder "Anything worth keeping from the session") · **Assigned in session**. Title "Edit session" when editing | "Save session" |
-| Session detail | `SessionDetail`, `SessionDetailPast` | today, past | EntryCard list, Button | "Mark as done" clears flags; entries stay in history | "Mark as done" (today) |
+| Sessions | `Sessions`, `SessionsEmpty` | filled, empty | next-session card on `teal-tint`, list, EmptyState, CountPill (0d) | Empty: "No sessions yet" / "Add your next appointment. Anything you flag will collect for it." | Filled: secondary "Add a session"; empty: primary "Add your next session". Teal "Prepare" on the next-session card (0d) is the one teal button in the app |
+| Add / edit session (10b) | `SessionEdit`, `SessionEditPast`, `TabletSessionEdit` | new, editing past, tablet | DateTimeField, TextArea, Chip, AddChip, RemovableChip, TextField, Button | Title "New session" / "Edit session". Sections: **When** · **Session notes** (placeholder "Anything worth keeping from the session") · **Assigned in session** (practice chips, plus "Anything else, not a practice yet") | "Save session" |
+| Session detail | `SessionDetail`, `SessionDetailPast` | today, past | EntryCard list, Button | "Mark session as done" records the session as done; flags since then "roll off" because they're derived from done sessions, never cleared; entries stay in history | "Mark session as done" (today or an earlier session not yet done) |
 
 ### Phase 0c — Hierarchy
 
