@@ -1,0 +1,57 @@
+/* Daybook tokens as CSS custom properties. Generated from tokens.json (v9, light theme). */
+
+:root {
+  --paper: #fbf6ec;
+  --paper-raised: #fffdf8;
+  --paper-sunk: #f3ecdf;
+  --line: #e7ddcc;
+  --line-strong: #8a7e70;
+  --ink: #2a2521;
+  --ink-muted: #6b6158;
+  --ink-inverse: #fffdf8;
+  --apricot: #f28c4a;
+  --apricot-ink: #a8471a;
+  --apricot-tint: #fde6d4;
+  --teal: #2c6f6e;
+  --teal-tint: #dcefed;
+  --marigold: #f5b83d;
+  --focus: var(--teal);
+  --difficulty-0: #cdeefc;
+  --difficulty-1: #b9e5f4;
+  --difficulty-2: #b0d9e4;
+  --difficulty-3: #becdc4;
+  --difficulty-4: #d3c2a0;
+  --difficulty-5: #dbae7b;
+  --difficulty-6: #e09457;
+  --difficulty-7: #d87339;
+  --difficulty-8: #b24a22;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 0 #e7ddcc, 0 2px 6px rgba(42, 37, 33, 0.05);
+  --shadow-sheet: 0 -4px 24px rgba(42, 37, 33, 0.10);
+  --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+}
+
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("fonts/AtkinsonHyperlegibleNext-Variable.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("fonts/AtkinsonHyperlegibleNext-Variable-Italic.woff2") format("woff2"); font-weight: 200 800; font-style: italic; font-display: swap; }
+
+.t-num-hero { font-family: var(--font-sans); font-size: 72px; line-height: 72px; font-weight: 800; letter-spacing: -0.02em; }
+.t-num-lg { font-family: var(--font-sans); font-size: 40px; line-height: 44px; font-weight: 750; letter-spacing: -0.01em; }
+.t-num-md { font-family: var(--font-sans); font-size: 24px; line-height: 28px; font-weight: 700; }
+.t-title-lg { font-family: var(--font-sans); font-size: 30px; line-height: 36px; font-weight: 750; letter-spacing: -0.01em; }
+.t-title { font-family: var(--font-sans); font-size: 22px; line-height: 28px; font-weight: 700; }
+.t-heading { font-family: var(--font-sans); font-size: 18px; line-height: 24px; font-weight: 700; }
+.t-body { font-family: var(--font-sans); font-size: 17px; line-height: 26px; font-weight: 400; }
+.t-body-strong { font-family: var(--font-sans); font-size: 17px; line-height: 26px; font-weight: 650; }
+.t-small { font-family: var(--font-sans); font-size: 15px; line-height: 22px; font-weight: 400; }
+.t-label { font-family: var(--font-sans); font-size: 13px; line-height: 18px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
