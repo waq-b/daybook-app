@@ -50,6 +50,8 @@ jobs:
       - run: npm run e2e
       # Accessibility score at least 0.95 on every listed page.
       - run: npm run lighthouse
+      # A new version reaches an already-open app (issue #38). Rebuilds dist, so it runs last.
+      - run: npm run check:update
       - if: failure()
         uses: actions/upload-artifact@v4
         with:

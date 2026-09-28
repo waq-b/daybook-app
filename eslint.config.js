@@ -48,7 +48,8 @@ export default tseslint.config(
     },
   },
   {
+    // Node scripts; some also run code in a browser page (check-update.mjs).
     files: ["scripts/**/*.mjs"],
-    languageOptions: { globals: globals.node },
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
 );

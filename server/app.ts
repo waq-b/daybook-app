@@ -20,11 +20,16 @@ export function buildApp({
 
   app.get("/api/health", async () => ({ ok: true, version }));
 
-  // Unknown /api routes are a real 404; everything else is the single-page app.
+  // App screens (/settings, /sessions/…) get the single-page app. Unknown
+  // /api routes and missing files (/assets/old-hash.js after a deploy) get a
+  // real 404: answering a script with HTML would break the page, and the
+  // service worker could cache that HTML as the script.
   if (existsSync(webRoot)) {
     app.register(fastifyStatic, { root: webRoot, wildcard: false });
     app.setNotFoundHandler((request, reply) => {
-      if (request.url.startsWith("/api/") || request.method !== "GET") {
+      const path = request.url.split("?")[0] ?? "";
+      const isFile = /\.[a-z0-9]+$/i.test(path);
+      if (path.startsWith("/api/") || request.method !== "GET" || isFile) {
         return reply.code(404).send({ ok: false });
       }
       return reply.sendFile("index.html");

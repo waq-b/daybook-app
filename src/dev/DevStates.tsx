@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react";
 import { Daybook, type Difficulty, type IconName } from "../design/daybook";
 import { DateTimeField } from "../components/DateTimeField";
+import { Note } from "../components/Note";
+import { copy } from "../copy";
 import { TextArea } from "../components/TextArea";
 import { samples as s } from "./samples";
 
@@ -232,6 +234,10 @@ export function DevStates() {
           placeholder={s.textArea.quietPlaceholder}
           rows={1}
         />
+      </Section>
+
+      <Section title={s.sections.note}>
+        <Note action={<Button variant="quiet">{copy.update.now}</Button>}>{copy.update.ready}</Note>
       </Section>
 
       <Section title={s.sections.nav}>

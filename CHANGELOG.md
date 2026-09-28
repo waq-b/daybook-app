@@ -4,6 +4,18 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
+### Fixed
+
+- New versions now reach the installed app (#38).
+  - Before: a new version waited for every Daybook window to close, which an installed iPhone app rarely does, and nothing said an update was ready.
+  - Now: the app checks for a new version on open, whenever it comes back to the front, and hourly. When one is ready, a teal note at the top says "A new version of Daybook is ready." with Update now. It never reloads by itself.
+  - `npm run check:update` (in CI) builds two versions and proves an already-open app gets from one to the other.
+- The server answers a missing file (an old script after a deploy) with a 404, not the app page. Answering a script with HTML blanked the screen, and the service worker could have cached it.
+
+### Added
+
+- Local `Note` component (DESIGN.md §5): the teal info banner.
+
 ## 0b Sessions — 2026-09-27
 
 ### Added

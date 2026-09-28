@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { AuthProvider } from "./auth/AuthProvider";
+import { UpdateNote } from "./components/UpdateNote";
 import { RequireNoSession, RequireSession } from "./auth/guards";
 import { DevStates } from "./dev/DevStates";
 import { InstallGate } from "./install/InstallGate";
@@ -16,6 +17,7 @@ export function App() {
   // The bundle's styles are scoped to .db (DESIGN.md §2).
   return (
     <div className="db">
+      <UpdateNote />
       <AuthProvider>
         <BrowserRouter>
           <Routes>

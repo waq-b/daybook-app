@@ -24,6 +24,7 @@ export const samples = {
     nav: "BottomNav",
     dateTime: "DateTimeField (local)",
     textArea: "TextArea (local)",
+    note: "Note (local)",
   },
   textArea: {
     label: "Session notes",

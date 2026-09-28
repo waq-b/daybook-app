@@ -98,6 +98,11 @@ export const copy = {
     markOffline: "Marking it done needs a connection. Nothing has changed.",
     markFailed: "That didn't go through, so nothing has changed. Try again in a minute.",
   },
+  // App update note (no board; DESIGN.md §5 Note). Never reloads by itself.
+  update: {
+    ready: "A new version of Daybook is ready.",
+    now: "Update now",
+  },
   // Shared field words (DateTimeField, TextArea).
   fields: {
     date: "Date",
