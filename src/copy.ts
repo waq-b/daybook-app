@@ -123,7 +123,8 @@ export const copy = {
   practices: {
     title: "Practices",
     emptyTitle: "No practices yet",
-    emptyBody: "Practices from your sessions will be listed here.",
+    emptyBody:
+      "Practices you're working on will be listed here, with or without a session behind them.",
   },
   // Sessions list: boards Sessions and SessionsEmpty (canvas words), plus the
   // states the canvas doesn't draw (later sessions, loading offline).

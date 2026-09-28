@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Fixed
 
+- The Practices tab's placeholder no longer implies practices come from sessions. Practices work with or without therapy sessions.
+
+### Fixed
+
 - New versions now reach the installed app (#38).
   - Before: a new version waited for every Daybook window to close, which an installed iPhone app rarely does, and nothing said an update was ready.
   - Now: the app checks for a new version on open, whenever it comes back to the front, and hourly. When one is ready, a teal note at the top says "A new version of Daybook is ready." with Update now. It never reloads by itself.
