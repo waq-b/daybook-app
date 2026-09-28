@@ -22,8 +22,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--ink);
   border-radius: var(--radius-md);
+  cursor: pointer;
 }
 
 .session-edit-back {

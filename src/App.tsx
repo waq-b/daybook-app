@@ -11,6 +11,7 @@ import { SignInScreen } from "./screens/SignInScreen";
 import { SessionEditScreen } from "./sessions/SessionEditScreen";
 import { HistoryScreen, TodayScreen } from "./screens/tabs";
 import { LadderScreen } from "./hierarchy/LadderScreen";
+import { LogRepScreen } from "./hierarchy/LogRepScreen";
 import { PracticesScreen } from "./hierarchy/PracticesScreen";
 import { TaskDetailScreen } from "./hierarchy/TaskDetailScreen";
 import { TaskFormScreen } from "./hierarchy/TaskFormScreen";
@@ -73,6 +74,14 @@ export function App() {
               element={
                 <RequireSession>
                   <TaskFormScreen />
+                </RequireSession>
+              }
+            />
+            <Route
+              path="practices/:id/tasks/:taskId/log"
+              element={
+                <RequireSession>
+                  <LogRepScreen />
                 </RequireSession>
               }
             />

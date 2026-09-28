@@ -4,6 +4,7 @@ import { copy } from "../copy";
 import { Daybook, type Difficulty } from "../design/daybook";
 import { PredictionBefore } from "../components/PredictionCheck";
 import { RepChart } from "../components/RepChart";
+import { ScoreStat } from "../components/ScoreStat";
 import { TextArea } from "../components/TextArea";
 import { formatEntryTime, formatShortDate, fromDateColumn, shortTarget } from "../data/dates";
 import { buildLadder, chartStory, tallyText, type LadderTask } from "../data/ladderRules";
@@ -15,20 +16,6 @@ import { useHierarchy } from "./store";
 const { Button, EntryCard, Icon } = Daybook;
 const t = copy.taskDetail;
 type Likelihood = "not_very" | "fairly" | "very";
-
-function Stat({ label, value }: { label: string; value: number | null }) {
-  return (
-    <div className="task-stat">
-      <span className="t-label task-stat-label">{label}</span>
-      <span className="t-num-lg">{value ?? t.noScore}</span>
-      <span
-        className="task-stat-strip"
-        style={{ background: value === null ? "var(--line)" : `var(--difficulty-${value})` }}
-        aria-hidden="true"
-      />
-    </div>
-  );
-}
 
 function metaLine(row: LadderTask, now: Date): string {
   const { task } = row;
@@ -122,11 +109,11 @@ export function TaskDetailScreen() {
         )}
         <h1 className="t-title-lg task-title">{task.name}</h1>
         <div className="task-stats">
-          <Stat label={t.predicted} value={task.predicted} />
+          <ScoreStat label={t.predicted} value={task.predicted} />
           <span className="t-num-md task-stat-arrow" aria-hidden="true">
             {copy.controls.arrow}
           </span>
-          <Stat label={t.remaining} value={row.remaining} />
+          <ScoreStat label={t.remaining} value={row.remaining} />
           <div className="task-stat task-stat-tally">
             <span className="t-label task-stat-label">{t.tally}</span>
             <span className="t-num-lg">{tallyText(row.tally)}</span>

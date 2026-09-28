@@ -6,6 +6,12 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Log a rep (0c.8): boards LogRep, LogRepAttempt, LogRepLogged and LogRepOffline.
+  - The form: Did it / Started, left early; your own quick picks plus Other and a note; Actual and Remaining difficulty; Bring to session.
+  - Save rep needs both scores and **always saves on the phone first**, syncing when there's signal (exactly one row, however many retries).
+  - The logged state: the board's confirmation line, the three scores, tally, this week and the flag, with the celebration wash when earned. "Saved on this phone, will sync" shows while it's only on the phone. Change something edits the same rep.
+  - A rung finished this way shows on the ladder once. A half-filled rep survives the app closing.
+  - With the prediction check on: "Did it happen?" with your own words quoted back.
 - Task detail (0c.7): boards TaskDetail, TaskDetailDone and TaskDetailNew.
   - The header shows Predicted → Remaining and the Tally; once done it's tinted, with "Done. Remaining 3, under the 4 line."
   - The rep chart and its sentence; "Before the next one" when the prediction check is on.

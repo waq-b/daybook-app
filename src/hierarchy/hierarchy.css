@@ -448,3 +448,125 @@
   padding: var(--space-3) var(--space-4);
   background: var(--paper);
 }
+
+/* Board LogRep (and its Attempt / Logged / Offline states): full screen, no nav. */
+.log-rep {
+  min-height: 100dvh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  /* Clear of the sticky bar (up to two buttons) and the home indicator. */
+  padding-bottom: calc(170px + env(safe-area-inset-bottom));
+}
+
+.log-rep-header {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+}
+
+.log-rep-kicker {
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+.log-rep-title,
+.log-rep-sub,
+.log-rep-pred,
+.log-rep-confirm-line {
+  margin: 0;
+}
+
+.log-rep-sub {
+  margin-top: calc(-1 * var(--space-3));
+  color: var(--ink-muted);
+}
+
+.log-rep-open,
+.log-rep-add {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.log-rep-open {
+  margin-left: calc(-1 * var(--space-3));
+}
+
+.log-rep-add > :first-child {
+  flex-grow: 1;
+}
+
+.log-rep-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.log-rep-spacer {
+  flex-grow: 1;
+}
+
+.log-rep-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.db-celebration .task-stats,
+.db-celebration .log-rep-pred {
+  margin-top: var(--space-3);
+}
+
+.log-rep-summary {
+  margin: 0;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.log-rep-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+.log-rep-summary > div:last-child {
+  border-bottom: 0;
+}
+
+.log-rep-summary dt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 650;
+}
+
+.log-rep-summary dd {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.log-rep-bar {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 10;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4) max(34px, env(safe-area-inset-bottom));
+  background: var(--paper);
+  box-shadow: 0 -1px 0 var(--line);
+}
