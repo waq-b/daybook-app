@@ -8,12 +8,16 @@ import { fromInputs, toDateInput, toTimeInput, weekdayName } from "../data/dates
 import { defaultNewSession } from "../data/sessionRules";
 import { createSession, getSession, listSessions, updateSession } from "../data/sessions";
 import { sessionHref } from "./links";
+import { AddChip } from "../components/AddChip";
+import { setPracticeSession } from "../data/practices";
+import { AddPracticeSheet } from "../hierarchy/AddPracticeSheet";
+import { useHierarchy } from "../hierarchy/store";
 
-const { Button, Icon } = Daybook;
+const { Button, Chip, Icon } = Daybook;
 const t = copy.sessionEdit;
 
 type Load = "loading" | "ready" | "offline" | "missing";
-type Status = "idle" | "saving" | "offline" | "failed";
+type Status = "idle" | "saving" | "offline" | "failed" | "linkFailed";
 
 /** Empty text is stored as null, not "". */
 const orNull = (text: string) => (text.trim() ? text.trim() : null);
@@ -34,6 +38,13 @@ export function SessionEditScreen() {
   const [notes, setNotes] = useState("");
   const [assignedNote, setAssignedNote] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  // Practices assigned in this session (optional; never needed to save).
+  const { loaded: hierarchy, reload: reloadPractices } = useHierarchy();
+  const practices = hierarchy.state === "ready" ? hierarchy.data.practices : [];
+  const [picked, setPicked] = useState<Set<string> | null>(null);
+  const [addingPractice, setAddingPractice] = useState(false);
+  const linkedHere = new Set(practices.filter((p) => id && p.session_id === id).map((p) => p.id));
+  const chosen = picked ?? linkedHere;
 
   useEffect(() => {
     let live = true;
@@ -80,7 +91,14 @@ export function SessionEditScreen() {
     };
     const result = id ? await updateSession(id, fields) : await createSession(fields);
     if (!result.ok) return setStatus(result.reason);
-    navigate(sessionHref(result.data.id), { replace: true });
+    // Link or unlink practices that changed. The session is saved either way.
+    const sessionId = result.data.id;
+    const changes = practices.filter((p) => chosen.has(p.id) !== (p.session_id === sessionId));
+    const links = await Promise.all(
+      changes.map((p) => setPracticeSession(p.id, chosen.has(p.id) ? sessionId : null)),
+    );
+    if (links.some((r) => !r.ok)) return setStatus("linkFailed");
+    navigate(sessionHref(sessionId), { replace: true });
   }
 
   if (load === "loading") return null;
@@ -97,7 +115,14 @@ export function SessionEditScreen() {
     );
   }
 
-  const note = status === "offline" ? t.offline : status === "failed" ? t.failed : null;
+  const note =
+    status === "offline"
+      ? t.offline
+      : status === "failed"
+        ? t.failed
+        : status === "linkFailed"
+          ? t.linkFailed
+          : null;
 
   return (
     <form className="screen session-edit" onSubmit={onSave} noValidate>
@@ -131,7 +156,27 @@ export function SessionEditScreen() {
         <h2 id="assigned-h" className="t-heading session-edit-h">
           {t.assignedHeading}
         </h2>
-        {/* Practice chips and "Add a practice" arrive in 0c. */}
+        <div className="db-chips" role="group" aria-labelledby="assigned-h">
+          {practices.map((p) => {
+            const on = chosen.has(p.id);
+            return (
+              <Chip
+                key={p.id}
+                selected={on}
+                icon={`practice-${p.type}`}
+                onClick={() => {
+                  const next = new Set(chosen);
+                  if (on) next.delete(p.id);
+                  else next.add(p.id);
+                  setPicked(next);
+                }}
+              >
+                {p.name}
+              </Chip>
+            );
+          })}
+          <AddChip onClick={() => setAddingPractice(true)}>{t.addPractice}</AddChip>
+        </div>
         <TextArea
           quietLabel
           optional
@@ -153,6 +198,17 @@ export function SessionEditScreen() {
           {saving ? t.saving : at ? t.save : t.saveNeedsWhen}
         </Button>
       </div>
+      {addingPractice && (
+        <AddPracticeSheet
+          existing={practices}
+          onClose={() => setAddingPractice(false)}
+          onPicked={(practice, isNew) => {
+            setAddingPractice(false);
+            setPicked(new Set([...chosen, practice.id]));
+            if (isNew) reloadPractices();
+          }}
+        />
+      )}
     </form>
   );
 }

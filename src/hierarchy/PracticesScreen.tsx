@@ -2,14 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { copy } from "../copy";
 import { Daybook } from "../design/daybook";
-import { BottomSheet } from "../components/BottomSheet";
 import { relativeDay } from "../data/dates";
 import { buildLadder, lastLoggedAt, practiceCounts, practiceWeek } from "../data/ladderRules";
-import { createPractice } from "../data/practices";
+import { AddPracticeSheet } from "./AddPracticeSheet";
 import { ladderHref } from "./links";
 import { useHierarchy, type Hierarchy } from "./store";
 
-const { Button, EmptyState, Icon, PracticeCard } = Daybook;
+const { Button, EmptyState, PracticeCard } = Daybook;
 const t = copy.practices;
 
 function cardProps(data: Hierarchy, practiceId: string, now: Date) {
@@ -32,30 +31,10 @@ export function PracticesScreen() {
   const navigate = useNavigate();
   const { loaded, reload } = useHierarchy();
   const [sheet, setSheet] = useState(false);
-  const [adding, setAdding] = useState<"idle" | "busy" | "offline" | "failed">("idle");
 
   const now = new Date();
   const practices = loaded.state === "ready" ? loaded.data.practices : [];
-  const hierarchy = practices.find((p) => p.type === "hierarchy");
   const empty = loaded.state === "ready" && practices.length === 0;
-
-  async function onHierarchy() {
-    // One hierarchy for now (D11): if it's there, the option opens it.
-    if (hierarchy) return navigate(ladderHref(hierarchy.id));
-    setAdding("busy");
-    const result = await createPractice({
-      id: crypto.randomUUID(),
-      type: "hierarchy",
-      name: t.hierarchyName,
-    });
-    if (!result.ok) return setAdding(result.reason);
-    setAdding("idle");
-    setSheet(false);
-    reload();
-    navigate(ladderHref(result.data.id));
-  }
-
-  const addNote = adding === "offline" ? t.addOffline : adding === "failed" ? t.addFailed : null;
 
   return (
     <main className="screen practices">
@@ -96,38 +75,15 @@ export function PracticesScreen() {
       )}
 
       {sheet && (
-        <BottomSheet
-          title={t.sheetTitle}
-          onClose={() => {
+        <AddPracticeSheet
+          existing={practices}
+          onClose={() => setSheet(false)}
+          onPicked={(practice, isNew) => {
             setSheet(false);
-            setAdding("idle");
+            if (isNew) reload();
+            navigate(ladderHref(practice.id));
           }}
-        >
-          <p className="practices-sheet-lead">{t.sheetLead}</p>
-          {/* Feelings and Gratitude join this list in phase 1 (D10). */}
-          <button
-            type="button"
-            className="practice-option"
-            onClick={onHierarchy}
-            disabled={adding === "busy"}
-          >
-            <span className="practice-option-tile is-hierarchy">
-              <Icon name="practice-hierarchy" />
-            </span>
-            <span className="practice-option-text">
-              <span className="practice-option-name">{t.hierarchyName}</span>
-              <span className="practice-option-line">
-                {adding === "busy" ? t.adding : hierarchy ? t.alreadyAdded : t.hierarchyLine}
-              </span>
-            </span>
-          </button>
-          {addNote && (
-            <p className="practices-sheet-note" role="status">
-              {addNote}
-            </p>
-          )}
-          <p className="practices-sheet-footer">{t.sheetFooter}</p>
-        </BottomSheet>
+        />
       )}
     </main>
   );

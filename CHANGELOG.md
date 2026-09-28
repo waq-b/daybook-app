@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Practices in sessions, optional (0c.9).
+  - Edit session's "Assigned in session" lists your practices as chips, plus "Add a practice".
+  - Session detail shows the practices assigned in it (each opens its ladder), and today's session has "Link a practice".
+  - Linking or unlinking never changes the practice, its tasks or its reps, and nothing needs a session.
 - Log a rep (0c.8): boards LogRep, LogRepAttempt, LogRepLogged and LogRepOffline.
   - The form: Did it / Started, left early; your own quick picks plus Other and a note; Actual and Remaining difficulty; Bring to session.
   - Save rep needs both scores and **always saves on the phone first**, syncing when there's signal (exactly one row, however many retries).

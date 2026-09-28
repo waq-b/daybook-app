@@ -5,6 +5,10 @@ import { Daybook } from "../design/daybook";
 import { formatLongDate, formatTime } from "../data/dates";
 import { canMarkDone, sessionStatus, type Session } from "../data/sessionRules";
 import { getSession, markSessionDone } from "../data/sessions";
+import { setPracticeSession } from "../data/practices";
+import { BottomSheet } from "../components/BottomSheet";
+import { ladderHref } from "../hierarchy/links";
+import { useHierarchy } from "../hierarchy/store";
 
 const { Button, Icon } = Daybook;
 const t = copy.sessionDetail;
@@ -27,6 +31,8 @@ export function SessionDetailScreen() {
   const { id = "" } = useParams();
   const [load, setLoad] = useState<Load>({ state: "loading" });
   const [mark, setMark] = useState<Mark>("idle");
+  const { loaded: hierarchy, reload: reloadPractices } = useHierarchy();
+  const [linking, setLinking] = useState<"closed" | "open" | "offline">("closed");
 
   useEffect(() => {
     let live = true;
@@ -69,6 +75,18 @@ export function SessionDetailScreen() {
     setMark("idle");
   }
 
+  const practices = hierarchy.state === "ready" ? hierarchy.data.practices : [];
+  const assigned = practices.filter((p) => p.session_id === session.id);
+  const unlinked = practices.filter((p) => p.session_id !== session.id);
+  const canLink = sessionStatus(session, now) === "today";
+
+  async function link(practiceId: string) {
+    const result = await setPracticeSession(practiceId, session.id);
+    if (!result.ok) return setLinking("offline");
+    setLinking("closed");
+    reloadPractices();
+  }
+
   const markLine =
     mark === "offline" ? t.markOffline : mark === "failed" ? t.markFailed : t.markNote;
 
@@ -99,15 +117,62 @@ export function SessionDetailScreen() {
         )}
       </section>
 
-      {session.assigned_note && (
+      {(assigned.length > 0 || session.assigned_note || canLink) && (
         <section className="session-detail-section">
           <h2 className="t-heading session-detail-h">{t.assigned}</h2>
-          {/* Assigned practice cards and "Link a practice" arrive in 0c. */}
-          <p className="session-detail-assigned">{session.assigned_note}</p>
+          {assigned.map((p) => (
+            <Link key={p.id} to={ladderHref(p.id)} className="session-practice">
+              <span className={`practice-option-tile is-${p.type}`}>
+                <Icon name={`practice-${p.type}`} size={22} />
+              </span>
+              <span className="practice-option-text">
+                <span className="practice-option-name">{p.name}</span>
+                <span className="practice-option-line">{t.practiceType[p.type]}</span>
+              </span>
+              <Icon name="chevron-right" size={20} />
+            </Link>
+          ))}
+          {session.assigned_note && (
+            <p className="session-detail-assigned">{session.assigned_note}</p>
+          )}
+          {canLink && (
+            <div className="session-link">
+              <Button variant="quiet" icon="plus" onClick={() => setLinking("open")}>
+                {t.linkPractice}
+              </Button>
+            </div>
+          )}
         </section>
       )}
 
       {/* "Flagged (n)" / "Talked through (n)" and "Open briefing" arrive in 0d. */}
+
+      {linking !== "closed" && (
+        <BottomSheet title={t.linkTitle} onClose={() => setLinking("closed")}>
+          {unlinked.length === 0 && <p className="practices-sheet-lead">{t.linkNone}</p>}
+          {unlinked.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className="practice-option"
+              onClick={() => void link(p.id)}
+            >
+              <span className={`practice-option-tile is-${p.type}`}>
+                <Icon name={`practice-${p.type}`} />
+              </span>
+              <span className="practice-option-text">
+                <span className="practice-option-name">{p.name}</span>
+                <span className="practice-option-line">{t.practiceType[p.type]}</span>
+              </span>
+            </button>
+          ))}
+          {linking === "offline" && (
+            <p className="practices-sheet-note" role="status">
+              {t.linkOffline}
+            </p>
+          )}
+        </BottomSheet>
+      )}
 
       {markable && (
         <div className="session-detail-bar">

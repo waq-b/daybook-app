@@ -82,6 +82,14 @@
   background: var(--apricot-tint);
 }
 
+.practice-option-tile.is-feelings {
+  background: var(--teal-tint);
+}
+
+.practice-option-tile.is-gratitude {
+  background: var(--paper-sunk);
+}
+
 .practice-option-text {
   display: flex;
   flex-direction: column;
