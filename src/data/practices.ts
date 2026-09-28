@@ -58,3 +58,19 @@ export async function setPracticeSession(
     .single();
   return error || !data ? failure() : { ok: true, data };
 }
+
+/** D1: the prediction check, per practice. Setting it needs a connection. */
+export async function setPredictionCheck(
+  practice: Practice,
+  on: boolean,
+): Promise<Result<Practice>> {
+  if (!navigator.onLine) return failure();
+  const settings = { ...(practice.settings as object), prediction_check: on } as unknown as Json;
+  const { data, error } = await supabase
+    .from("practices")
+    .update({ settings })
+    .eq("id", practice.id)
+    .select()
+    .single();
+  return error || !data ? failure() : { ok: true, data };
+}

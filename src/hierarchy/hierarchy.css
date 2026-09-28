@@ -97,3 +97,149 @@
   line-height: 22px;
   color: var(--ink-muted);
 }
+
+/* Boards Ladder / LadderEmpty / LadderDone. */
+.ladder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  /* Room for the Add bar above the nav. */
+  padding-bottom: 104px;
+}
+
+.ladder.has-celebration {
+  padding-bottom: 260px;
+}
+
+.ladder-back {
+  align-self: flex-start;
+  margin: calc(-1 * var(--space-2)) 0 calc(-1 * var(--space-2)) calc(-1 * var(--space-2));
+}
+
+.ladder-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ladder-title,
+.ladder-rule,
+.ladder-note {
+  margin: 0;
+}
+
+.ladder-rule {
+  color: var(--ink-muted);
+}
+
+.ladder-empty {
+  padding-top: var(--space-4);
+}
+
+.ladder-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+.ladder-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ladder-legend-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--difficulty-5);
+}
+
+/* The ladder's rails: two quiet bars down the sides of the active rungs. */
+.ladder-rungs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ladder-rungs:not(.is-done)::before,
+.ladder-rungs:not(.is-done)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  z-index: -1;
+}
+
+.ladder-rungs:not(.is-done)::before {
+  left: 20px;
+}
+
+.ladder-rungs:not(.is-done)::after {
+  right: 20px;
+}
+
+.ladder-rung {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ladder-up-next {
+  color: var(--apricot-ink);
+}
+
+.ladder-rung.is-just-done > * {
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 3px var(--apricot);
+}
+
+.ladder-separator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--ink-muted);
+}
+
+.ladder-separator::before,
+.ladder-separator::after {
+  content: "";
+  flex: 1;
+  border-top: 1.5px dashed var(--line-strong);
+}
+
+.ladder-setting {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ladder-bar {
+  position: fixed;
+  inset: auto 0 calc(69px + env(safe-area-inset-bottom));
+  z-index: 9;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--paper);
+}

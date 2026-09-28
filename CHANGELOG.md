@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Ladder (0c.5): boards Ladder, LadderEmpty and LadderDone at `/practices/:id`.
+  - Rungs: easiest first with UP NEXT, or hardest first (remembered); the legend; each rung's latest full remaining, tally and "x of y this week" or "One-off · by Wed".
+  - Finished rungs sit in the "UNDER 4 · DONE" band with their date. After the rep that finishes a rung, a one-time celebration shows and that rung is ringed.
+  - The prediction check switch (off by default). Opens offline from the phone's copy.
 - Practices (0c.4): boards Practices, PracticesEmpty and PracticesPicker.
   - Each practice card shows its tasks on the go and done, when you last logged, and this week's target.
   - The "Add a practice" sheet offers Activity hierarchy (one for now), which starts with the prediction check off and no session.

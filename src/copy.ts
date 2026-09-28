@@ -106,6 +106,40 @@ export const copy = {
   sheet: {
     close: "Close",
   },
+  // Ladder: boards Ladder, LadderEmpty, LadderDone (canvas words).
+  ladder: {
+    back: "Practices",
+    rule: "Repeat each task until remaining difficulty is under 4, then move up to the next one.",
+    order: "Order",
+    easiest: "Easiest first",
+    hardest: "Hardest first",
+    legendRemaining: "Latest remaining",
+    legendRep: "Rep",
+    legendAttempt: "Started, left early",
+    upNext: "Up next",
+    doneBand: "Under 4 · done",
+    doneBandLabel: "Under 4 is done",
+    doneSection: "Done",
+    emptyTitle: "No tasks yet. Add the first rung.",
+    emptyBody:
+      "Put in everything from your worksheet, in any order. They'll sort themselves, easiest first.",
+    add: "Add a task",
+    addFirst: "Add the first task",
+    week: (n: number, of: number) => `${n} of ${of} this week`,
+    oneOff: "One-off",
+    oneOffBy: (when: string) => `One-off · by ${when}`,
+    today: "today",
+    celebrationHeading: "That one's done.",
+    celebrationLine: (name: string, remaining: number) =>
+      `${name}. Remaining ${remaining}, under the 4 line.`,
+    predictionCheck: "Prediction check",
+    predictionCheckHint: "Ask what I think will happen before each rep",
+    predictionOffline: "Changing this needs a connection. Nothing has changed.",
+    notFound: "That practice isn't here any more.",
+    loadOffline:
+      "This ladder needs a connection the first time. After that it opens on this phone.",
+    backToPractices: "Back to practices",
+  },
   // Canvas-only controls (DESIGN.md §5) used by the hierarchy screens.
   controls: {
     fewer: "Fewer",

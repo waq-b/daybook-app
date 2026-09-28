@@ -6,6 +6,7 @@ import { BottomSheet } from "../components/BottomSheet";
 import { relativeDay } from "../data/dates";
 import { buildLadder, lastLoggedAt, practiceCounts, practiceWeek } from "../data/ladderRules";
 import { createPractice } from "../data/practices";
+import { ladderHref } from "./links";
 import { useHierarchy, type Hierarchy } from "./store";
 
 const { Button, EmptyState, Icon, PracticeCard } = Daybook;
@@ -40,7 +41,7 @@ export function PracticesScreen() {
 
   async function onHierarchy() {
     // One hierarchy for now (D11): if it's there, the option opens it.
-    if (hierarchy) return navigate(`/practices/${hierarchy.id}`);
+    if (hierarchy) return navigate(ladderHref(hierarchy.id));
     setAdding("busy");
     const result = await createPractice({
       id: crypto.randomUUID(),
@@ -51,7 +52,7 @@ export function PracticesScreen() {
     setAdding("idle");
     setSheet(false);
     reload();
-    navigate(`/practices/${result.data.id}`);
+    navigate(ladderHref(result.data.id));
   }
 
   const addNote = adding === "offline" ? t.addOffline : adding === "failed" ? t.addFailed : null;
@@ -82,7 +83,7 @@ export function PracticesScreen() {
             type={p.type}
             name={p.name}
             {...cardProps(loaded.data, p.id, now)}
-            onClick={() => navigate(`/practices/${p.id}`)}
+            onClick={() => navigate(ladderHref(p.id))}
           />
         ))}
 
