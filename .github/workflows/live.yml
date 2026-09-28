@@ -9,7 +9,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions: {}
+# Read the repo to check it out; nothing else.
+permissions:
+  contents: read
 
 jobs:
   live:

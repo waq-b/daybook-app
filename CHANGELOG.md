@@ -13,6 +13,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Fixed
 
+- The live-checks workflow can check out the (private) repo.
 - At Safari's largest page zoom, the bottom nav and the weekly target ran off the phone. They now fit (a design-system workaround).
 - The chart's numbers overlapped when actual was two or more below remaining; each number now sits on the side away from the other point.
 
