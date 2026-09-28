@@ -1,4 +1,13 @@
-import { expect, fakeTables, practiceRow, repRow, signIn, taskRow, test } from "./fixtures";
+import {
+  expect,
+  fakeTables,
+  needsServiceWorker,
+  practiceRow,
+  repRow,
+  signIn,
+  taskRow,
+  test,
+} from "./fixtures";
 
 // Monday 28 September 2026, 10am in London.
 const NOW = new Date("2026-09-28T09:00:00Z");
@@ -137,7 +146,8 @@ test("just completed: the celebration and the ringed rung show once", async ({ p
   await expect(page.getByText("That one's done.")).toHaveCount(0);
 });
 
-test("opens offline from the phone's copy", async ({ page, context }) => {
+test("opens offline from the phone's copy", async ({ page, context }, info) => {
+  needsServiceWorker(info);
   const w = world();
   await fakeTables(page, { practices: [w.p], tasks: [w.gym, w.coffee], reps: w.reps });
   await page.goto(`/practices/${w.p.id}`);

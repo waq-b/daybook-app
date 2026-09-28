@@ -1,4 +1,13 @@
-import { expect, fakeTables, practiceRow, repRow, signIn, taskRow, test } from "./fixtures";
+import {
+  expect,
+  fakeTables,
+  onIphone,
+  practiceRow,
+  repRow,
+  signIn,
+  taskRow,
+  test,
+} from "./fixtures";
 
 // Monday 28 September 2026, 6pm in London (car park time).
 const NOW = new Date("2026-09-28T17:00:00Z");
@@ -83,12 +92,12 @@ test("log a rep online: Save needs both scores, it lands once, Done goes back to
 test("offline: saved on this phone, then exactly one row once the signal's back (the car park)", async ({
   page,
   context,
-}) => {
+}, info) => {
   const w = gymWorld();
   const db = await fakeTables(page, { practices: [w.p], tasks: [w.gym], reps: w.reps });
   await page.goto(`/practices/${w.p.id}/tasks/${w.gym.id}`);
   await expect(page.getByRole("button", { name: "Log a rep" })).toBeVisible();
-  await page.evaluate(() => navigator.serviceWorker.ready);
+  if (!onIphone(info)) await page.evaluate(() => navigator.serviceWorker.ready);
 
   await context.setOffline(true);
   await page.getByRole("button", { name: "Log a rep" }).click();
@@ -100,8 +109,9 @@ test("offline: saved on this phone, then exactly one row once the signal's back 
 
   await page.getByRole("button", { name: "Done" }).click();
   await expect(page).toHaveURL(`/practices/${w.p.id}/tasks/${w.gym.id}`);
-  // Reopen the app with no signal: the rep is still there.
-  await page.reload();
+  // Reopen the app with no signal: the rep is still there. (Reopening offline
+  // needs the service worker, which is Chromium-only in these tests.)
+  if (!onIphone(info)) await page.reload();
   await expect(page.locator(".task-reps").getByText("Rep 3")).toBeVisible();
 
   await context.setOffline(false);

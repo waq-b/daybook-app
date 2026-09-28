@@ -1,4 +1,4 @@
-import { expect, signIn, test } from "./fixtures";
+import { androidOnly, expect, signIn, test } from "./fixtures";
 
 const IPHONE =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1";
@@ -47,7 +47,8 @@ test.describe("iPhone in Safari", () => {
 });
 
 test.describe("Android in Chrome", () => {
-  test("Install Daybook opens Chrome's own install dialog", async ({ page }) => {
+  test("Install Daybook opens Chrome's own install dialog", async ({ page }, info) => {
+    androidOnly(info);
     await signIn(page, { installPromptSeen: false });
     await page.addInitScript(() => {
       (window as unknown as { prompted: boolean }).prompted = false;

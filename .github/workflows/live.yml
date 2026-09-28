@@ -1,0 +1,46 @@
+# The live production smoke suite (e2e-live/), after every deploy: waits
+# until Render is serving this commit, then checks the real site and the
+# real database on an Android and an iPhone profile. Replaces "open it on
+# your phone and check".
+name: Live checks
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LIVE_URL: https://daybook-gjf6.onrender.com
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Render to serve this commit
+        run: |
+          want="${GITHUB_SHA::7}"
+          for i in $(seq 1 90); do
+            got=$(curl -s -m 30 "$LIVE_URL/api/health" | sed -n 's/.*"version":"\([^"]*\)".*/\1/p')
+            if [ "$got" = "$want" ]; then echo "Live on $want"; echo "EXPECT_VERSION=$want" >> "$GITHUB_ENV"; exit 0; fi
+            echo "Serving '${got:-nothing yet}', waiting for $want"
+            sleep 10
+          done
+          echo "Render never served $want" >&2
+          exit 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Playwright browser cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run e2e:live

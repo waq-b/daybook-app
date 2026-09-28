@@ -316,6 +316,16 @@ export function DevStates() {
             { actual: 5, remaining: 5, leftEarly: false },
           ]}
         />
+        {/* Actual below remaining, the case where the numbers could collide. */}
+        <RepChart
+          predicted={5}
+          story={s.local.chartStoryLow}
+          reps={[
+            { actual: 3, remaining: 5, leftEarly: false },
+            { actual: 2, remaining: 4, leftEarly: true },
+            { actual: 2, remaining: 6, leftEarly: false },
+          ]}
+        />
       </Section>
 
       <Section title={s.sections.prediction}>

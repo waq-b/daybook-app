@@ -308,3 +308,21 @@ export function repRow(
     ...extra,
   };
 }
+
+/** True on the iPhone (WebKit) project, where the service worker is off (see playwright.config.ts). */
+export function onIphone(info: { project: { name: string } }): boolean {
+  return info.project.name === "iphone";
+}
+
+/** Skips a test that needs the service worker in control; Chromium covers it. */
+export function needsServiceWorker(info: { project: { name: string } }) {
+  test.skip(
+    onIphone(info),
+    "Needs the service worker; Playwright can't intercept a WebKit page it controls. Covered on Chromium.",
+  );
+}
+
+/** Skips an Android/Chrome-only test on the iPhone. */
+export function androidOnly(info: { project: { name: string } }) {
+  test.skip(onIphone(info), "Android/Chrome behaviour; not on an iPhone.");
+}

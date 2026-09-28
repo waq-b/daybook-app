@@ -13,3 +13,31 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
 }
+
+/*
+ * Design-system workarounds (DESIGN.md §4). At Safari's largest page zoom
+ * these components run off a phone: their grid/flex items won't shrink and
+ * their text won't wrap. Scoped, minimal, and to be removed once the design
+ * system fixes them (v10).
+ */
+
+/* BottomNav: five tabs may shrink below their label width; labels wrap. */
+.db-nav {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.db-nav-item {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.db-nav-pill {
+  max-width: 100%;
+}
+
+/* TargetProgress: the "x of y this week" text wraps under the pips. */
+.db-target {
+  flex-wrap: wrap;
+  max-width: 100%;
+}

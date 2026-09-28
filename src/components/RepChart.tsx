@@ -97,7 +97,13 @@ export function RepChart({ predicted, reps, story }: Props) {
         {reps.map((r, i) => (
           <g key={i}>
             <circle cx={x(i)} cy={y(r.actual)} r="6.5" className="db-chart-ring" />
-            <text x={x(i)} y={y(r.actual) - 11} className="db-chart-value" textAnchor="middle">
+            {/* Each number sits on the side away from the other point, so they never overlap. */}
+            <text
+              x={x(i)}
+              y={r.actual >= r.remaining ? y(r.actual) - 11 : y(r.actual) + 19}
+              className="db-chart-value"
+              textAnchor="middle"
+            >
               {r.actual}
             </text>
             <circle
@@ -109,7 +115,7 @@ export function RepChart({ predicted, reps, story }: Props) {
             />
             <text
               x={x(i)}
-              y={y(r.remaining) + 17}
+              y={r.actual >= r.remaining ? y(r.remaining) + 17 : y(r.remaining) - 9}
               className="db-chart-value is-remaining"
               textAnchor="middle"
             >

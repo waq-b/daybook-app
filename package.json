@@ -21,7 +21,8 @@
     "icons": "tsx scripts/make-icons.ts",
     "test:db": "vitest run --config vitest.db.config.ts",
     "e2e:build": "VITE_SUPABASE_URL=http://localhost:54321 VITE_SUPABASE_PUBLISHABLE_KEY=test-publishable-key npm run build",
-    "check:update": "node scripts/check-update.mjs"
+    "check:update": "node scripts/check-update.mjs",
+    "e2e:live": "playwright test -c playwright.live.config.ts"
   },
   "simple-git-hooks": {
     "pre-push": "node scripts/refuse-push-to-main.mjs"

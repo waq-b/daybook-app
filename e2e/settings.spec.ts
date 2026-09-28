@@ -1,4 +1,4 @@
-import { expect, signedInTest as test } from "./fixtures";
+import { expect, onIphone, signedInTest as test } from "./fixtures";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/settings");
@@ -17,7 +17,48 @@ test("shows the signed-in email, the install row and the version", async ({ page
   ).toBeVisible();
 });
 
-test("Export my data downloads everything as JSON", async ({ page }) => {
+test("Export my data on iPhone opens the share sheet with the JSON file (Save to Files)", async ({
+  page,
+}, info) => {
+  test.skip(!onIphone(info), "The share-sheet path is Safari's; Chromium downloads.");
+  await page.route("**/rest/v1/rpc/export_everything", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        app: "Daybook",
+        schema_version: 1,
+        sessions: [],
+        reps: [],
+        tasks: [],
+      }),
+    }),
+  );
+  // iOS Safari has the Web Share API with files; stand in for its share sheet.
+  await page.evaluate(() => {
+    const w = window as unknown as { shared?: { name: string; type: string; text: string } };
+    Object.defineProperty(navigator, "canShare", { value: () => true, configurable: true });
+    Object.defineProperty(navigator, "share", {
+      configurable: true,
+      value: async ({ files }: { files: File[] }) => {
+        const f = files[0]!;
+        w.shared = { name: f.name, type: f.type, text: await f.text() };
+      },
+    });
+  });
+  await page.getByRole("button", { name: /Export my data/ }).click();
+  const shared = await page.waitForFunction(
+    () => (window as unknown as { shared?: unknown }).shared,
+  );
+  const file = (await shared.jsonValue()) as { name: string; type: string; text: string };
+  expect(file.name).toMatch(/^daybook-export-\d{4}-\d{2}-\d{2}\.json$/);
+  expect(file.type).toBe("application/json");
+  expect(JSON.parse(file.text)).toMatchObject({ app: "Daybook", reps: [], tasks: [] });
+  await expect(page.getByRole("status")).toHaveText("Exported. Check your downloads or Files.");
+});
+
+test("Export my data downloads everything as JSON", async ({ page }, info) => {
+  test.skip(onIphone(info), "Safari shares the file instead (tested above).");
   await page.route("**/rest/v1/rpc/export_everything", (route) =>
     route.fulfill({
       status: 200,

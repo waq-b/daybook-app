@@ -71,6 +71,43 @@ test("PredictionCheck, before and after", async ({ page }) => {
   ).toHaveAttribute("aria-pressed", "true");
 });
 
+test("RatingScale selects on tap; FlagToggle turns to 'Flagged for session'", async ({ page }) => {
+  const scale = page.getByRole("radiogroup").first();
+  await scale.getByRole("radio", { name: "3 of 8" }).click();
+  await expect(scale.getByRole("radio", { name: "3 of 8" })).toHaveAttribute(
+    "aria-checked",
+    "true",
+  );
+  const flag = page.getByRole("button", { name: "Bring to session" }).first();
+  await flag.click();
+  await expect(page.getByRole("button", { name: "Flagged for session" }).first()).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+});
+
+test("the chart's numbers never overlap, whichever way round the scores are", async ({ page }) => {
+  const boxes = await page.locator(".db-chart-plot").evaluateAll((charts) =>
+    charts.map((chart) =>
+      [...chart.querySelectorAll(".db-chart-value")].map((t) => {
+        const b = t.getBoundingClientRect();
+        return { x: b.left, y: b.top, w: b.width, h: b.height, text: t.textContent };
+      }),
+    ),
+  );
+  expect(boxes.length).toBeGreaterThanOrEqual(2);
+  for (const labels of boxes) {
+    for (let i = 0; i < labels.length; i++) {
+      for (let j = i + 1; j < labels.length; j++) {
+        const a = labels[i]!;
+        const b = labels[j]!;
+        const overlap = a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+        expect(overlap, `${a.text} and ${b.text}`).toBe(false);
+      }
+    }
+  }
+});
+
 test("every control on the page passes axe", async ({ page }) => {
   // Checked at rest: mid-fade, the celebration's text is briefly translucent.
   await page.emulateMedia({ reducedMotion: "reduce" });

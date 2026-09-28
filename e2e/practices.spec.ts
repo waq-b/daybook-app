@@ -1,4 +1,13 @@
-import { expect, fakeTables, practiceRow, repRow, signIn, taskRow, test } from "./fixtures";
+import {
+  expect,
+  fakeTables,
+  needsServiceWorker,
+  practiceRow,
+  repRow,
+  signIn,
+  taskRow,
+  test,
+} from "./fixtures";
 
 // Tuesday 29 September 2026, 10am in London.
 const NOW = new Date("2026-09-29T09:00:00Z");
@@ -75,7 +84,8 @@ test("with the hierarchy already there, the option opens it instead of adding an
 test("offline: opens from the phone's copy; adding says it needs a connection", async ({
   page,
   context,
-}) => {
+}, info) => {
+  needsServiceWorker(info);
   const p = practiceRow();
   await fakeTables(page, { practices: [p], tasks: [taskRow(p.id, "Gym", 7)], reps: [] });
   await page.goto("/practices");

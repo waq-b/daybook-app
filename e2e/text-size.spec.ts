@@ -2,7 +2,7 @@
 // sideways scroll and the primary action still reachable. (iOS Larger Text
 // doesn't scale px type in an installed PWA; see DESIGN.md §4.)
 import type { Page } from "@playwright/test";
-import { expect, mockSupabase, signIn, test } from "./fixtures";
+import { androidOnly, expect, mockSupabase, signIn, test } from "./fixtures";
 
 const IPHONE =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1";
@@ -38,7 +38,8 @@ test.describe("install prompt on iPhone", () => {
   });
 });
 
-test("install prompt on Android", async ({ page }) => {
+test("install prompt on Android", async ({ page }, info) => {
+  androidOnly(info);
   await signIn(page, { installPromptSeen: false });
   await page.goto("/");
   await atDoubleSize(page);

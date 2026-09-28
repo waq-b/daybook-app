@@ -47,6 +47,8 @@ export const samples = {
     celebrationLine: "Coffee on my own in town. Remaining 3, under the 4 line.",
     chartStory:
       "Thought 7. The first one was an 8, the latest a 5. Remaining has gone from 7 to 5.",
+    chartStoryLow:
+      "Thought 5. The first one was a 3, the latest a 2. Remaining has gone from 5 to 6.",
     prediction: "Everyone by the weights will stare and I'll have to leave.",
   },
   textArea: {

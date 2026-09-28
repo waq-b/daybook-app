@@ -4,6 +4,18 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
+### Added
+
+- Checks automated instead of done by hand (#63); coverage map in `docs/checks.md`:
+  - **iPhone project:** every end-to-end test also runs in Safari's engine (WebKit) on an iPhone profile.
+  - **Live suite:** after every deploy, a suite checks the real site and database on both phones, including that strangers are refused and sign-up is closed.
+  - **New checks:** tapping the rating and flag, chart numbers that never overlap, and every bottom bar clearing the home indicator.
+
+### Fixed
+
+- At Safari's largest page zoom, the bottom nav and the weekly target ran off the phone. They now fit (a design-system workaround).
+- The chart's numbers overlapped when actual was two or more below remaining; each number now sits on the side away from the other point.
+
 ## 0c Hierarchy — 2026-09-28
 
 ### Added

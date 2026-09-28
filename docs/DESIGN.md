@@ -93,6 +93,7 @@ These are decided. Don't re-decide them in a build session. (The v8 API gaps —
 | Extra icons drawn locally on the canvas | Now in `Icon` (v9); `src/components/icons/` is not needed |
 | Install board's hand-drawn down arrow | `Icon` `chevron-down` (no arrow icon in the set) |
 | LadderRung overflows the phone at 200% text (its grid column won't shrink; `right` never wraps) | Local override scoped to `.ladder` in `src/hierarchy/hierarchy.css`: the column may shrink and `right` wraps only when it can't fit. Fix in the design system (v10) and remove the override |
+| BottomNav and TargetProgress run off a phone at Safari's largest page zoom (found by the iPhone/WebKit tests) | Overrides in `src/styles/app.css`: nav columns may shrink and labels wrap; the target's text wraps under its pips. Fix in the design system (v10) and remove |
 | Type sizes are px in `tokens.css`, so iOS Larger Text doesn't scale an installed PWA | Accepted for now (plan Q10). Screens are tested at 200% zoom and must not clip or scroll sideways. A rem-based type scale is a design-system request for a later version |
 
 ## 5. Canvas-only components (build locally in `src/components/`)

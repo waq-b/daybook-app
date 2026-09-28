@@ -45,7 +45,8 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-      - run: npx playwright install --with-deps chromium
+      # Chromium (Android) and WebKit (Safari's engine, the iPhone project).
+      - run: npx playwright install --with-deps chromium webkit
       # Installable, service worker in control, opens offline (plan D8).
       - run: npm run e2e
       # Accessibility score at least 0.95 on every listed page.

@@ -1,6 +1,6 @@
 // The installability and offline check that replaces Lighthouse's removed PWA
 // category (plan D8).
-import { expect, signedInTest, test } from "./fixtures";
+import { expect, needsServiceWorker, signedInTest, test } from "./fixtures";
 
 test("manifest has what install needs, and its icons load", async ({ page, request }) => {
   await page.goto("/");
@@ -45,7 +45,8 @@ test("iOS home-screen tags are present", async ({ page }) => {
 
 signedInTest(
   "a service worker takes control and the app opens offline",
-  async ({ page, context }) => {
+  async ({ page, context }, info) => {
+    needsServiceWorker(info);
     await page.goto("/");
     await page.evaluate(() => navigator.serviceWorker.ready);
     await page.reload();
@@ -65,7 +66,8 @@ signedInTest(
   },
 );
 
-test("the API is never answered from the cache", async ({ page, context }) => {
+test("the API is never answered from the cache", async ({ page, context }, info) => {
+  needsServiceWorker(info);
   await page.goto("/");
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload();
