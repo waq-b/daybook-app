@@ -74,3 +74,37 @@ describe("native input values", () => {
     expect(fromInputs("2026-10-25", "")).toBeNull();
   });
 });
+
+import {
+  formatEntryTime,
+  formatShortDate,
+  fromDateColumn,
+  relativeDay,
+  shortTarget,
+  startOfWeek,
+} from "./dates";
+
+describe("weeks and relative days", () => {
+  it("weeks start on Monday", () => {
+    expect(startOfWeek(new Date(2026, 8, 27, 22))).toEqual(new Date(2026, 8, 21)); // Sun → Mon 21
+    expect(startOfWeek(new Date(2026, 8, 28, 0, 5))).toEqual(new Date(2026, 8, 28)); // Mon
+    expect(startOfWeek(new Date(2026, 9, 27, 9))).toEqual(new Date(2026, 9, 26)); // across the clock change
+  });
+
+  it("says when something was last logged", () => {
+    const now = new Date(2026, 8, 29, 10);
+    expect(relativeDay(new Date(2026, 8, 29, 8), now)).toBe("today");
+    expect(relativeDay(new Date(2026, 8, 28, 23), now)).toBe("yesterday");
+    expect(relativeDay(new Date(2026, 8, 24, 18), now)).toBe("Thursday");
+    expect(relativeDay(new Date(2026, 8, 12, 18), now)).toBe("12 Sep");
+  });
+
+  it("writes target dates and entry times", () => {
+    const now = new Date(2026, 8, 28, 10);
+    expect(shortTarget(new Date(2026, 8, 30), now)).toBe("Wed");
+    expect(shortTarget(new Date(2026, 9, 31), now)).toBe("31 Oct");
+    expect(formatShortDate(new Date(2026, 8, 12))).toBe("12 Sep");
+    expect(formatEntryTime(new Date(2026, 8, 1, 18, 10))).toBe("Tue 1 Sep, 18:10");
+    expect(fromDateColumn("2026-10-31")).toEqual(new Date(2026, 9, 31));
+  });
+});

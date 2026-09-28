@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Hierarchy data (0c.1):
+  - Every rep needs both scores, attempts included. Tasks can hold "Before the next one". Reps per week only on repeating tasks. Applied live.
+  - Data layer for practices, tasks and reps.
+  - `src/data/ladderRules.ts` holds the worksheet's rules as tested code: done (latest full rep under 4), date completed, tally "4 + 1", this week from Monday, rep numbers, easiest or hardest first, where a new task lands, the high-rung note, celebration, the chart's story, and your own quick picks.
 - `docs/PLAN.md`: phase 0c Hierarchy plan, ten tasks tracked as GitHub issues #41–#50. The finished 0b plan moves to `docs/plans/0b.md`.
 
 ### Fixed

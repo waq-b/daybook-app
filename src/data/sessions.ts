@@ -4,11 +4,9 @@ import type { TablesInsert, TablesUpdate } from "../lib/database.types";
 import { supabase } from "../lib/supabase";
 import type { Session } from "./sessionRules";
 
-export type Result<T> = { ok: true; data: T } | { ok: false; reason: "offline" | "failed" };
+import { failure, type Result } from "./result";
 
-function failure<T>(): Result<T> {
-  return { ok: false, reason: navigator.onLine ? "failed" : "offline" };
-}
+export type { Result } from "./result";
 
 export type SessionFields = Pick<TablesInsert<"sessions">, "at" | "notes" | "assigned_note">;
 

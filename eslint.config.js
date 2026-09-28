@@ -24,6 +24,10 @@ export default tseslint.config(
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    rules: {
+      // `const { dropped, ...rest } = row` is how a field is left out.
+      "@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
+    },
   },
   {
     files: ["src/**/*.{ts,tsx}", "server/**/*.ts"],

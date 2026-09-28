@@ -79,3 +79,47 @@ export function fromInputs(date: string, time: string): Date | null {
   if (!dm || !tm) return null;
   return new Date(Number(dm[1]), Number(dm[2]) - 1, Number(dm[3]), Number(tm[1]), Number(tm[2]));
 }
+
+/** Monday 00:00 of the local week containing `d` (weeks roll over on Monday). */
+export function startOfWeek(d: Date): Date {
+  const day = startOfDay(d);
+  const back = (day.getDay() + 6) % 7; // Monday → 0 … Sunday → 6
+  return new Date(day.getFullYear(), day.getMonth(), day.getDate() - back);
+}
+
+/** "12 Sep" */
+export function formatShortDate(d: Date): string {
+  return `${d.getDate()} ${MONTHS[d.getMonth()]!.slice(0, 3)}`;
+}
+
+/** "Tue 1 Sep, 18:10" for an entry's time (24-hour, as on the rep cards). */
+export function formatEntryTime(d: Date): string {
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  return `${WEEKDAYS[d.getDay()]!.slice(0, 3)} ${d.getDate()} ${MONTHS[d.getMonth()]!.slice(0, 3)}, ${hh}:${mm}`;
+}
+
+/**
+ * When something last happened, for "Last logged …": "today", "yesterday",
+ * a weekday within the last week, otherwise "12 Sep".
+ */
+export function relativeDay(d: Date, now: Date): string {
+  const days = calendarDaysBetween(d, now);
+  if (days <= 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 7) return WEEKDAYS[d.getDay()]!;
+  return formatShortDate(d);
+}
+
+/** A target date: "Wed" within the coming week, otherwise "30 Oct". */
+export function shortTarget(d: Date, now: Date): string {
+  const days = calendarDaysBetween(now, d);
+  if (days >= 0 && days < 7) return WEEKDAYS[d.getDay()]!.slice(0, 3);
+  return formatShortDate(d);
+}
+
+/** yyyy-mm-dd (a date column) as a local date at midnight. */
+export function fromDateColumn(value: string): Date {
+  const [y, m, d] = value.split("-").map(Number);
+  return new Date(y!, m! - 1, d!);
+}

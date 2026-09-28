@@ -292,7 +292,7 @@ export type Database = {
       };
       reps: {
         Row: {
-          actual: number | null;
+          actual: number;
           archived_at: string | null;
           at: string;
           coping: string[];
@@ -304,13 +304,13 @@ export type Database = {
           prediction: string | null;
           prediction_likelihood: Database["public"]["Enums"]["prediction_likelihood"] | null;
           prediction_outcome: Database["public"]["Enums"]["prediction_outcome"] | null;
-          remaining: number | null;
+          remaining: number;
           task_id: string;
           updated_at: string;
           user_id: string;
         };
         Insert: {
-          actual?: number | null;
+          actual: number;
           archived_at?: string | null;
           at?: string;
           coping?: string[];
@@ -322,7 +322,7 @@ export type Database = {
           prediction?: string | null;
           prediction_likelihood?: Database["public"]["Enums"]["prediction_likelihood"] | null;
           prediction_outcome?: Database["public"]["Enums"]["prediction_outcome"] | null;
-          remaining?: number | null;
+          remaining: number;
           task_id: string;
           updated_at?: string;
           user_id?: string;
@@ -440,6 +440,8 @@ export type Database = {
           created_at: string;
           id: string;
           name: string;
+          next_prediction: string | null;
+          next_prediction_likelihood: Database["public"]["Enums"]["prediction_likelihood"] | null;
           notes: string | null;
           practice_id: string;
           predicted: number;
@@ -456,6 +458,8 @@ export type Database = {
           created_at?: string;
           id?: string;
           name: string;
+          next_prediction?: string | null;
+          next_prediction_likelihood?: Database["public"]["Enums"]["prediction_likelihood"] | null;
           notes?: string | null;
           practice_id: string;
           predicted: number;
@@ -472,6 +476,8 @@ export type Database = {
           created_at?: string;
           id?: string;
           name?: string;
+          next_prediction?: string | null;
+          next_prediction_likelihood?: Database["public"]["Enums"]["prediction_likelihood"] | null;
           notes?: string | null;
           practice_id?: string;
           predicted?: number;
