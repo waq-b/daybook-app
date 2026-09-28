@@ -92,6 +92,7 @@ These are decided. Don't re-decide them in a build session. (The v8 API gaps —
 | Canvas loads fonts from Google | App self-hosts from `design/fonts/` via `tokens.css` |
 | Extra icons drawn locally on the canvas | Now in `Icon` (v9); `src/components/icons/` is not needed |
 | Install board's hand-drawn down arrow | `Icon` `chevron-down` (no arrow icon in the set) |
+| LadderRung overflows the phone at 200% text (its grid column won't shrink; `right` never wraps) | Local override scoped to `.ladder` in `src/hierarchy/hierarchy.css`: the column may shrink and `right` wraps only when it can't fit. Fix in the design system (v10) and remove the override |
 | Type sizes are px in `tokens.css`, so iOS Larger Text doesn't scale an installed PWA | Accepted for now (plan Q10). Screens are tested at 200% zoom and must not clip or scroll sideways. A rem-based type scale is a design-system request for a later version |
 
 ## 5. Canvas-only components (build locally in `src/components/`)
@@ -145,6 +146,25 @@ One row per canvas board group. Copy marked **verbatim** must match exactly and 
 | Add a task | `AddTask`, `AddTaskWarning` | default, high-rung warning | TextField, RatingScale (Predicted difficulty), SegmentedControl (One-off / Repeating), Stepper, DateTimeField, Note | Shows where it lands on the ladder before saving. Warning is a Note, not a block | "Add to ladder" |
 | Task detail | `TaskDetail`, `TaskDetailDone`, `TaskDetailNew` | in progress, done, new | Score ×2 (`num-lg` header), RepChart, Tally, PredictionCheck (before), EntryCard list, TextArea (Comments) | Header: PREDICTED / REMAINING. Card: "Before the next one". Completed: worksheet "Comments" field | "Log a rep" |
 | Log a rep | `LogRep`, `LogRepAttempt`, `LogRepLogged`, `LogRepOffline` | rating, left early, logged, offline | SegmentedControl (Did it / Started, left early), PredictionCheck (after), Chip quick-picks, TextField, RatingScale ×2, FlagToggle, Button, Celebration, Tally, SyncStatus | Labels: "Actual difficulty" hint "How hard was it?" · "Remaining difficulty" hint "If you did it again now" · ends "0 easy / Under 4 is done / 8 intense" · "Anything you did to make it easier?" · "Note, or anything that made it easier" · Save disabled: "Pick both scores to save" · confirmations: "Logged. Thought {p}, it was {a}, now it's a {r}." / "That one's done. Remaining {r}, under the 4 line." / "Logged as started, left early. It still goes in the tally." · offline: "Saved on this phone, will sync." | "Save rep"; then "Done". Body scrolls, Save sticky. Draft persisted locally if the app closes |
+
+As built in 0c (decided in the 0c plan):
+
+- **Practices:** no wording assumes a therapist or a session. The empty body is "Each worksheet becomes a practice, whether it came from a session or not. Add the first one."; there's no empty subtitle. The picker offers Activity hierarchy only until phase 1 adds the other two, and there's one hierarchy for now.
+- **Prediction check:** off by default, per practice, switched at the foot of the ladder ("Prediction check" / "Ask what I think will happen before each rep"). When off, no prediction UI appears anywhere. "Did it happen?" quotes your own words back ("You thought: “…” It didn't happen."); the app never paraphrases.
+- **Rules:**
+  - done = latest *full* rep under 4 (attempts count in the tally and week, not towards done)
+  - tally reads "4 + 1" everywhere, marks in order
+  - rep numbers count attempts
+  - date completed is derived
+- **Add a task:**
+  - Target date is a real date (the DATE half of DateTimeField), shown as "by Wed" / "by 31 Oct".
+  - The high-rung Note shows at 6+ when nothing one or two below is done ("nothing at {p−2} or {p−1} is done yet").
+  - Editing reuses the form, with "Archive this task" (no board).
+- **Task detail:**
+  - Once done, the meta reads "One-off · 2 reps" (no week).
+  - Comments have an explicit "Save comments".
+  - The chart's sentence is "Thought 7. The first one was an 8, the latest a 5. Remaining has gone from 7 to 5."
+- **Log a rep:** Done returns to the task, or to the ladder's just-completed state if this rep finished the rung. The canvas's ✕ to Today waits for 0d.
 
 ### Phase 0d — Today and flags
 

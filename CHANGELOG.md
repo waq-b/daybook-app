@@ -4,8 +4,11 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
+## 0c Hierarchy — 2026-09-28
+
 ### Added
 
+- Close-out (0c.10): axe (WCAG 2.2 AA), 390px and 200% text over every 0c screen and state; an "as built" note in `docs/PLAN.md`.
 - Practices in sessions, optional (0c.9).
   - Edit session's "Assigned in session" lists your practices as chips, plus "Add a practice".
   - Session detail shows the practices assigned in it (each opens its ladder), and today's session has "Link a practice".
@@ -51,22 +54,26 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
   - Data layer for practices, tasks and reps.
   - `src/data/ladderRules.ts` holds the worksheet's rules as tested code: done (latest full rep under 4), date completed, tally "4 + 1", this week from Monday, rep numbers, easiest or hardest first, where a new task lands, the high-rung note, celebration, the chart's story, and your own quick picks.
 - `docs/PLAN.md`: phase 0c Hierarchy plan, ten tasks tracked as GitHub issues #41–#50. The finished 0b plan moves to `docs/plans/0b.md`.
+- Local `Note` component (DESIGN.md §5): the teal info banner.
+
+### Changed
+
+- `CLAUDE.md` (0c plan):
+  - Prediction check off by default, switchable per practice.
+  - Hard line 12: logging's reads (the hierarchy) are kept on the phone.
+  - The offline row and the data model are updated: NOT NULL scores, `next_prediction*`, reps per week repeating only.
+  - Derived rules: done is the latest full rep under 4, date completed, and the week.
+- `docs/DESIGN.md`: an as-built note for 0c, and §4 records the LadderRung text-size workaround. `docs/setup.md`: seven migrations and what the phone keeps.
 
 ### Fixed
 
 - The Practices tab's placeholder no longer implies practices come from sessions. Practices work with or without therapy sessions.
-
-### Fixed
-
 - New versions now reach the installed app (#38).
   - Before: a new version waited for every Daybook window to close, which an installed iPhone app rarely does, and nothing said an update was ready.
   - Now: the app checks for a new version on open, whenever it comes back to the front, and hourly. When one is ready, a teal note at the top says "A new version of Daybook is ready." with Update now. It never reloads by itself.
   - `npm run check:update` (in CI) builds two versions and proves an already-open app gets from one to the other.
 - The server answers a missing file (an old script after a deploy) with a 404, not the app page. Answering a script with HTML blanked the screen, and the service worker could have cached it.
-
-### Added
-
-- Local `Note` component (DESIGN.md §5): the teal info banner.
+- LadderRung no longer runs off the phone at 200% text (a scoped workaround until the design system fixes it).
 
 ## 0b Sessions — 2026-09-27
 

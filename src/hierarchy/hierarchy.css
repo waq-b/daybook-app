@@ -578,3 +578,27 @@
   background: var(--paper);
   box-shadow: 0 -1px 0 var(--line);
 }
+
+/*
+ * Workaround (DESIGN.md §4): at the largest text sizes the design system's
+ * LadderRung can't fit a phone — its grid column won't shrink below its
+ * widest line and "right" never wraps. Let the column shrink, and let
+ * "right" wrap only when it truly doesn't fit. To be fixed in the design
+ * system (v10); remove this then.
+ */
+.ladder .db-rung > * {
+  min-width: 0;
+}
+
+.ladder .db-rung-name {
+  overflow-wrap: anywhere;
+}
+
+.ladder .db-rung-end {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.ladder .db-rung-right {
+  white-space: normal;
+}
