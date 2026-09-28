@@ -4,6 +4,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ## Unreleased
 
+### Added
+
+- `docs/PLAN.md`: phase 0c Hierarchy plan, ten tasks tracked as GitHub issues #41–#50. The finished 0b plan moves to `docs/plans/0b.md`.
+
 ### Fixed
 
 - The Practices tab's placeholder no longer implies practices come from sessions. Practices work with or without therapy sessions.
