@@ -30,6 +30,7 @@
     "@fastify/static": "^10.1.5",
     "@supabase/supabase-js": "^2.117.2",
     "fastify": "^5.12.5",
+    "idb": "^8.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.18.4"
@@ -48,6 +49,7 @@
     "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "fake-indexeddb": "^6.2.5",
     "globals": "^17.12.0",
     "pg": "^8.23.0",
     "prettier": "^3.9.9",

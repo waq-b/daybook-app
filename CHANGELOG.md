@@ -6,6 +6,11 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Offline store (0c.2): `src/offline/` on IndexedDB.
+  - An outbox: writes save on the phone and sync in order when there's signal. An insert is an upsert on an ID made on the phone, so a retry never duplicates. A failure keeps the write and tries again.
+  - The phone's copy of the ladder for reading offline, and drafts.
+  - It syncs on start, on reconnect, on returning to the app, and every minute while anything waits. Each write only syncs while the person who made it is signed in.
+  - Sign-out keeps unsynced writes; Delete everything clears the phone too.
 - Hierarchy data (0c.1):
   - Every rep needs both scores, attempts included. Tasks can hold "Before the next one". Reps per week only on repeating tasks. Applied live.
   - Data layer for practices, tasks and reps.

@@ -1,4 +1,5 @@
 import { supabase } from "../lib/supabase";
+import { clearPhoneStore, clearReadableCopies } from "../offline/db";
 
 /** Keys this app keeps in the phone's storage, besides Supabase's session. */
 const LOCAL_PREFIX = "daybook.";
@@ -58,12 +59,14 @@ export async function deleteEverything(): Promise<Outcome> {
   if (!navigator.onLine) return "offline";
   const { error } = await supabase.rpc("delete_everything", { confirm: "delete" });
   if (error) return navigator.onLine ? "failed" : "offline";
+  await clearPhoneStore();
   await signOutHere();
   return "ok";
 }
 
 /** Signs out on this phone and forgets what Daybook kept here. */
 export async function signOutHere(): Promise<void> {
+  await clearReadableCopies();
   await supabase.auth.signOut({ scope: "local" });
   try {
     for (const key of Object.keys(localStorage)) {

@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("../lib/supabase", () => ({ supabase: {} }));
+vi.mock("../offline/db", () => ({ clearPhoneStore: vi.fn(), clearReadableCopies: vi.fn() }));
 const { confirmsDelete, exportFileName } = await import("./account");
 
 describe("confirmsDelete", () => {
