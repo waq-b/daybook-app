@@ -12,12 +12,12 @@ export type TaskFields = Pick<
   "name" | "predicted" | "repeating" | "reps_per_week" | "target_date" | "notes"
 >;
 
-export async function listTasks(practiceId: string): Promise<Result<Task[]>> {
+/** Every rung you have (not archived), oldest first. One person's ladder is small. */
+export async function listAllTasks(): Promise<Result<Task[]>> {
   if (!navigator.onLine) return failure();
   const { data, error } = await supabase
     .from("tasks")
     .select("*")
-    .eq("practice_id", practiceId)
     .is("archived_at", null)
     .order("created_at", { ascending: true });
   return error || !Array.isArray(data) ? failure() : { ok: true, data };

@@ -103,6 +103,9 @@ export const copy = {
     ready: "A new version of Daybook is ready.",
     now: "Update now",
   },
+  sheet: {
+    close: "Close",
+  },
   // Canvas-only controls (DESIGN.md §5) used by the hierarchy screens.
   controls: {
     fewer: "Fewer",
@@ -152,11 +155,31 @@ export const copy = {
     emptyTitle: "Nothing to log yet",
     emptyBody: "Once a practice is set up, what's on for today shows here.",
   },
+  // Practices: boards Practices, PracticesEmpty, PracticesPicker. The boards'
+  // therapist wording is replaced so practices never depend on a session
+  // (plan 0c D9); everything else is the canvas's words.
   practices: {
     title: "Practices",
+    active: (n: number) => `${n} active`,
     emptyTitle: "No practices yet",
     emptyBody:
-      "Practices you're working on will be listed here, with or without a session behind them.",
+      "Each worksheet becomes a practice, whether it came from a session or not. Add the first one.",
+    add: "Add a practice",
+    addFirst: "Add the first practice",
+    meta: (onTheGo: number, done: number) =>
+      onTheGo + done === 0
+        ? "No tasks yet"
+        : `${onTheGo} ${onTheGo === 1 ? "task" : "tasks"} on the go, ${done} done`,
+    sheetTitle: "Add a practice",
+    sheetLead: "Which worksheet is it?",
+    hierarchyName: "Activity hierarchy",
+    hierarchyLine: "A ladder of tasks, easiest first. Log reps and scores.",
+    alreadyAdded: "Already on your list. Tap to open it.",
+    sheetFooter: "Each worksheet gets its own screen, so new types get added one at a time.",
+    adding: "Adding it",
+    addOffline: "Adding a practice needs a connection. Try again when you're back online.",
+    addFailed: "That didn't go through. Try again in a minute.",
+    loadOffline: "Practices need a connection the first time. After that they open on this phone.",
   },
   // Sessions list: boards Sessions and SessionsEmpty (canvas words), plus the
   // states the canvas doesn't draw (later sessions, loading offline).

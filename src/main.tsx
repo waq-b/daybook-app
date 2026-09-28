@@ -7,6 +7,7 @@ import "./screens/signin.css";
 import "./install/install.css";
 import "./screens/settings.css";
 import "./sessions/sessions.css";
+import "./hierarchy/hierarchy.css";
 import "./dev/dev.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

@@ -9,7 +9,8 @@ import { AppShell } from "./shell/AppShell";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { SignInScreen } from "./screens/SignInScreen";
 import { SessionEditScreen } from "./sessions/SessionEditScreen";
-import { HistoryScreen, PracticesScreen, TodayScreen } from "./screens/tabs";
+import { HistoryScreen, TodayScreen } from "./screens/tabs";
+import { PracticesScreen } from "./hierarchy/PracticesScreen";
 import { SessionDetailScreen } from "./sessions/SessionDetailScreen";
 import { SessionsScreen } from "./sessions/SessionsScreen";
 

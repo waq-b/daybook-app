@@ -1,4 +1,8 @@
 import { useEffect, useId, useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { copy } from "../copy";
+import { Daybook } from "../design/daybook";
+
+const { Icon } = Daybook;
 
 interface Props {
   /** Small caps line above the title, e.g. "Step 1 of 2". */
@@ -60,9 +64,19 @@ export function BottomSheet({ label, title, onClose, children }: Props) {
         >
           <span className="db-sheet-handle" aria-hidden="true" />
           {label && <span className="t-label db-sheet-label">{label}</span>}
-          <h2 id={titleId} ref={titleRef} tabIndex={-1} className="t-title db-sheet-title">
-            {title}
-          </h2>
+          <div className="db-sheet-titlebar">
+            <h2 id={titleId} ref={titleRef} tabIndex={-1} className="t-title db-sheet-title">
+              {title}
+            </h2>
+            <button
+              type="button"
+              className="db-sheet-close"
+              aria-label={copy.sheet.close}
+              onClick={onClose}
+            >
+              <Icon name="close" />
+            </button>
+          </div>
         </div>
         {children}
       </section>

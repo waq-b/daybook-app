@@ -6,6 +6,12 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Practices (0c.4): boards Practices, PracticesEmpty and PracticesPicker.
+  - Each practice card shows its tasks on the go and done, when you last logged, and this week's target.
+  - The "Add a practice" sheet offers Activity hierarchy (one for now), which starts with the prediction check off and no session.
+  - The list opens from the phone's copy when there's no signal.
+  - No wording assumes a therapist.
+- The bottom sheet has a visible close button.
 - Canvas-only controls (0c.3, DESIGN.md §5), all on `/dev/states` and checked with axe:
   - Controls: SegmentedControl, Stepper (1–7), a Toggle switch that prints On/Off, AddChip.
   - Displays: Celebration (one apricot wash, 200ms fade, none with reduced motion), Tally marks in order ("4 + 1"), RepChart (0–8, dashed under-4 line, each point numbered, attempts ticked, its sentence as alt text), PredictionCheck before and after.

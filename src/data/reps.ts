@@ -6,15 +6,13 @@ import { failure, type Result } from "./result";
 
 export type Rep = Tables<"reps">;
 
-/** Every rep on a practice's tasks, oldest first. */
-export async function listPracticeReps(practiceId: string): Promise<Result<Rep[]>> {
+/** Every rep you've logged (not archived), oldest first. */
+export async function listAllReps(): Promise<Result<Rep[]>> {
   if (!navigator.onLine) return failure();
   const { data, error } = await supabase
     .from("reps")
-    .select("*, tasks!inner(practice_id)")
-    .eq("tasks.practice_id", practiceId)
+    .select("*")
     .is("archived_at", null)
     .order("at", { ascending: true });
-  if (error || !Array.isArray(data)) return failure();
-  return { ok: true, data: data.map(({ tasks, ...rep }) => rep) };
+  return error || !Array.isArray(data) ? failure() : { ok: true, data };
 }
