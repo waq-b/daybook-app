@@ -96,6 +96,24 @@ describe("outbox", () => {
     expect(await o.pendingCount()).toBe(2);
   });
 
+  it("folds updates to the same row together", async () => {
+    const o = await fresh();
+    (navigator as { onLine: boolean }).onLine = false;
+    await o.enqueue({ table: "tasks", kind: "update", id: "t1", data: { comments: "a" } });
+    await o.enqueue({
+      table: "tasks",
+      kind: "update",
+      id: "t1",
+      data: { comments: "ab", next_prediction: "x" },
+    });
+    await o.enqueue({ table: "tasks", kind: "update", id: "t2", data: { comments: "other" } });
+    const ops = await o.pendingOps();
+    expect(ops.map((op) => [op.id, op.data])).toEqual([
+      ["t1", { comments: "ab", next_prediction: "x" }],
+      ["t2", { comments: "other" }],
+    ]);
+  });
+
   it("folds an update into a pending insert of the same row", async () => {
     const o = await fresh();
     (navigator as { onLine: boolean }).onLine = false;

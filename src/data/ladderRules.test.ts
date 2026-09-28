@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import {
-  article,
   buildLadder,
   celebrates,
   chartStory,
@@ -283,8 +282,6 @@ describe("chart story, picks, last logged", () => {
       toRemaining: 5,
       count: 3,
     });
-    expect(article(8)).toBe("an");
-    expect(article(5)).toBe("a");
   });
 
   it("offers your own picks, most used first (D17)", () => {

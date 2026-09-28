@@ -219,11 +219,6 @@ export function chartStory(
   };
 }
 
-/** "a 5", "an 8": the article for a score read aloud. */
-export function article(n: number): "a" | "an" {
-  return n === 8 ? "an" : "a";
-}
-
 /** The practice card's line: how many rungs are on the go and how many are done. */
 export function practiceCounts(ladder: Ladder): { onTheGo: number; done: number } {
   return { onTheGo: ladder.active.length, done: ladder.done.length };

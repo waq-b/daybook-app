@@ -30,8 +30,8 @@ export async function pendingOps(table?: OutboxTable): Promise<OutboxOp[]> {
 }
 
 /**
- * Queues a write. An update to a row that's still waiting to be inserted is
- * folded into that insert, so the server only ever sees the final row.
+ * Queues a write. An update to a row that's still waiting (to be inserted or
+ * updated) is folded into that write, so the server only sees the final row.
  */
 export async function enqueue(op: Pick<OutboxOp, "table" | "kind" | "id" | "data">): Promise<void> {
   const { data: auth } = await supabase.auth.getSession();
@@ -39,9 +39,12 @@ export async function enqueue(op: Pick<OutboxOp, "table" | "kind" | "id" | "data
   if (!userId) throw new Error("enqueue needs a signed-in user");
   const d = await db();
   const tx = d.transaction("outbox", "readwrite");
-  const waiting = (await tx.store.getAll()).find(
-    (o) => o.table === op.table && o.id === op.id && o.kind === "insert" && o.userId === userId,
+  // The latest write still waiting for the same row: an update folds into it
+  // (an insert or an earlier update), so the server gets one final version.
+  const same = (await tx.store.getAll()).filter(
+    (o) => o.table === op.table && o.id === op.id && o.userId === userId,
   );
+  const waiting = same.at(-1);
   if (op.kind === "update" && waiting) {
     await tx.store.put({ ...waiting, data: { ...waiting.data, ...op.data } });
   } else {

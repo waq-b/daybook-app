@@ -12,6 +12,7 @@ import { SessionEditScreen } from "./sessions/SessionEditScreen";
 import { HistoryScreen, TodayScreen } from "./screens/tabs";
 import { LadderScreen } from "./hierarchy/LadderScreen";
 import { PracticesScreen } from "./hierarchy/PracticesScreen";
+import { TaskDetailScreen } from "./hierarchy/TaskDetailScreen";
 import { TaskFormScreen } from "./hierarchy/TaskFormScreen";
 import { SessionDetailScreen } from "./sessions/SessionDetailScreen";
 import { SessionsScreen } from "./sessions/SessionsScreen";
@@ -44,6 +45,7 @@ export function App() {
               <Route index element={<TodayScreen />} />
               <Route path="practices" element={<PracticesScreen />} />
               <Route path="practices/:id" element={<LadderScreen />} />
+              <Route path="practices/:id/tasks/:taskId" element={<TaskDetailScreen />} />
               <Route path="sessions" element={<SessionsScreen />} />
               <Route path="sessions/:id" element={<SessionDetailScreen />} />
               <Route path="history" element={<HistoryScreen />} />

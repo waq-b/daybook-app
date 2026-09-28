@@ -3,6 +3,9 @@
 // Voice: plain, warm, British. Sentence case. No exclamation marks, no emoji.
 // src/copy.test.ts checks every string in this file.
 
+/** "an 8", "a 5": the article for a score read aloud. */
+const an = (n: number) => (n === 8 ? "an" : "a");
+
 export const copy = {
   app: {
     name: "Daybook",
@@ -147,6 +150,7 @@ export const copy = {
     minus: "−",
     plus: "+",
     fromTo: (from: number, to: number) => `${from} → ${to}`,
+    arrow: "→",
     quote: (text: string) => `“${text}”`,
     on: "On",
     off: "Off",
@@ -207,6 +211,38 @@ export const copy = {
     archiveConfirm: "Archive it",
     archiveKeep: "Keep it",
     archiveOffline: "Archiving needs a connection. Nothing has changed.",
+    notFound: "That task isn't here any more.",
+  },
+  // Task detail: boards TaskDetail, TaskDetailDone, TaskDetailNew.
+  taskDetail: {
+    edit: "Edit",
+    doneLine: (remaining: number) => `Done. Remaining ${remaining}, under the 4 line.`,
+    predicted: "Predicted",
+    remaining: "Remaining",
+    tally: "Tally",
+    noScore: "–",
+    repeating: (perWeek: number) => `Repeating, ${perWeek} a week`,
+    week: (n: number, of: number) => `${n} of ${of} this week`,
+    oneOff: "One-off",
+    repCount: (n: number) => `${n} ${n === 1 ? "rep" : "reps"}`,
+    by: (when: string) => `by ${when}`,
+    metaJoin: " · ",
+    // The chart's sentence and alt text (plan 0c D21). "an 8", "a 5".
+    storyOne: (predicted: number, actual: number, remaining: number) =>
+      `Thought ${predicted}. It was ${an(actual)} ${actual}, and remaining is ${remaining}.`,
+    storyMany: (predicted: number, first: number, latest: number, from: number, to: number) =>
+      `Thought ${predicted}. The first one was ${an(first)} ${first}, the latest ${an(latest)} ${latest}. Remaining has gone from ${from} to ${to}.`,
+    comments: "Comments",
+    dateCompleted: (date: string) => `Date completed ${date}`,
+    saveComments: "Save comments",
+    reps: "Reps",
+    repTitle: (n: number) => `Rep ${n}`,
+    noReps: "No reps yet.",
+    noRepsBody: (predicted: number) =>
+      `When you log the first one, it'll show here against the ${predicted} you predicted.`,
+    logIt: "Log it",
+    logRep: "Log a rep",
+    logAnother: "Log another rep",
     notFound: "That task isn't here any more.",
   },
   // Shared field words (DateTimeField, TextArea).

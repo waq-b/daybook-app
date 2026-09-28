@@ -11,11 +11,14 @@ export function PredictionBefore({
   text,
   likelihood,
   onText,
+  onTextDone,
   onLikelihood,
 }: {
   text: string;
   likelihood: Likelihood | null;
   onText: (text: string) => void;
+  /** Leaving the text box: the moment to save it. */
+  onTextDone?: () => void;
   onLikelihood: (value: Likelihood) => void;
 }) {
   return (
@@ -29,6 +32,7 @@ export function PredictionBefore({
         rows={2}
         value={text}
         onChange={(e) => onText(e.target.value)}
+        onBlur={onTextDone}
       />
       <span className="db-field-label">{t.howLikely}</span>
       <SegmentedControl

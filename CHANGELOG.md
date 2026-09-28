@@ -6,6 +6,12 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Task detail (0c.7): boards TaskDetail, TaskDetailDone and TaskDetailNew.
+  - The header shows Predicted → Remaining and the Tally; once done it's tinted, with "Done. Remaining 3, under the 4 line."
+  - The rep chart and its sentence; "Before the next one" when the prediction check is on.
+  - Once done: Comments with Date completed. Every rep, newest first, flaggable from its card (offline too).
+  - The button reads Log it / Log a rep / Log another rep.
+  - The outbox now folds repeated edits to the same row into one.
 - Add and edit a task (0c.6): boards AddTask and AddTaskWarning.
   - Fields: Task, Predicted difficulty, a live "Where it lands · easiest first" preview, How often (One-off / Repeating, with reps per week 1–7), an optional target date, optional notes.
   - A soft high-rung note when nothing one or two below is done yet; it never blocks.
