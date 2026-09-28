@@ -6,6 +6,11 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Add and edit a task (0c.6): boards AddTask and AddTaskWarning.
+  - Fields: Task, Predicted difficulty, a live "Where it lands · easiest first" preview, How often (One-off / Repeating, with reps per week 1–7), an optional target date, optional notes.
+  - A soft high-rung note when nothing one or two below is done yet; it never blocks.
+  - Editing reuses the form ("Edit task", "Save changes"). "Archive this task" asks once; the rung leaves the ladder and its reps stay.
+  - Saving needs a connection and keeps what you typed.
 - Ladder (0c.5): boards Ladder, LadderEmpty and LadderDone at `/practices/:id`.
   - Rungs: easiest first with UP NEXT, or hardest first (remembered); the legend; each rung's latest full remaining, tally and "x of y this week" or "One-off · by Wed".
   - Finished rungs sit in the "UNDER 4 · DONE" band with their date. After the rep that finishes a rung, a one-time celebration shows and that rung is ringed.

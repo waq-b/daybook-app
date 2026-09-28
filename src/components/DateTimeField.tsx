@@ -67,3 +67,34 @@ export function DateTimeField({ date, time, onChange }: Props) {
     </div>
   );
 }
+
+/**
+ * A date on its own (a task's target date): the DATE half of the field, full
+ * width. `label` names it for screen readers; the field itself just says DATE,
+ * since the visible label sits above it.
+ */
+export function DateField({
+  label,
+  date,
+  onChange,
+}: {
+  label: string;
+  date: string;
+  onChange: (date: string) => void;
+}) {
+  const d = dateWords(date);
+  return (
+    <label className="db-when-field">
+      <span className="db-when-label">{t.date}</span>
+      <span className={`db-when-value${d ? "" : " is-empty"}`}>{d ?? t.pickDate}</span>
+      <input
+        type="date"
+        className="db-when-input"
+        aria-label={d ? `${label}, ${d}. ${t.change}` : `${label}. ${t.pickDate}`}
+        value={date}
+        onClick={(e) => openPicker(e.currentTarget)}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </label>
+  );
+}

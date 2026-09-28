@@ -243,3 +243,75 @@
   padding: var(--space-3) var(--space-4);
   background: var(--paper);
 }
+
+/* Boards AddTask / AddTaskWarning, and editing. */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-bottom: calc(140px + env(safe-area-inset-bottom));
+}
+
+.task-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.task-form-clear,
+.task-form-archive {
+  display: flex;
+  margin-left: calc(-1 * var(--space-3));
+}
+
+.task-form-sheet-text {
+  margin: 0;
+}
+
+.task-lands {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.task-lands-title {
+  color: var(--ink-muted);
+}
+
+.task-lands-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-lands-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  color: var(--ink-muted);
+}
+
+.task-lands-row.is-new {
+  background: var(--apricot-tint);
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.task-lands-name {
+  flex-grow: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-lands-tag {
+  color: var(--apricot-ink);
+}

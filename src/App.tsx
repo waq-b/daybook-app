@@ -12,6 +12,7 @@ import { SessionEditScreen } from "./sessions/SessionEditScreen";
 import { HistoryScreen, TodayScreen } from "./screens/tabs";
 import { LadderScreen } from "./hierarchy/LadderScreen";
 import { PracticesScreen } from "./hierarchy/PracticesScreen";
+import { TaskFormScreen } from "./hierarchy/TaskFormScreen";
 import { SessionDetailScreen } from "./sessions/SessionDetailScreen";
 import { SessionsScreen } from "./sessions/SessionsScreen";
 
@@ -62,6 +63,22 @@ export function App() {
               element={
                 <RequireSession>
                   <SessionEditScreen />
+                </RequireSession>
+              }
+            />
+            <Route
+              path="practices/:id/tasks/new"
+              element={
+                <RequireSession>
+                  <TaskFormScreen />
+                </RequireSession>
+              }
+            />
+            <Route
+              path="practices/:id/tasks/:taskId/edit"
+              element={
+                <RequireSession>
+                  <TaskFormScreen />
                 </RequireSession>
               }
             />

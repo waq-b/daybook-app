@@ -172,6 +172,43 @@ export const copy = {
     didItHappen: "Did it happen?",
     outcome: { no: "No", a_bit: "A bit", yes: "Yes" },
   },
+  // Add a task / Edit task: boards AddTask and AddTaskWarning; editing and
+  // archiving follow plan 0c D12 (no board).
+  addTask: {
+    newTitle: "Add a task",
+    editTitle: "Edit task",
+    close: "Close",
+    name: "Task",
+    predicted: "Predicted difficulty",
+    landsTitle: "Where it lands · easiest first",
+    landsLabel: "Where it lands",
+    newTag: "New",
+    unnamed: "This task",
+    highRung: (low: number, high: number) =>
+      `This one's high up, and nothing at ${low} or ${high} is done yet. You might want a step in between first. Up to you, you can still add it.`,
+    howOften: "How often",
+    oneOff: "One-off",
+    repeating: "Repeating",
+    repsPerWeek: "Reps per week",
+    repsHint: "Your worksheet suggests 4 or 5",
+    targetDate: "Target date",
+    noTarget: "No target date",
+    notes: "Notes",
+    add: "Add to the ladder",
+    save: "Save changes",
+    needs: "Name the task and pick a predicted difficulty",
+    adding: "Adding it",
+    saving: "Saving",
+    offline: "Adding or changing a task needs a connection. Everything you typed is still here.",
+    failed: "That didn't go through. Everything you typed is still here, so try again in a minute.",
+    archive: "Archive this task",
+    archiveTitle: "Archive this task?",
+    archiveBody: "It leaves the ladder. Its reps stay in your history.",
+    archiveConfirm: "Archive it",
+    archiveKeep: "Keep it",
+    archiveOffline: "Archiving needs a connection. Nothing has changed.",
+    notFound: "That task isn't here any more.",
+  },
   // Shared field words (DateTimeField, TextArea).
   fields: {
     date: "Date",
@@ -181,6 +218,7 @@ export const copy = {
     dateChange: (value: string) => `Date, ${value}. Change`,
     timeChange: (value: string) => `Time, ${value}. Change`,
     optional: "(optional)",
+    change: "Change",
   },
   // Placeholder screens for the tabs whose content arrives in later phases.
   // Each is replaced when its phase builds the real screen.
