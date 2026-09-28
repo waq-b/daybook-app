@@ -73,6 +73,13 @@
   gap: var(--space-3);
 }
 
+.db-sheet-grab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  touch-action: none;
+}
+
 .db-sheet-handle {
   align-self: center;
   width: 40px;
@@ -233,4 +240,365 @@
   padding: max(var(--space-3), env(safe-area-inset-top)) var(--space-4) 0;
   max-width: 640px;
   margin: 0 auto;
+}
+
+/* SegmentedControl (DESIGN.md §5). */
+.db-segmented {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--paper-sunk);
+  border-radius: var(--radius-md);
+}
+
+.db-segment {
+  min-height: 44px;
+  padding: var(--space-1) var(--space-2);
+  border: 1.5px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.db-segment[aria-pressed="true"] {
+  background: var(--paper-raised);
+  border-color: var(--ink);
+  font-weight: 650;
+}
+
+/* Stepper. */
+.db-stepper-row,
+.db-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.db-stepper-text,
+.db-toggle-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.db-stepper-hint,
+.db-toggle-description {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+.db-stepper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--paper-raised);
+}
+
+.db-stepper button {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.db-stepper button:disabled {
+  color: var(--line-strong);
+  cursor: default;
+}
+
+.db-stepper-value {
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Toggle (switch). */
+.db-toggle {
+  flex-shrink: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-1);
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.db-toggle-track {
+  position: relative;
+  width: 52px;
+  height: 32px;
+  box-sizing: border-box;
+  border-radius: var(--radius-pill);
+  background: var(--paper-sunk);
+  border: 1.5px solid var(--line-strong);
+}
+
+.db-toggle-knob {
+  position: absolute;
+  top: 2.5px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--line-strong);
+  transition: left 150ms ease;
+}
+
+.db-toggle[aria-checked="true"] .db-toggle-track {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.db-toggle[aria-checked="true"] .db-toggle-knob {
+  left: 23px;
+  background: var(--paper-raised);
+}
+
+/* AddChip. */
+.db-add-chip {
+  min-height: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--line-strong);
+  background: transparent;
+  color: var(--teal);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+/* Celebration: one apricot-tint wash, 200ms fade, nothing more. */
+.db-celebration {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--apricot-tint);
+  animation: db-fade-in 200ms ease-out;
+}
+
+.db-celebration-heading,
+.db-celebration-line,
+.db-celebration-numbers {
+  margin: 0;
+}
+
+.db-celebration-numbers {
+  margin-top: var(--space-2);
+}
+
+@keyframes db-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .db-celebration {
+    animation: none;
+  }
+}
+
+/* Tally (standalone). */
+.db-tally-standalone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.db-tally-marks {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.db-tally-mark {
+  width: 4px;
+  height: 18px;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+}
+
+.db-tally-mark.is-attempt {
+  background: transparent;
+  border: 1.5px dashed var(--ink);
+}
+
+/* RepChart. */
+.db-chart {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.db-chart-title,
+.db-chart-story {
+  margin: 0;
+}
+
+.db-chart-story {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+.db-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+.db-chart-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.db-chart-plot {
+  width: 100%;
+  min-height: 160px;
+  height: auto;
+}
+
+.db-chart-grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.db-chart-four {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.db-chart-predicted {
+  stroke: var(--teal);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+
+.db-chart-actual-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.db-chart-remaining-line {
+  fill: none;
+  stroke: var(--apricot-ink);
+  stroke-width: 1.5;
+}
+
+.db-chart-ring {
+  fill: var(--paper-raised);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.db-chart-dot {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.db-chart-attempt {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 3 2;
+}
+
+.db-chart-axis,
+.db-chart-value {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  fill: var(--ink-muted);
+}
+
+.db-chart-value {
+  font-weight: 700;
+  fill: var(--ink);
+
+  /* A paper halo keeps each number readable over the lines behind it. */
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.db-chart-value.is-remaining {
+  fill: var(--apricot-ink);
+}
+
+/* PredictionCheck. */
+.db-prediction {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.db-prediction-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.db-prediction-h,
+.db-prediction-helper,
+.db-prediction-quote {
+  margin: 0;
+}
+
+.db-prediction-optional,
+.db-prediction-helper,
+.db-prediction-lead {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+.db-prediction-quote {
+  font-style: italic;
+}
+
+/* Focus rings for the local controls (kept last so they win). */
+.db-segment:focus-visible,
+.db-stepper button:focus-visible,
+.db-toggle:focus-visible,
+.db-add-chip:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }

@@ -2,6 +2,15 @@ import { useState, type ReactNode } from "react";
 import { Daybook, type Difficulty, type IconName } from "../design/daybook";
 import { DateTimeField } from "../components/DateTimeField";
 import { Note } from "../components/Note";
+import { AddChip } from "../components/AddChip";
+import { Celebration } from "../components/Celebration";
+import { PredictionAfter, PredictionBefore } from "../components/PredictionCheck";
+import { RepChart } from "../components/RepChart";
+import { SegmentedControl } from "../components/SegmentedControl";
+import { Stepper } from "../components/Stepper";
+import { Tally } from "../components/Tally";
+import { Toggle } from "../components/Toggle";
+import type { Outcome } from "../data/ladderRules";
 import { copy } from "../copy";
 import { TextArea } from "../components/TextArea";
 import { samples as s } from "./samples";
@@ -69,6 +78,12 @@ export function DevStates() {
   const [chip, setChip] = useState<string>(s.chips[0]);
   const [when, setWhen] = useState({ date: "", time: "" });
   const [notes, setNotes] = useState("");
+  const [order, setOrder] = useState<"easiest" | "hardest">("easiest");
+  const [perWeek, setPerWeek] = useState(4);
+  const [check, setCheck] = useState(false);
+  const [guess, setGuess] = useState("");
+  const [likely, setLikely] = useState<"not_very" | "fairly" | "very" | null>(null);
+  const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [nav, setNav] = useState<"today" | "practices" | "sessions" | "history" | "settings">(
     "today",
   );
@@ -238,6 +253,79 @@ export function DevStates() {
 
       <Section title={s.sections.note}>
         <Note action={<Button variant="quiet">{copy.update.now}</Button>}>{copy.update.ready}</Note>
+      </Section>
+
+      <Section title={s.sections.segmented}>
+        <SegmentedControl
+          label={s.local.order}
+          value={order}
+          onChange={setOrder}
+          options={[
+            { value: "easiest", label: s.local.easiest },
+            { value: "hardest", label: s.local.hardest },
+          ]}
+        />
+      </Section>
+
+      <Section title={s.sections.stepper}>
+        <Stepper
+          label={s.local.repsPerWeek}
+          hint={s.local.repsHint}
+          value={perWeek}
+          min={1}
+          max={7}
+          onChange={setPerWeek}
+        />
+      </Section>
+
+      <Section title={s.sections.toggle}>
+        <Toggle
+          label={s.local.predictionCheck}
+          description={s.local.predictionCheckHint}
+          checked={check}
+          onChange={setCheck}
+        />
+      </Section>
+
+      <Section title={s.sections.addChip}>
+        <AddChip onClick={() => undefined}>{s.local.other}</AddChip>
+      </Section>
+
+      <Section title={s.sections.celebration}>
+        <Celebration
+          heading={s.local.celebrationHeading}
+          line={s.local.celebrationLine}
+          from={5}
+          to={3}
+        />
+      </Section>
+
+      <Section title={s.sections.tally}>
+        <Tally marks={["rep", "rep", "attempt", "rep", "rep"]} text="4 + 1" />
+      </Section>
+
+      <Section title={s.sections.chart}>
+        <RepChart
+          predicted={7}
+          story={s.local.chartStory}
+          reps={[
+            { actual: 8, remaining: 7, leftEarly: false },
+            { actual: 7, remaining: 6, leftEarly: false },
+            { actual: 7, remaining: 7, leftEarly: true },
+            { actual: 6, remaining: 5, leftEarly: false },
+            { actual: 5, remaining: 5, leftEarly: false },
+          ]}
+        />
+      </Section>
+
+      <Section title={s.sections.prediction}>
+        <PredictionBefore
+          text={guess}
+          likelihood={likely}
+          onText={setGuess}
+          onLikelihood={setLikely}
+        />
+        <PredictionAfter prediction={s.local.prediction} outcome={outcome} onOutcome={setOutcome} />
       </Section>
 
       <Section title={s.sections.nav}>

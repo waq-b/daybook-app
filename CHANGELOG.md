@@ -6,6 +6,10 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
+- Canvas-only controls (0c.3, DESIGN.md §5), all on `/dev/states` and checked with axe:
+  - Controls: SegmentedControl, Stepper (1–7), a Toggle switch that prints On/Off, AddChip.
+  - Displays: Celebration (one apricot wash, 200ms fade, none with reduced motion), Tally marks in order ("4 + 1"), RepChart (0–8, dashed under-4 line, each point numbered, attempts ticked, its sentence as alt text), PredictionCheck before and after.
+  - The bottom sheet now closes with a swipe down.
 - Offline store (0c.2): `src/offline/` on IndexedDB.
   - An outbox: writes save on the phone and sync in order when there's signal. An insert is an upsert on an ID made on the phone, so a retry never duplicates. A failure keeps the write and tries again.
   - The phone's copy of the ladder for reading offline, and drafts.

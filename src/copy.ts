@@ -103,6 +103,38 @@ export const copy = {
     ready: "A new version of Daybook is ready.",
     now: "Update now",
   },
+  // Canvas-only controls (DESIGN.md §5) used by the hierarchy screens.
+  controls: {
+    fewer: "Fewer",
+    more: "More",
+    minus: "−",
+    plus: "+",
+    fromTo: (from: number, to: number) => `${from} → ${to}`,
+    quote: (text: string) => `“${text}”`,
+    on: "On",
+    off: "Off",
+    other: "Other",
+    tallyLabel: (reps: number, attempts: number) =>
+      `${reps} ${reps === 1 ? "rep" : "reps"}` +
+      (attempts ? `, ${attempts} ${attempts === 1 ? "attempt" : "attempts"}` : ""),
+    chartTitle: "Predicted, actual and remaining, rep by rep",
+    chartPredicted: "Predicted",
+    chartActual: "Actual",
+    chartRemaining: "Remaining",
+    chartUnderFour: "under 4 is done",
+  },
+  // The prediction check (plan 0c D1, D15, D16): only with it switched on.
+  prediction: {
+    beforeHeading: "Before the next one",
+    optional: "optional",
+    whatWillHappen: "What do you think will happen?",
+    howLikely: "How likely does that feel?",
+    likelihood: { not_very: "Not very", fairly: "Fairly", very: "Very" },
+    beforeHelper: "You'll see this again when you log the rep, and can say whether it happened.",
+    afterLead: "Before, you thought",
+    didItHappen: "Did it happen?",
+    outcome: { no: "No", a_bit: "A bit", yes: "Yes" },
+  },
   // Shared field words (DateTimeField, TextArea).
   fields: {
     date: "Date",
