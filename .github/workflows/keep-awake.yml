@@ -5,7 +5,8 @@
 #
 # It uses the publishable key, which is public by design (it ships in the web
 # app). Row level security refuses the read, which is fine: it still reaches
-# the database.
+# the database. Without the repository secrets (for example in a fork) it
+# skips instead of failing.
 name: Keep Supabase awake
 
 on:
@@ -26,8 +27,8 @@ jobs:
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: |
           if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
-            echo "SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY repository secrets are not set" >&2
-            exit 1
+            echo "::notice::SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY repository secrets are not set; skipping."
+            exit 0
           fi
           status=$(curl -s -o /dev/null -w "%{http_code}" \
             "$SUPABASE_URL/rest/v1/sessions?select=id&limit=1" \
