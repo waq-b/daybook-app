@@ -2,7 +2,7 @@
 
 A phone-first, offline-capable PWA for tracking therapy homework and practice between sessions, built design system first.
 
-[![CI](https://github.com/waq-b/daybook/actions/workflows/ci.yml/badge.svg)](https://github.com/waq-b/daybook/actions/workflows/ci.yml)
+[![CI](https://github.com/waq-b/daybook-app/actions/workflows/ci.yml/badge.svg)](https://github.com/waq-b/daybook-app/actions/workflows/ci.yml)
 
 <p>
   <img src="docs/images/app-ladder.png" alt="The activity ladder in the app" width="240">

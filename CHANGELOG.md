@@ -140,7 +140,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 - `src/copy.ts` for every user-facing string, with a voice test (no exclamation marks, no emoji, no banned words) and ESLint rules that stop literal strings in components.
 - CI on every PR: typecheck, ESLint, stylelint, Prettier, tests, build.
 - Pre-push hook that refuses direct pushes to `main`.
-- Repo `waq-b/daybook` with design system v9 (`design/`) and design docs.
+- Repository set up with design system v9 (`design/`) and design docs.
 
 ### Changed
 
