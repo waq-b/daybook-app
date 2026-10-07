@@ -1,4 +1,4 @@
-Daybook is a logbook for the practical side of therapy: the worksheets, the reps, the feelings check-ins, the gratitude lines, all in one place and ready to take into session. It lives at `daybook.example.com`, alongside Pip, Terpa and Tare.
+Daybook is a logbook for the practical side of therapy: the worksheets, the reps, the feelings check-ins, the gratitude lines, all in one place and ready to take into session.
 
 A daybook is an old working ledger: where you write down what you did today. That's the whole idea. It's a notebook with a ribbon in today's page, not a coach and not a crisis service.
 

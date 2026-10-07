@@ -15,10 +15,10 @@ const at = (iso: string) => new Date(iso);
 
 function world() {
   const p = practiceRow();
-  const gig = taskRow(p.id, "Go to a gig at the Fleece", 8);
-  const phone = taskRow(p.id, "Phone the landlord", 7, { target_date: "2026-09-30" });
+  const gig = taskRow(p.id, "Go to a concert", 8);
+  const phone = taskRow(p.id, "Phone the dentist", 7, { target_date: "2026-09-30" });
   const gym = taskRow(p.id, "Go to the gym at 6pm", 7, { repeating: true, reps_per_week: 4 });
-  const coffee = taskRow(p.id, "Coffee on my own in town", 5, {
+  const coffee = taskRow(p.id, "Walk to the shop", 5, {
     repeating: true,
     reps_per_week: 2,
   });
@@ -66,16 +66,16 @@ test("easiest first with UP NEXT; hardest first reverses and is remembered", asy
   const active = page.locator("ol.ladder-rungs:not(.is-done) > li");
   await expect(active).toHaveCount(4);
   await expect(active.nth(0)).toContainText("Up next");
-  await expect(active.nth(0)).toContainText("Coffee on my own in town");
+  await expect(active.nth(0)).toContainText("Walk to the shop");
   await expect(active.nth(0)).toContainText("0 of 2 this week");
-  await expect(active.nth(1)).toContainText("Phone the landlord");
+  await expect(active.nth(1)).toContainText("Phone the dentist");
   await expect(active.nth(1)).toContainText("One-off · by Wed");
   await expect(active.nth(2)).toContainText("Go to the gym at 6pm");
   await expect(active.nth(2)).toContainText("1 of 4 this week");
-  await expect(active.nth(3)).toContainText("Go to a gig at the Fleece");
+  await expect(active.nth(3)).toContainText("Go to a concert");
 
   await page.getByRole("button", { name: "Hardest first" }).click();
-  await expect(active.nth(0)).toContainText("Go to a gig at the Fleece");
+  await expect(active.nth(0)).toContainText("Go to a concert");
   await expect(page.getByText("Up next")).toHaveCount(0);
   await page.reload();
   await expect(page.getByRole("button", { name: "Hardest first" })).toHaveAttribute(
@@ -151,12 +151,12 @@ test("opens offline from the phone's copy", async ({ page, context }, info) => {
   const w = world();
   await fakeTables(page, { practices: [w.p], tasks: [w.gym, w.coffee], reps: w.reps });
   await page.goto(`/practices/${w.p.id}`);
-  await expect(page.getByText("Coffee on my own in town")).toBeVisible();
+  await expect(page.getByText("Walk to the shop")).toBeVisible();
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload();
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByText("Coffee on my own in town")).toBeVisible();
+  await expect(page.getByText("Walk to the shop")).toBeVisible();
   await expect(page.getByText("Go to the gym at 6pm")).toBeVisible();
   await context.setOffline(false);
 });

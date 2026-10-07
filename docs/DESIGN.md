@@ -1,15 +1,13 @@
-# Daybook — DESIGN.md
+# Daybook design notes
 
-How the designs become code. Read after `CLAUDE.md`. The design system and the canvas are the source of truth for how things look; this file says how to use them and what the app must get right that a picture can't show.
+How the designs become code. Daybook is built design system first: tokens, fonts and sixteen components were designed before any screen, and the app mounts them as-is instead of re-implementing them. This file says how to use the system and what the app must get right that a picture can't show.
 
-| Source | Version | Link |
-| --- | --- | --- |
-| Daybook design system (tokens, 16 React components, voice) | v9 (1790512374-1158) | https://claude.ai/code/artifact/a263c454-4866-43b3-a241-78fd5d7000ce |
-| Daybook canvas (every screen and state, 390 and 820) | v12 (1790512547-23b8) | https://claude.ai/artifact/1H6SemHoJi7XyBkRhfu4td |
-| Design handoff (research, sources, QA) | 27 Sep 2026 | `docs/design-handoff.md` |
-| Planner brief (design → build) | 27 Sep 2026 | `docs/planner-brief.md` |
+| Source | Version |
+| --- | --- |
+| Design system (tokens, 16 React components, voice), vendored in `design/` | v9 |
+| Screen mockups (every screen and state, at 390px and 820px) | v12 |
 
-Don't copy canvas HTML into the app. The canvas is the reference; the bundle is the code.
+The mockups are reference only and are not in this repo. Don't copy their HTML into the app: the mockups are the reference, and the bundle in `design/` is the code.
 
 ## 1. Files in the repo
 
@@ -82,23 +80,23 @@ Use these, never re-implement them. Props in `index.d.ts`; rules from each compo
 
 ## 4. Accepted deviations
 
-These are decided. Don't re-decide them in a build session. (The v8 API gaps — `LadderRung.right`, `EntryCard.predicted`, `PracticeCard.meta`, the CrisisFooter copy, the missing `tokens.css` — were all fixed in design system v9 and are no longer workarounds.)
+These are decided, so they aren't reopened per screen. (The v8 API gaps — `LadderRung.right`, `EntryCard.predicted`, `PracticeCard.meta`, the CrisisFooter copy, the missing `tokens.css` — were all fixed in design system v9 and are no longer workarounds.)
 
 | Item | Decision |
 | --- | --- |
 | `Score` has no large size | Accept: tablet feelings intensity uses the default 36px |
 | `SyncStatus` too long for a header row | Accept: Log a rep shows it on its own line under the title |
 | `RatingScale` cells ~39px wide at 390 | Accept; 56px tall, gapless. Revisit in the accessibility pass |
-| Canvas loads fonts from Google | App self-hosts from `design/fonts/` via `tokens.css` |
-| Extra icons drawn locally on the canvas | Now in `Icon` (v9); `src/components/icons/` is not needed |
-| Install board's hand-drawn down arrow | `Icon` `chevron-down` (no arrow icon in the set) |
+| Mockups load fonts from Google | App self-hosts from `design/fonts/` via `tokens.css` |
+| Extra icons drawn locally in the mockups | Now in `Icon` (v9); `src/components/icons/` is not needed |
+| Install screen's hand-drawn down arrow | `Icon` `chevron-down` (no arrow icon in the set) |
 | LadderRung overflows the phone at 200% text (its grid column won't shrink; `right` never wraps) | Local override scoped to `.ladder` in `src/hierarchy/hierarchy.css`: the column may shrink and `right` wraps only when it can't fit. Fix in the design system (v10) and remove the override |
 | BottomNav and TargetProgress run off a phone at Safari's largest page zoom (found by the iPhone/WebKit tests) | Overrides in `src/styles/app.css`: nav columns may shrink and labels wrap; the target's text wraps under its pips. Fix in the design system (v10) and remove |
-| Type sizes are px in `tokens.css`, so iOS Larger Text doesn't scale an installed PWA | Accepted for now (plan Q10). Screens are tested at 200% zoom and must not clip or scroll sideways. A rem-based type scale is a design-system request for a later version |
+| Type sizes are px in `tokens.css`, so iOS Larger Text doesn't scale an installed PWA | Accepted for now. Screens are tested at 200% zoom and must not clip or scroll sideways. A rem-based type scale is a design-system request for a later version |
 
-## 5. Canvas-only components (build locally in `src/components/`)
+## 5. Components outside the design system (built locally in `src/components/`)
 
-Each is drawn with states on the canvas Components page (`CompControls`, `CompScores`, `CompCards`, `CompChrome`, `CompIcons`), labelled "Canvas only". Build from tokens; same `.db-` naming convention; 44px targets; focus ring from `--focus`.
+Each is drawn with its states in the mockups but is not in the design-system bundle. Build from tokens; same `.db-` naming convention; 44px targets; focus ring from `--focus`.
 
 | Component | Spec |
 | --- | --- |
@@ -120,13 +118,13 @@ Each is drawn with states on the canvas Components page (`CompControls`, `CompSc
 
 ## 6. Screens
 
-One row per canvas board group. Copy marked **verbatim** must match exactly and lives in `src/copy.ts`. Primary = the one apricot button and where it sits.
+One row per mockup board group. Copy marked **verbatim** must match exactly and lives in `src/copy.ts`. Phases 0a to 0c are built; 0d onwards are designed but not built yet (see the README roadmap). Primary = the one apricot button and where it sits.
 
 ### Phase 0a
 
 | Screen | Boards | States | Components | Verbatim copy | Primary |
 | --- | --- | --- | --- | --- | --- |
-| Sign in | `SignIn`, `SignInCode` | email, code | Logo lockup, TextField, Button | Canvas wording (see `src/copy.ts`) | "Email me a code" / "Sign in", bottom third |
+| Sign in | `SignIn`, `SignInCode` | email, code | Logo lockup, TextField, Button | See `src/copy.ts` | "Email me a code" / "Sign in", bottom third |
 | Install prompt | `Install`, `InstallAndroid` | iOS, Android | Logo mark, Button | Explains add-to-home-screen because reminders need it | iOS: quiet "Not now" only (Share is in Safari's bar). Android: "Install Daybook", then quiet "Not now" |
 | Settings | `Settings`, `SettingsDelete1`, `SettingsDelete2` | main, delete 1, delete 2 | rows, BottomSheet, TextField, Button (secondary; ink for delete) | Delete is two real steps; step 2 types DELETE (any case accepted) | Secondary only; the ink button is the one destructive action in the app |
 
@@ -148,7 +146,7 @@ One row per canvas board group. Copy marked **verbatim** must match exactly and 
 | Task detail | `TaskDetail`, `TaskDetailDone`, `TaskDetailNew` | in progress, done, new | Score ×2 (`num-lg` header), RepChart, Tally, PredictionCheck (before), EntryCard list, TextArea (Comments) | Header: PREDICTED / REMAINING. Card: "Before the next one". Completed: worksheet "Comments" field | "Log a rep" |
 | Log a rep | `LogRep`, `LogRepAttempt`, `LogRepLogged`, `LogRepOffline` | rating, left early, logged, offline | SegmentedControl (Did it / Started, left early), PredictionCheck (after), Chip quick-picks, TextField, RatingScale ×2, FlagToggle, Button, Celebration, Tally, SyncStatus | Labels: "Actual difficulty" hint "How hard was it?" · "Remaining difficulty" hint "If you did it again now" · ends "0 easy / Under 4 is done / 8 intense" · "Anything you did to make it easier?" · "Note, or anything that made it easier" · Save disabled: "Pick both scores to save" · confirmations: "Logged. Thought {p}, it was {a}, now it's a {r}." / "That one's done. Remaining {r}, under the 4 line." / "Logged as started, left early. It still goes in the tally." · offline: "Saved on this phone, will sync." | "Save rep"; then "Done". Body scrolls, Save sticky. Draft persisted locally if the app closes |
 
-As built in 0c (decided in the 0c plan):
+As built in 0c:
 
 - **Practices:** no wording assumes a therapist or a session. The empty body is "Each worksheet becomes a practice, whether it came from a session or not. Add the first one."; there's no empty subtitle. The picker offers Activity hierarchy only until phase 1 adds the other two, and there's one hierarchy for now.
 - **Prediction check:** off by default, per practice, switched at the foot of the ladder ("Prediction check" / "Ask what I think will happen before each rep"). When off, no prediction UI appears anywhere. "Did it happen?" quotes your own words back ("You thought: “…” It didn't happen."); the app never paraphrases.
@@ -165,7 +163,7 @@ As built in 0c (decided in the 0c plan):
   - Once done, the meta reads "One-off · 2 reps" (no week).
   - Comments have an explicit "Save comments".
   - The chart's sentence is "Thought 7. The first one was an 8, the latest a 5. Remaining has gone from 7 to 5."
-- **Log a rep:** Done returns to the task, or to the ladder's just-completed state if this rep finished the rung. The canvas's ✕ to Today waits for 0d.
+- **Log a rep:** Done returns to the task, or to the ladder's just-completed state if this rep finished the rung. The mockup's close button to Today waits for 0d (Today is not built yet).
 
 ### Phase 0d — Today and flags
 
@@ -200,9 +198,9 @@ Boards `Tablet*` and `TabletRail`. Two columns at ≥ 820: list left, detail rig
 
 Board `WorksheetPDF` is the reference for the hierarchy page: the paper layout exactly, A4 landscape — Task · Predicted difficulty · Date assigned · Tally of repetitions · Date completed · Remaining difficulty · Comments. The rest of the PDF is the Prepare screen in print form: at-a-glance strip, flagged entries grouped by practice in date order, "anything else to raise". Same tokens, same type scale, `paper` background prints white. Export from Prepare and Session detail via the share sheet. Board `TherapistView` is v2 material and not built.
 
-## 7. Rules block (what a build session checks every PR against)
+## 7. Rules checked on every change
 
-- **Voice.** Plain, warm, British. Sentence case. No exclamation marks, no emoji. Banned: journey, healing, self-care, mindful, wellness, streak. All user-facing strings in `src/copy.ts`; a unit test greps them.
+- **Voice.** Plain, warm, British. Sentence case. No exclamation marks, no emoji. Banned: journey, healing, self-care, mindful, wellness, streak. All user-facing strings in `src/copy.ts`; a unit test checks them.
 - **The therapist is never gendered.** "Your therapist", "Assigned in session", "Session notes".
 - **No streaks, no shame.** Progress shows done of target. A miss asks a question. Nothing resets to zero with a sad face. No red, no green, no error colours.
 - **Marigold = flagged.** Nothing else is marigold. Apricot = the one primary action, active nav pill, target pips. Teal = focus, quiet buttons, sessions accent, predicted line.
@@ -212,11 +210,11 @@ Board `WorksheetPDF` is the reference for the hierarchy page: the paper layout e
 - **CrisisFooter** on the feelings log only, permanent, never a popup, never styled as a warning.
 - **Offline first for writes.** IndexedDB outbox; `SyncStatus` shows "Saved on this phone, will sync". No error states in the UI: a disabled control says what it needs.
 - **Never delete, archive.** Only "Delete everything" hard-deletes, two steps.
-- **Dynamic type.** Rows wrap, no fixed heights on text. Test at the largest iOS text size before closing a phase.
+- **Dynamic type.** Rows wrap, no fixed heights on text. Tested at 200% text in the e2e suite.
 - **Safe areas.** Standalone PWA: `env(safe-area-inset-*)` on the nav and any sticky action.
 - **Fonts self-hosted.** Atkinson Hyperlegible Next variable, `font-display: swap`.
 - **Celebration** is one `apricot-tint` wash and `num-lg` numbers. No confetti, no sound.
 
 ## 8. Verification per screen
 
-Before a screen's PR merges: side-by-side screenshot against its canvas board at 390 (and 820 where a tablet board exists), every state listed above rendered in Storybook or a `/dev/states` route, axe-core clean, copy test green, Lighthouse PWA installable.
+Before a screen's PR merges: compared against its mockup at 390px (and 820px where a tablet board exists), every state listed above rendered on the `/dev/states` route, axe-core clean, copy test green, Lighthouse accessibility at or above 0.95 and the PWA installable.

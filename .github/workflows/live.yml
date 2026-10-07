@@ -1,7 +1,9 @@
 # The live production smoke suite (e2e-live/), after every deploy: waits
 # until Render is serving this commit, then checks the real site and the
 # real database on an Android and an iPhone profile. Replaces "open it on
-# your phone and check".
+# your phone and check". It targets the author's own deployment and needs the
+# SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY repository secrets, so it is only
+# meaningful in the original repository.
 name: Live checks
 
 on:

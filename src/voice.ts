@@ -1,4 +1,4 @@
-// The voice rules from CLAUDE.md hard line 8, as code, so tests can apply them
+// The voice rules, as code, so tests can apply them
 // to copy.ts and anything else that reaches the user.
 
 export const BANNED_WORDS = ["journey", "healing", "self-care", "mindful", "wellness", "streak"];

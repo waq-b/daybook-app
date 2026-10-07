@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
 
 test("today's session: notes, assigned line, and Mark session as done", async ({ page }) => {
   const today = sessionRow(new Date("2026-09-29T15:00:00Z"), {
-    notes: "Gym is working.\nPhone the landlord before next time.",
+    notes: "Gym is working.\nPhone the dentist before next time.",
     assigned_note: "Notice when I check my phone to avoid talking",
   });
   const store = await fakeSessions(page, [today]);
@@ -21,7 +21,7 @@ test("today's session: notes, assigned line, and Mark session as done", async ({
   await expect(page.getByRole("main").getByText("Today", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Tuesday 29 September");
   await expect(page.getByRole("main").getByText("4pm", { exact: true })).toBeVisible();
-  await expect(page.getByText("Phone the landlord before next time.")).toBeVisible();
+  await expect(page.getByText("Phone the dentist before next time.")).toBeVisible();
   await expect(page.getByText("Notice when I check my phone to avoid talking")).toBeVisible();
   await expect(page.getByRole("status")).toHaveText("The entries stay in your history.");
 

@@ -25,8 +25,8 @@ const gym = taskRow(p.id, "Go to the gym at 6pm", 7, {
   next_prediction: "Everyone by the weights will stare and I'll have to leave.",
   next_prediction_likelihood: "very",
 });
-const coffee = taskRow(p.id, "Coffee on my own in town", 5, { comments: "Sat in the window." });
-const phone = taskRow(p.id, "Phone the landlord about the boiler before the weekend", 8, {
+const coffee = taskRow(p.id, "Walk to the shop", 5, { comments: "Sat in the window." });
+const phone = taskRow(p.id, "Phone the dentist to book a check-up before the weekend", 8, {
   target_date: "2026-09-30",
 });
 const reps = [
@@ -72,8 +72,8 @@ const SCREENS: Array<[string, string, string | RegExp]> = [
     `/practices/${p.id}/tasks/${gym.id}`,
     "Go to the gym at 6pm",
   ],
-  ["task done", `/practices/${p.id}/tasks/${coffee.id}`, "Coffee on my own in town"],
-  ["task not tried", `/practices/${p.id}/tasks/${phone.id}`, /Phone the landlord/],
+  ["task done", `/practices/${p.id}/tasks/${coffee.id}`, "Walk to the shop"],
+  ["task not tried", `/practices/${p.id}/tasks/${phone.id}`, /Phone the dentist/],
   ["log a rep", `/practices/${p.id}/tasks/${gym.id}/log`, "Go to the gym at 6pm"],
   ["session edit with practice chips", `/sessions/${session.id}/edit`, "Edit session"],
   ["session detail with Link a practice", `/sessions/${session.id}`, /Monday 28 September/],

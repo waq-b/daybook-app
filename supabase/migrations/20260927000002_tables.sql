@@ -1,4 +1,4 @@
--- Daybook 0002: the data model from CLAUDE.md.
+-- Daybook 0002: the data model.
 --
 -- Every table: id, user_id (defaults to the signed-in user), created_at,
 -- updated_at, archived_at. Nothing is deleted in normal use; rows are

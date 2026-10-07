@@ -32,3 +32,15 @@ supabase/.branches
 supabase/.temp
 test-results/
 playwright-report/
+
+# Local working files, not part of the public repo
+.claude/
+.venv/
+storybook-static/
+CLAUDE.md
+docs/PLAN.md
+docs/plans/
+docs/setup.md
+docs/planner-brief.md
+docs/design-handoff.md
+docs/activity-hierarchy-worksheet.docx

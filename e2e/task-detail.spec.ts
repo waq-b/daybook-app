@@ -11,18 +11,18 @@ test.beforeEach(async ({ page }) => {
 
 test("not tried yet (board TaskDetailNew)", async ({ page }) => {
   const p = practiceRow();
-  const phone = taskRow(p.id, "Phone the landlord", 7, {
+  const phone = taskRow(p.id, "Phone the dentist", 7, {
     target_date: "2026-09-30",
-    notes: "About the boiler",
+    notes: "About a check-up",
   });
   await fakeTables(page, { practices: [p], tasks: [phone], reps: [] });
   await page.goto(`/practices/${p.id}/tasks/${phone.id}`);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Phone the landlord");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Phone the dentist");
   const header = page.locator("header.task-header");
   await expect(header).toContainText("Predicted7");
   await expect(header).toContainText("Remaining–");
   await expect(header).toContainText("One-off · by Wed");
-  await expect(header).toContainText("About the boiler");
+  await expect(header).toContainText("About a check-up");
   await expect(page.getByText("No reps yet.")).toBeVisible();
   await expect(
     page.getByText("When you log the first one, it'll show here against the 7 you predicted."),
@@ -66,7 +66,7 @@ test("in progress: chart, tally 4 + 1, reps newest first", async ({ page }) => {
 
 test("done: the tinted header, comments that save, Log another rep", async ({ page }) => {
   const p = practiceRow();
-  const coffee = taskRow(p.id, "Coffee on my own in town", 5);
+  const coffee = taskRow(p.id, "Walk to the shop", 5);
   const db = await fakeTables(page, {
     practices: [p],
     tasks: [coffee],

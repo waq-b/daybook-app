@@ -147,7 +147,7 @@ describe("tally, week, rep number (D6–D8)", () => {
 
 describe("the ladder", () => {
   const gig = task("Gig", 8);
-  const phone = task("Phone the landlord", 7);
+  const phone = task("Phone the dentist", 7);
   const gym = task("Gym", 7, { repeating: true, reps_per_week: 4 });
   const shop = task("Big shop", 6, { repeating: true, reps_per_week: 1 });
   const coffee = task("Coffee", 5, { repeating: true, reps_per_week: 2 });
@@ -168,7 +168,7 @@ describe("the ladder", () => {
     expect(l.active.map((r) => r.task.name)).toEqual([
       "Coffee",
       "Big shop",
-      "Phone the landlord",
+      "Phone the dentist",
       "Gym",
       "Gig",
     ]);
@@ -179,7 +179,7 @@ describe("the ladder", () => {
     const l = buildLadder(tasks, reps, "hardest", day(29, 20));
     expect(l.active.map((r) => r.task.name)).toEqual([
       "Gig",
-      "Phone the landlord",
+      "Phone the dentist",
       "Gym",
       "Big shop",
       "Coffee",

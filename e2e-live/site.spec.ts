@@ -1,4 +1,4 @@
-// What Waqar would otherwise check by opening the site on his phone.
+// What would otherwise be checked by hand by opening the site on a phone.
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 

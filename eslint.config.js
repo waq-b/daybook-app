@@ -39,7 +39,7 @@ export default tseslint.config(
     settings: { react: { version: "18" } },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      // Copy lives in src/copy.ts (CLAUDE.md protocol 5).
+      // Copy lives in src/copy.ts.
       "react/jsx-no-literals": ["error", { noStrings: true, ignoreProps: true }],
       "no-restricted-syntax": [
         "error",

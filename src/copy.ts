@@ -1,5 +1,5 @@
 // Every user-facing string in Daybook. Components import from here; nothing
-// user-facing is a literal in a component (CLAUDE.md protocol 5).
+// user-facing is a literal in a component.
 // Voice: plain, warm, British. Sentence case. No exclamation marks, no emoji.
 // src/copy.test.ts checks every string in this file.
 

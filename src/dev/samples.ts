@@ -44,7 +44,7 @@ export const samples = {
     predictionCheckHint: "Ask what I think will happen before each rep",
     other: "Other",
     celebrationHeading: "That one's done.",
-    celebrationLine: "Coffee on my own in town. Remaining 3, under the 4 line.",
+    celebrationLine: "Walk to the shop. Remaining 3, under the 4 line.",
     chartStory:
       "Thought 7. The first one was an 8, the latest a 5. Remaining has gone from 7 to 5.",
     chartStoryLow:

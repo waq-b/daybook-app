@@ -10,9 +10,8 @@ if (!url || !key) {
 }
 
 /**
- * The one Supabase client. Reads and writes go straight to Supabase under RLS
- * (CLAUDE.md stack). The session is kept on the phone, so reopening the app
- * stays signed in.
+ * The one Supabase client. Reads and writes go straight to Supabase under RLS.
+ * The session is kept on the phone, so reopening the app stays signed in.
  */
 export const supabase = createClient<Database>(url, key, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },

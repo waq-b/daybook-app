@@ -1,4 +1,4 @@
--- Daybook 0c.1: the activity hierarchy (plan 0c).
+-- Daybook 0c.1: the activity hierarchy.
 --
 -- Every rep has both scores, attempts included (D3): "started, left early"
 -- still rates how hard it was and how hard it would be now. No reps exist

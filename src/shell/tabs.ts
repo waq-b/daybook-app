@@ -1,4 +1,4 @@
-// The five tabs (CLAUDE.md phase 0a). Ids match BottomNav's.
+// The five tabs. Ids match BottomNav's.
 export type TabId = "today" | "practices" | "sessions" | "history" | "settings";
 
 export const TAB_PATHS: Record<TabId, string> = {

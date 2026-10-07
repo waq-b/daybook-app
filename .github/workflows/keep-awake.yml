@@ -1,6 +1,6 @@
 # Free Supabase projects pause after about a week of low activity and need a
 # manual resume. This makes one small request from outside every three days
-# (plan D6, the same as pip). Render is left to sleep: the installed app opens
+# (a free tier trade-off). Render is left to sleep: the installed app opens
 # from its service-worker cache.
 #
 # It uses the publishable key, which is public by design (it ships in the web

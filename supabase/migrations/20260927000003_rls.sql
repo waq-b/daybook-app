@@ -1,4 +1,4 @@
--- Daybook 0003: row level security. CLAUDE.md hard line 11: every table has
+-- Daybook 0003: row level security. Every table has
 -- RLS on user_id = auth.uid() from day one.
 --
 -- Signed-in users can read, add and change their own rows. There is no DELETE

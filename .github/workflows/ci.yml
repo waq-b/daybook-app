@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
 
-# One job on purpose: a free private repo gets 2,000 Actions minutes a month,
-# and every job bills at least a minute. Later tasks add their steps here.
+# One job on purpose: every job bills at least a minute (private repos get a
+# limited monthly allowance), so all the checks run as steps in a single job.
 jobs:
   ci:
     runs-on: ubuntu-latest

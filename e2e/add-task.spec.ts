@@ -67,7 +67,7 @@ test("one-off sends no reps per week", async ({ page }) => {
   const p = practiceRow();
   const db = await fakeTables(page, { practices: [p], tasks: [], reps: [] });
   await page.goto(`/practices/${p.id}/tasks/new`);
-  await page.getByLabel("Task", { exact: true }).fill("Phone the landlord");
+  await page.getByLabel("Task", { exact: true }).fill("Phone the dentist");
   await page.getByRole("radio", { name: "7 of 8" }).click();
   await page.getByRole("button", { name: "Repeating" }).click();
   await page.getByRole("button", { name: "One-off" }).click();

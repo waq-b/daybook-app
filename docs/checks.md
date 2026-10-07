@@ -1,6 +1,6 @@
-# Daybook — what's tested instead of checked by hand
+# What the automated checks cover
 
-Waqar, 28 Sep 2026: anything he'd be asked to check by hand should be an automated test. This maps every "check on your phone" item from PRs #13–#60 to the test that now covers it. Only what a machine truly can't do goes to Waqar.
+The rule on this project is that anything I'd otherwise check by hand on a phone should be an automated test. This maps each manual check from PRs #13 to #60 to the test that now covers it. What a machine can't do is listed at the end.
 
 ## How it runs
 
@@ -24,16 +24,16 @@ What the iPhone project can't cover: Playwright can't intercept requests from a 
 | #15/#16 clears the notch and home indicator | unit `safeArea.test` (every bottom bar), `viewport-fit=cover` in `pwa.spec` |
 | #16 tabs switch; largest text; no sideways scroll | e2e `shell.spec`; every a11y spec at 200% on **both** phones |
 | #18 sign-in with a code; the code field suggests from Mail; stays signed in | e2e `sign-in.spec` (both phones); live `site.spec` sign-in page |
-| #18 an email arrives from Daybook with a code | **not automatable** (needs your inbox); done once on 27 Sep |
+| #18 an email arrives from Daybook with a code | **not automatable** (needs a real inbox); checked once by hand |
 | #20 iPhone install steps in Safari, never in the installed app | e2e `install.spec` on the iPhone project |
 | #21 export file; delete two steps; sign out | e2e `settings.spec`: download on Android, **share sheet on iPhone**; delete and sign out |
 | #32 DATE/TIME open the wheels; the text box grows without zoom | e2e `fields.spec` (both phones: native date/time inputs, ≥16px, 56px target); the wheel itself is iOS's own |
 | #34–#36 new session, list, detail, mark done, offline save | e2e `session-edit`, `sessions-list`, `session-detail` (both phones) |
 | #54 each control works; the chart's numbers don't overlap | e2e `controls.spec`, including the overlap check for both score orders |
-| #55–#60 practices, ladder, add task, task detail, Log a rep offline, draft survives, link to a session | e2e `practices`, `ladder`, `add-task`, `task-detail`, `log-rep` (car park: offline → one row), `session-practices` (both phones) |
+| #55–#60 practices, ladder, add task, task detail, Log a rep offline, draft survives, link to a session | e2e `practices`, `ladder`, `add-task`, `task-detail`, `log-rep` (offline → one row), `session-practices` (both phones) |
 | Sign-up closed; strangers can't read or write | live `database.spec` against the real Supabase |
 
-## Only for Waqar
+## Not automated
 
-- Putting your own worksheet's tasks in: that's your content.
-- The phase's "done when": a real rep, from the real gym car park.
+- That a sign-in email actually arrives (needs a real inbox).
+- The iOS date and time wheels themselves; the tests check the native inputs, sizes and targets.

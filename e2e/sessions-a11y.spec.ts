@@ -8,7 +8,7 @@ import { expect, fakeSessions, sessionRow, signIn, test } from "./fixtures";
 const NOW = new Date("2026-09-29T09:00:00Z");
 
 const today = sessionRow(new Date("2026-09-29T15:00:00Z"), {
-  notes: "Gym is working, keep it at 4 a week.\nPhone the landlord before next time.",
+  notes: "Gym is working, keep it at 4 a week.\nPhone the dentist before next time.",
   assigned_note: "Notice when I check my phone to avoid talking",
 });
 const upcoming = sessionRow(new Date("2026-10-06T15:00:00Z"));

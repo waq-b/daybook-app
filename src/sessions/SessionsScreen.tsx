@@ -66,7 +66,7 @@ function SessionRow({ session, showStatus }: { session: Session; showStatus: boo
   );
 }
 
-/** Boards Sessions (filled) and SessionsEmpty. Reading needs the network (CLAUDE.md line 12). */
+/** Boards Sessions (filled) and SessionsEmpty. Reading needs the network. */
 export function SessionsScreen() {
   const navigate = useNavigate();
   const [load, setLoad] = useState<Load>({ state: "loading" });

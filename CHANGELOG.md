@@ -13,7 +13,6 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Fixed
 
-- The live-checks workflow can check out the (private) repo.
 - At Safari's largest page zoom, the bottom nav and the weekly target ran off the phone. They now fit (a design-system workaround).
 - The chart's numbers overlapped when actual was two or more below remaining; each number now sits on the side away from the other point.
 
@@ -21,7 +20,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
-- Close-out (0c.10): axe (WCAG 2.2 AA), 390px and 200% text over every 0c screen and state; an "as built" note in `docs/PLAN.md`.
+- Close-out (0c.10): axe (WCAG 2.2 AA), 390px and 200% text over every 0c screen and state.
 - Practices in sessions, optional (0c.9).
   - Edit session's "Assigned in session" lists your practices as chips, plus "Add a practice".
   - Session detail shows the practices assigned in it (each opens its ladder), and today's session has "Link a practice".
@@ -53,7 +52,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
   - The list opens from the phone's copy when there's no signal.
   - No wording assumes a therapist.
 - The bottom sheet has a visible close button.
-- Canvas-only controls (0c.3, DESIGN.md §5), all on `/dev/states` and checked with axe:
+- Controls outside the design system (0c.3, DESIGN.md §5), all on `/dev/states` and checked with axe:
   - Controls: SegmentedControl, Stepper (1–7), a Toggle switch that prints On/Off, AddChip.
   - Displays: Celebration (one apricot wash, 200ms fade, none with reduced motion), Tally marks in order ("4 + 1"), RepChart (0–8, dashed under-4 line, each point numbered, attempts ticked, its sentence as alt text), PredictionCheck before and after.
   - The bottom sheet now closes with a swipe down.
@@ -66,17 +65,14 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
   - Every rep needs both scores, attempts included. Tasks can hold "Before the next one". Reps per week only on repeating tasks. Applied live.
   - Data layer for practices, tasks and reps.
   - `src/data/ladderRules.ts` holds the worksheet's rules as tested code: done (latest full rep under 4), date completed, tally "4 + 1", this week from Monday, rep numbers, easiest or hardest first, where a new task lands, the high-rung note, celebration, the chart's story, and your own quick picks.
-- `docs/PLAN.md`: phase 0c Hierarchy plan, ten tasks tracked as GitHub issues #41–#50. The finished 0b plan moves to `docs/plans/0b.md`.
 - Local `Note` component (DESIGN.md §5): the teal info banner.
 
 ### Changed
 
-- `CLAUDE.md` (0c plan):
-  - Prediction check off by default, switchable per practice.
-  - Hard line 12: logging's reads (the hierarchy) are kept on the phone.
-  - The offline row and the data model are updated: NOT NULL scores, `next_prediction*`, reps per week repeating only.
-  - Derived rules: done is the latest full rep under 4, date completed, and the week.
-- `docs/DESIGN.md`: an as-built note for 0c, and §4 records the LadderRung text-size workaround. `docs/setup.md`: seven migrations and what the phone keeps.
+- Prediction check is off by default and switchable per practice.
+- Logging's reads (the hierarchy) are kept on the phone for offline use.
+- Data model: scores are NOT NULL, `next_prediction*` columns added, reps per week only on repeating tasks.
+- `docs/DESIGN.md`: an as-built note for 0c, and §4 records the LadderRung text-size workaround.
 
 ### Fixed
 
@@ -92,7 +88,7 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 
 ### Added
 
-- Close-out (0b.6): axe accessibility checks, 390px and 200% text on every Sessions screen and state, an "as built" note in `docs/PLAN.md`.
+- Close-out (0b.6): axe accessibility checks, 390px and 200% text on every Sessions screen and state,
 - Session detail (0b.5): boards SessionDetail and SessionDetailPast at `/sessions/:id`.
   - A Today / Upcoming / Done / Not marked done badge, the date and time, the notes, and the assigned line.
   - Mark session as done on today's session or any earlier one; it only records that the session is done.
@@ -114,17 +110,16 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
   - `sessions.assigned_note` for the edit screen's "Anything else, not a practice yet"
   - `src/data/sessions.ts` (list, get, create, update, mark done; each returns an outcome, never throws)
   - pure rules in `src/data/sessionRules.ts` and `src/data/dates.ts` for next and past sessions, the countdown, the new-session default, when a session can be marked done, and past row titles; tested in UK time across both clock changes
-- `docs/PLAN.md`: phase 0b Sessions plan, six tasks tracked as GitHub issues #24–#29. The finished 0a plan moves to `docs/plans/0a.md`.
 
 ### Changed
 
-- `CLAUDE.md` data model: `sessions.assigned_note` (0b plan, Q1). `docs/DESIGN.md` §6 Sessions rows aligned with the canvas (Q8) and with how mark as done works. `docs/setup.md`: six migrations.
+- `docs/DESIGN.md` §6 Sessions rows aligned with the mockups and with how mark as done works.
 
 ## 0a Foundation — 2026-09-27
 
 ### Added
 
-- Close-out (0a.10): `docs/setup.md` (services, environment, Supabase Auth settings, recreating from scratch), an "as built" note in the 0a plan (now `docs/plans/0a.md`), and a 200% text-size e2e pass over sign-in, the install prompt and Settings.
+- Close-out (0a.10): a 200% text-size e2e pass over sign-in, the install prompt and Settings.
 
 - Settings (0a.9): boards Settings, SettingsDelete1 and SettingsDelete2. Signed-in email, Add to home screen (links to `/install`), Export my data (every row as JSON, via the share sheet where the phone has one, else a download), Delete everything in two real steps (step 2 needs DELETE typed; the ink button is the app's one destructive action), About with the build's version, Sign out.
 - Local `BottomSheet` (DESIGN.md §5).
@@ -145,19 +140,18 @@ All notable changes to Daybook. Format: [Keep a Changelog](https://keepachangelo
 - `src/copy.ts` for every user-facing string, with a voice test (no exclamation marks, no emoji, no banned words) and ESLint rules that stop literal strings in components.
 - CI on every PR: typecheck, ESLint, stylelint, Prettier, tests, build.
 - Pre-push hook that refuses direct pushes to `main`.
-- `docs/PLAN.md`: phase 0a Foundation plan, ten tasks tracked as GitHub issues #1–#10.
-- Repo `waq-b/daybook` (private) with the constitution, design system v9 (`design/`) and design docs.
+- Repo `waq-b/daybook` with design system v9 (`design/`) and design docs.
 
 ### Changed
 
 - Sign-up closed (0a.10): the app only signs in existing accounts, and Supabase's "Allow new users to sign up" is off.
-- `CLAUDE.md` (approved in the 0a plan):
-  - repo `waq-b/daybook`; GitHub issues replace monday.com
-  - Node 22 LTS; the Render URL until the custom domain
-  - Supabase keep-awake instead of a Render keep-alive
-  - `main` guarded by a pre-push hook
-  - CI's PWA check is Playwright plus Lighthouse accessibility
-  - export and delete are Postgres functions
+- Decisions made at the end of 0a:
+  - GitHub issues are used for tracking.
+  - Node 22 LTS.
+  - A Supabase keep-awake workflow instead of a Render keep-alive.
+  - `main` is guarded by a pre-push hook.
+  - CI's PWA check is Playwright plus Lighthouse accessibility.
+  - Export and delete are Postgres functions.
 - `docs/DESIGN.md`:
   - §2 mounting snippet fixed (React on `window` in its own module, imported first)
   - §1 token check and hex ban as built
