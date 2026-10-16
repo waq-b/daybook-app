@@ -3,11 +3,14 @@
 -- exactly as Supabase's does. Also Supabase's permissive default grants, so
 -- the tests prove the migrations tighten them.
 
+-- Roles are shared by every database on the server and test files run in
+-- parallel, so two of them can race to create the same role. Creating it and
+-- ignoring "already exists" is safe where check-then-create is not.
 do $$
 begin
-  if not exists (select from pg_roles where rolname = 'anon') then create role anon nologin; end if;
-  if not exists (select from pg_roles where rolname = 'authenticated') then create role authenticated nologin; end if;
-  if not exists (select from pg_roles where rolname = 'service_role') then create role service_role nologin bypassrls; end if;
+  begin create role anon nologin; exception when duplicate_object or unique_violation then null; end;
+  begin create role authenticated nologin; exception when duplicate_object or unique_violation then null; end;
+  begin create role service_role nologin bypassrls; exception when duplicate_object or unique_violation then null; end;
 end;
 $$;
 
