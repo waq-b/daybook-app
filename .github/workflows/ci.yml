@@ -5,12 +5,13 @@ on:
   push:
     branches: [main]
 
-# One job on purpose: every job bills at least a minute (private repos get a
-# limited monthly allowance), so all the checks run as steps in a single job.
+# One job on purpose: the checks share one install and one build, so they run
+# as steps in a single job. The Playwright suite runs on a phone and an iPhone
+# profile and takes about 15 minutes, hence the 30-minute limit.
 jobs:
   ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     # Migrations and RLS are tested against a real Postgres, with a small
     # Supabase stub (supabase/tests/supabase-stub.sql).
     services:
